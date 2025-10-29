@@ -37,22 +37,24 @@ coverage
 # Vitest
 __screenshots__/
 
-# Data Processing - ignore all data files except viz-datasets
-data-processing/raw-data/
-data-processing/intermediate/
-data-processing/output/
+# Data Processing - ignore only data files, keep folder structure and documentation
+# Ignore CSV and Excel files
 data-processing/**/*.csv
 data-processing/**/*.xlsx
 data-processing/**/*.xls
 data-processing/**/*.parquet
-data-processing/**/*.png
-data-processing/**/*.jpg
-data-processing/**/*.jpeg
-data-processing/**/*.svg
-data-processing/**/*.pdf
 
-# Allow viz-datasets folder (reduced datasets for website)
-!data-processing/viz-datasets/
+# Ignore image outputs
+data-processing/output/**/*.png
+data-processing/output/**/*.jpg
+data-processing/output/**/*.jpeg
+data-processing/output/**/*.svg
+data-processing/output/**/*.pdf
+
+# Ignore temp folder (for one-off analysis scripts)
+data-processing/temp/
+
+# Allow viz-datasets folder JSON files (reduced datasets for website)
 !data-processing/viz-datasets/**/*.json
 !data-processing/viz-datasets/**/*.geojson
 

@@ -17,3 +17,4 @@
 
 5. **Data Handling**: As a baseline, we will work with the original CSV files. We process them using Python and classic libraries like pandas and NumPy. From there, we create static visualisations directly in Python (Matplotlib/seaborn) and upload the PNGs, or we create reduced "viz-datasets", preferably in JSON format for easy usage in D3, that we can upload to our website easily and hook up to interactive visualisations. When available, we might make use of APIs, such as in the case of ACLED, obtaining the required small data requests directly and up to date in JSON.
    Python scripts will follow a pipeline-like structure, probably in .ipynb and transformations on datasets will be versioned and applied within new files.
+
