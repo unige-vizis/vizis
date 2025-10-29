@@ -4,7 +4,14 @@
       "Bash(cat:*)",
       "Bash(npm run dev:*)",
       "Bash(npm install:*)",
-      "Bash(timeout 3 npm run dev:*)"
+      "Bash(timeout 3 npm run dev:*)",
+      "Bash(unzip:*)",
+      "Bash(python:*)",
+      "Bash(for dir in */)",
+      "Bash(do echo \"=== $dir ===\")",
+      "Bash(ls:*)",
+      "Bash(done)",
+      "Bash(tee:*)"
     ],
     "deny": [],
     "ask": []
