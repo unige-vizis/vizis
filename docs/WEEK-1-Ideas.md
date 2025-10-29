@@ -6,19 +6,31 @@ Homepage: title, subtitel, introduction (section 1), footer
 
 New section: title, subtilte, some text and at least 5 charts of this type: 
 
+PRIMARY SECTOR
+SECONDARY SECTOR
+TERTIARY SECTOR
+TOURISM SECTOR
+
+
 o	Mandatory 
-- barchart
-- grouped barchart
-- heatmap
-- 100% stacked barchart
-- waffle chart 
+- barchart (top conflict countries bar chart) SORTED by Percentage primary sector, maybe some highlighted 
+- grouped barchart (subkategorien) Event types. 
+- heatmap (x Jahreszahlen, Y Eventype, intensity #Events, maybe #Fatalities)
+- 100% stacked barchart (subkategorien) economic makeup for the highlighted countries from above plot.
+- waffle chart   (evtl. small multiple)
+- [pie chart]. 100% of conflicts, which sector is dominating in the country of origin.
+
+"consider plotting something where absolute values are correlated or normalized in some way"
 
 o	Extra 
 - circle packing
-- dumbbell plot
+- dumbbell plot       (binäre kategorische spalte Vergleich)
 - stacked barchart (small multiple)
-- [pie chart]
+- [pie chart] 
 - other charts from Kirk chapter 6 in the "comparison" category 
+
+
+
 
 **First ideas for the Introduction (Human Suffering)**
  
