@@ -8,9 +8,14 @@ import vueDevTools from "vite-plugin-vue-devtools";
 export default defineConfig({
   plugins: [vue(), vueDevTools()],
   base: "/vizis/",
+  root: "./public",
   resolve: {
     alias: {
-      "@": fileURLToPath(new URL("./src", import.meta.url)),
+      "@": fileURLToPath(new URL("./public/src", import.meta.url)),
     },
+  },
+  build: {
+    outDir: "../dist",
+    emptyOutDir: true,
   },
 });
