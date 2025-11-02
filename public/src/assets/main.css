@@ -29,13 +29,18 @@ header h1 {
   letter-spacing: -0.02em;
 }
 
-/* Section component styles */
+h3 {
+  font-size: 1.5rem;
+  margin: 0 0 0.5rem 0;
+  font-weight: 600;
+}
+
 section {
   margin: 2rem 0;
   width: 100%;
   padding: 3rem 1rem;
   box-sizing: border-box;
-  background: linear-gradient(135deg, rgba(198, 199, 255, 0.1), rgba(114, 18, 136, 0.1));
+  background: linear-gradient(90deg, rgba(198, 199, 255, 0.1), rgba(114, 18, 136, 0.1));
   border-radius: 1rem;
 }
 
@@ -59,79 +64,45 @@ section h2 {
   margin: 0 0 0.75rem 0;
 }
 
-/* New York Times-style article layout */
-.article-container {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 0;
+div {
+  margin-top: 2rem;
 }
 
-.article-text {
-  max-width: 640px;
-  margin: 0 auto;
-  padding: 1.5rem 2rem;
-  text-align: left;
-  line-height: 1.7;
+strong {
+  font-weight: 700;
 }
 
-.article-text p {
-  font-size: 1.125rem;
-  color: #e0e0e0;
-  margin: 0 0 1.5rem 0;
-  text-align: left;
+ul {
+  list-style-type: none;
+  padding-left: 0;
 }
 
-.article-text h3 {
-  font-size: 1.75rem;
-  color: #ffffff;
-  margin: 2.5rem 0 1rem 0;
-  text-align: left;
-}
-
-.article-text h4 {
-  font-size: 1.35rem;
-  color: #c7c7c7;
-  margin: 2rem 0 0.75rem 0;
-  text-align: left;
-  font-weight: 600;
-}
-
-/* Full-width visualization container */
-.visualization-container {
+.chart-wrapper {
   width: 100%;
-  max-width: 1100px;
-  margin: 3rem auto;
-  padding: 2rem 1rem;
-  background: rgba(255, 255, 255, 0.02);
-  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  min-height: 500px;
 }
 
-.visualization-title {
-  font-size: 1.2rem;
-  color: #c7c7c7;
-  margin: 0 0 0.5rem 0;
-  text-align: center;
-  font-weight: 600;
+.chart {
+  flex: 1;
+  width: 100%;
+  max-width: 850px;
+  min-height: 0;
+  overflow-x: auto;
 }
 
-.visualization-subtitle {
-  font-size: 0.95rem;
-  color: #999;
-  margin: 0 0 1.5rem 0;
-  text-align: center;
-  font-style: italic;
+.chart svg {
+  display: block;
+  margin: 0 auto;
 }
 
-/* Placeholder text styling */
-.placeholder-text {
+.data-note {
+  margin-top: 1rem;
+  font-size: 0.85rem;
   color: #888;
   font-style: italic;
-  background: rgba(255, 255, 255, 0.03);
-  padding: 1rem;
-  border-radius: 4px;
-  border-left: 3px solid rgba(198, 199, 255, 0.3);
-  text-align: left;
+  text-align: center;
 }
-
-
-
