@@ -4,10 +4,10 @@ This document provides a comprehensive overview of all datasets in the raw-data 
 
 ## Summary Statistics
 
-**Total Datasets**: 10 CSV files
-**Organizations**: 5 data sources
-**Total Rows**: ~2.4 million records
-**Coverage**: Global conflict, protests, violence, religious demographics, ethnic composition (1945-2024)
+**Total Datasets**: 13 files (11 CSV/Excel files + 1 PDF metadata)
+**Organizations**: 7 data sources
+**Total Rows**: ~2.42 million records
+**Coverage**: Global conflict, protests, violence, religious demographics, ethnic composition, economic indicators, tourism metrics (1945-2024)
 **Primary Dataset**: ACLED (2.37M events)
 
 ---
@@ -265,6 +265,179 @@ Global religious demographics from 1945-2010 at three levels of aggregation. Use
 
 ---
 
+## 6. World Bank
+
+Economic indicators and GDP data from the World Bank's comprehensive global development database. Two complementary datasets covering macroeconomic performance and sectoral breakdowns.
+
+### 6.1 world_bank_development_indicators.csv
+**Comprehensive Development Indicators**
+
+**Size**: 17,272 rows × 50 columns (5.2 MB)
+**Source**: World Bank Development Indicators
+**Coverage**: Annual data by country (1960-2024+)
+**Geographic Scope**: Global (all countries)
+
+**Purpose**: Comprehensive collection of 50 key development indicators covering economic performance, governance, environment, infrastructure, and social metrics. Use for understanding the broader development context behind conflicts.
+
+**Indicator Categories** (50 total indicators):
+
+**Economic Indicators**:
+- `GDP_current_US` - GDP in current US dollars
+- `inflation_annual%` - Annual inflation rate
+- `real_interest_rate` - Real interest rate
+- `risk_premium_on_lending` - Risk premium on lending
+- `central_goverment_debt%` - Central government debt as % of GDP
+- `tax_revenue%` - Tax revenue as % of GDP
+- `expense%` - Government expense as % of GDP
+
+**Governance Indicators** (World Bank Governance Indicators):
+- `control_of_corruption_estimate` & `control_of_corruption_std` - Corruption control scores
+- `goverment_effectiveness_estimate` & `goverment_effectiveness_std` - Government effectiveness
+- `political_stability_estimate` & `political_stability_std` - Political stability scores
+- `rule_of_law_estimate` & `rule_of_law_std` - Rule of law metrics
+- `regulatory_quality_estimate` & `regulatory_quality_std` - Regulatory quality
+- `voice_and_accountability_estimate` & `voice_and_accountability_std` - Democratic accountability
+
+**Social & Human Development**:
+- `human_capital_index` - Human capital index score
+- `government_expenditure_on_education%` - Education spending as % of GDP
+- `government_health_expenditure%` - Health spending as % of GDP
+- `multidimensional_poverty_headcount_ratio%` - Multidimensional poverty rate
+- `gini_index` - Income inequality measure
+- `life_expectancy_at_birth` - Average life expectancy
+- `birth_rate` & `death_rate` - Demographic rates
+- `population` & `rural_population` - Population metrics
+- `population_density` - People per sq km
+
+**Environment & Resources**:
+- `agricultural_land%` & `forest_land%` - Land use percentages
+- `land_area` - Total land area
+- `avg_precipitation` - Average precipitation levels
+- `CO2_emisions` - CO2 emissions
+- `other_greenhouse_emisions` - Other greenhouse gas emissions
+- `renewvable_energy_consumption%` - Renewable energy share
+- `electric_power_consumption` - Electricity consumption
+- `access_to_electricity%` - Population with electricity access
+
+**Infrastructure & Business**:
+- `individuals_using_internet%` - Internet penetration rate
+- `logistic_performance_index` - Logistics performance
+- `doing_business` - Ease of doing business score
+- `time_to_get_operation_license` - Days to get business permits
+- `statistical_performance_indicators` - Statistical capacity
+
+**Trade & Research**:
+- `trade_in_services%` - Trade in services as % of GDP
+- `research_and_development_expenditure%` - R&D spending as % of GDP
+
+**Security**:
+- `military_expenditure%` - Military spending as % of GDP
+- `intentional_homicides` - Intentional homicide rate
+
+**Data Quality**:
+- Many indicators have sparse data for certain countries/years
+- Governance indicators updated annually with some lag
+- Check for missing values when analyzing specific countries
+
+### 6.2 Download-GDPcurrent-NCU-countries.xlsx
+**GDP Components and Sectoral Breakdown**
+
+**Size**: 3,714 rows × 58 columns (2.2 MB)
+**Source**: World Bank National Accounts Data
+**Coverage**: Annual GDP data by country (1970-2023)
+**Geographic Scope**: 220 countries
+**Format**: Excel (.xlsx) with 2 sheets (main data + footnotes)
+
+**Purpose**: Detailed GDP breakdown by expenditure components and economic sectors in national currencies. Use for understanding economic structure and how conflicts affect different sectors.
+
+**GDP Expenditure Components** (9 indicators):
+- `Final consumption expenditure` - Total consumption
+- `Household consumption expenditure` - Private consumption
+- `General government final consumption expenditure` - Government consumption
+- `Gross capital formation` - Total investment
+- `Gross fixed capital formation` - Fixed capital investment
+- `Changes in inventories` - Inventory changes
+- `Exports of goods and services` - Total exports
+- `Imports of goods and services` - Total imports
+- `Gross Domestic Product (GDP)` - Total GDP
+
+**GDP by Economic Sector** (8 indicators):
+- `Agriculture, hunting, forestry, fishing (ISIC A-B)`
+- `Mining, Manufacturing, Utilities (ISIC C-E)`
+- `Manufacturing (ISIC D)`
+- `Construction (ISIC F)`
+- `Wholesale, retail trade, restaurants and hotels (ISIC G-H)`
+- `Transport, storage and communication (ISIC I)`
+- `Other Activities (ISIC J-P)`
+- `Total Value Added`
+
+**Key Features**:
+- All values in national currency (see `Currency` column)
+- 54 years of annual data (1970-2023)
+- Includes footnotes sheet with data source notes
+- Header row starts at row 3 (row 1-2 are metadata)
+
+**Data Structure**:
+| Column | Type | Description |
+|--------|------|-------------|
+| `CountryID` | int | Numeric country identifier |
+| `Country` | str | Country name |
+| `Currency` | str | National currency name |
+| `IndicatorName` | str | GDP component or sector name |
+| `1970` to `2023` | float | Annual values in national currency |
+
+---
+
+## 7. UN Tourism
+
+### 7.1 UN_Tourism_8_9_1_TDGDP_04_2025.xlsx
+**Tourism Direct GDP Contribution (SDG Indicator 8.9.1)**
+
+**Size**: 1,243 rows × 12 columns (78 KB)
+**Source**: UN Tourism (formerly UNWTO) - Sustainable Development Goal 8.9.1
+**Coverage**: Annual data by country (2008-2023)
+**Geographic Scope**: 125 countries
+**Format**: Excel (.xlsx) with 2 sheets (Overview + data)
+**Update**: April 2025 release
+
+**Purpose**: Tracks tourism's direct contribution to GDP as a percentage of total GDP. Essential for understanding economic dependence on tourism and how conflicts affect tourism-dependent economies.
+
+**SDG Context**: Part of UN Sustainable Development Goal 8.9 - "By 2030, devise and implement policies to promote sustainable tourism that creates jobs and promotes local culture and products."
+
+**Complete Column Reference**:
+| Column | Type | Description |
+|--------|------|-------------|
+| `INDEX` | int | Row index (mostly null) |
+| `SDG_Indicator` | str | SDG code (8.9.1) |
+| `SeriesCode` | str | UN series identifier |
+| `SeriesDescription` | str | "Tourism direct GDP as a proportion of total GDP (%)" |
+| `GeoAreaCode` | int | UN M49 country code |
+| `GeoAreaName` | str | Country name |
+| `TimePeriod` | int | Year of observation |
+| `Value` | float | Tourism GDP as % of total GDP |
+| `Source` | str | Data source organization |
+| `FootNote` | str | Methodological notes |
+| `Nature` | str | Data type (Country data/Estimate) |
+| `Units` | str | PERCENT |
+
+**Key Metrics**:
+- Measures **direct** tourism contribution only (not indirect/induced effects)
+- Includes accommodation, food services, transport, recreation, travel services
+- Based on Tourism Satellite Account (TSA) methodology
+- Values typically range from <1% (low tourism) to 20%+ (tourism-dependent economies)
+
+**Coverage Notes**:
+- 125 countries reporting
+- 16 years of data (2008-2023)
+- Some countries have gaps in annual reporting
+- Data may be estimated for certain years (check `Nature` column)
+
+**Included Files**:
+- Main data: Sheet "SDG 8.9.1"
+- Metadata PDF: `UN_Tourism_8_9_1_TDGDP_metadata_04_2025.pdf` (251 KB) - Contains methodology, definitions, and data quality notes
+
+---
+
 ## Data Linkage Keys
 
 Cross-dataset joins are possible using these common identifiers:
@@ -273,16 +446,26 @@ Cross-dataset joins are possible using these common identifiers:
 |-----------|-----------|---------------|-------|
 | ACLED | UCDP GED | `country`, `year`, `event_date`, `latitude`, `longitude` | Fuzzy match on location/date |
 | ACLED | Religious Cleavages | `country`, `year`, `actor1/2` | Match on country-year, actors |
+| ACLED | World Bank | `country`, `year` | Country-year join |
+| ACLED | UN Tourism | `country`, `year` (as `TimePeriod`) | Country-year join |
 | UCDP Actor | UCDP Conflict | `ActorId` ↔ `side_a_id`, `side_b_id` | Direct join |
 | UCDP Conflict | UCDP BattleDeaths | `conflict_id`, `dyad_id` | Direct join |
+| UCDP Conflict | World Bank | `country`, `year` | Country-year join |
 | Religious Cleavages | UCDP Conflict | `idv4` ↔ `conflict_id` (v4) | Direct join |
 | Epac | WRP | `gwid` ↔ `state` | May need code conversion |
 | Any dataset | WRP | `country` ↔ `name`, `year` | Country-year join |
+| Any dataset | World Bank Dev Indicators | `country`, `date` (year) | Country-year join |
+| Any dataset | World Bank GDP | `country`, year columns | Country-year join |
+| Any dataset | UN Tourism | `country` ↔ `GeoAreaName`, `year` ↔ `TimePeriod` | Country-year join |
+| World Bank Dev Indicators | World Bank GDP | `country`, `year` | Both use country names |
+| World Bank | UN Tourism | `country`, `year` | Economic context for tourism |
 
 **Geographic Codes**:
 - ACLED uses ISO numeric country codes (`iso` column)
 - UCDP/Religious Cleavages use Gleditsch-Ward codes (`gwno*`, `gwnoa`)
 - Epac/WRP use Gleditsch-Ward codes (`gwid`, `state`)
-- A lookup table may be needed for cross-system joins
+- World Bank uses country names (`country` column) and numeric IDs (`CountryID`)
+- UN Tourism uses UN M49 codes (`GeoAreaCode`) and country names (`GeoAreaName`)
+- A lookup table may be needed for cross-system joins between different coding schemes
 
 ---
