@@ -1,0 +1,160 @@
+{
+  "metadata": {
+    "title": "100% Stacked Bar: Economic Sector Composition by Country",
+    "description": "Distribution of economic sectors (Primary, Secondary, Tertiary, Tourism) for highlighted conflict countries",
+    "source": "World Bank + ACLED",
+    "date_range": "2015-2024",
+    "note": "Tourism is shown separately but is part of Tertiary sector. Bars total 100%. Only showing the 7 highlighted countries from Viz 1."
+  },
+  "countries": [
+    "Ukraine",
+    "India",
+    "Mexico",
+    "United States",
+    "Afghanistan",
+    "Somalia",
+    "Italy"
+  ],
+  "data": [
+    {
+      "country": "Ukraine",
+      "sector": "Primary",
+      "percentage": 18.74
+    },
+    {
+      "country": "Ukraine",
+      "sector": "Secondary",
+      "percentage": 11.22
+    },
+    {
+      "country": "Ukraine",
+      "sector": "Tertiary",
+      "percentage": 70.04
+    },
+    {
+      "country": "Ukraine",
+      "sector": "Tourism",
+      "percentage": 0.0
+    },
+    {
+      "country": "India",
+      "sector": "Primary",
+      "percentage": 22.1
+    },
+    {
+      "country": "India",
+      "sector": "Secondary",
+      "percentage": 22.86
+    },
+    {
+      "country": "India",
+      "sector": "Tertiary",
+      "percentage": 52.44
+    },
+    {
+      "country": "India",
+      "sector": "Tourism",
+      "percentage": 2.6
+    },
+    {
+      "country": "Mexico",
+      "sector": "Primary",
+      "percentage": 9.99
+    },
+    {
+      "country": "Mexico",
+      "sector": "Secondary",
+      "percentage": 28.73
+    },
+    {
+      "country": "Mexico",
+      "sector": "Tertiary",
+      "percentage": 52.82
+    },
+    {
+      "country": "Mexico",
+      "sector": "Tourism",
+      "percentage": 8.46
+    },
+    {
+      "country": "United States",
+      "sector": "Primary",
+      "percentage": 4.38
+    },
+    {
+      "country": "United States",
+      "sector": "Secondary",
+      "percentage": 14.65
+    },
+    {
+      "country": "United States",
+      "sector": "Tertiary",
+      "percentage": 78.0
+    },
+    {
+      "country": "United States",
+      "sector": "Tourism",
+      "percentage": 2.97
+    },
+    {
+      "country": "Afghanistan",
+      "sector": "Primary",
+      "percentage": 41.89
+    },
+    {
+      "country": "Afghanistan",
+      "sector": "Secondary",
+      "percentage": 8.9
+    },
+    {
+      "country": "Afghanistan",
+      "sector": "Tertiary",
+      "percentage": 49.21
+    },
+    {
+      "country": "Afghanistan",
+      "sector": "Tourism",
+      "percentage": 0.0
+    },
+    {
+      "country": "Somalia",
+      "sector": "Primary",
+      "percentage": 60.86
+    },
+    {
+      "country": "Somalia",
+      "sector": "Secondary",
+      "percentage": 6.68
+    },
+    {
+      "country": "Somalia",
+      "sector": "Tertiary",
+      "percentage": 32.47
+    },
+    {
+      "country": "Somalia",
+      "sector": "Tourism",
+      "percentage": 0.0
+    },
+    {
+      "country": "Italy",
+      "sector": "Primary",
+      "percentage": 4.73
+    },
+    {
+      "country": "Italy",
+      "sector": "Secondary",
+      "percentage": 22.9
+    },
+    {
+      "country": "Italy",
+      "sector": "Tertiary",
+      "percentage": 66.66
+    },
+    {
+      "country": "Italy",
+      "sector": "Tourism",
+      "percentage": 5.71
+    }
+  ]
+}

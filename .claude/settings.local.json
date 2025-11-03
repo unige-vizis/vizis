@@ -1,0 +1,34 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cat:*)",
+      "Bash(npm run dev:*)",
+      "Bash(npm install:*)",
+      "Bash(timeout 3 npm run dev:*)",
+      "Bash(unzip:*)",
+      "Bash(python:*)",
+      "Bash(for dir in */)",
+      "Bash(do echo \"=== $dir ===\")",
+      "Bash(ls:*)",
+      "Bash(done)",
+      "Bash(tee:*)",
+      "Bash(find:*)",
+      "Bash(git add:*)",
+      "Bash(git check-ignore:*)",
+      "Bash(mv:*)",
+      "Bash(rm:*)",
+      "Bash(pip install:*)",
+      "Bash(jupyter nbconvert:*)",
+      "Bash(dir:*)",
+      "mcp__ide__executeCode",
+      "Bash(timeout:*)",
+      "Bash(npm run build:*)",
+      "Bash(NUL)",
+      "Bash(findstr:*)",
+      "Bash(copy:*)",
+      "Bash(cp:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

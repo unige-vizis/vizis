@@ -1,0 +1,60 @@
+{
+  "metadata": {
+    "title": "Event Types by Country (2015-2024)",
+    "description": "Distribution of ACLED event types across the 7 highlighted countries",
+    "source": "ACLED",
+    "date_range": "2015-2024",
+    "note": "Protests & Riots combined. Strategic developments excluded. Same 7 countries as viz2."
+  },
+  "data": [
+    {
+      "country": "Ukraine",
+      "Battles": 53383,
+      "Explosions/Remote violence": 126721,
+      "Protests & Riots": 6436,
+      "Violence against civilians": 1485
+    },
+    {
+      "country": "India",
+      "Battles": 6393,
+      "Explosions/Remote violence": 1663,
+      "Protests & Riots": 150906,
+      "Violence against civilians": 6518
+    },
+    {
+      "country": "Mexico",
+      "Battles": 9115,
+      "Explosions/Remote violence": 190,
+      "Protests & Riots": 42614,
+      "Violence against civilians": 38103
+    },
+    {
+      "country": "United States",
+      "Battles": 24,
+      "Explosions/Remote violence": 18,
+      "Protests & Riots": 69188,
+      "Violence against civilians": 388
+    },
+    {
+      "country": "Afghanistan",
+      "Battles": 40917,
+      "Explosions/Remote violence": 17393,
+      "Protests & Riots": 1501,
+      "Violence against civilians": 4738
+    },
+    {
+      "country": "Somalia",
+      "Battles": 15646,
+      "Explosions/Remote violence": 6479,
+      "Protests & Riots": 1511,
+      "Violence against civilians": 4938
+    },
+    {
+      "country": "Italy",
+      "Battles": 0,
+      "Explosions/Remote violence": 14,
+      "Protests & Riots": 23893,
+      "Violence against civilians": 43
+    }
+  ]
+}

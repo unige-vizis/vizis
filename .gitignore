@@ -15,6 +15,8 @@ dist
 dist-ssr
 coverage
 *.local
+.vite/
+py_vizis/
 
 # Editor directories and files
 .vscode/*
@@ -36,3 +38,32 @@ coverage
 
 # Vitest
 __screenshots__/
+
+# Data Processing - ignore only data files, keep folder structure and documentation
+# Ignore CSV and Excel files
+data-processing/**/*.csv
+data-processing/**/*.xlsx
+data-processing/**/*.xls
+data-processing/**/*.parquet
+
+# Ignore image outputs
+data-processing/output/**/*.png
+data-processing/output/**/*.jpg
+data-processing/output/**/*.jpeg
+data-processing/output/**/*.svg
+data-processing/output/**/*.pdf
+
+# Ignore temp folder (for one-off analysis scripts)
+data-processing/temp/
+
+# Allow viz-datasets folder JSON files (reduced datasets for website)
+!data-processing/viz-datasets/**/*.json
+!data-processing/viz-datasets/**/*.geojson
+
+# Python
+data-processing/**/*.pyc
+data-processing/**/__pycache__/
+data-processing/**/.ipynb_checkpoints/
+data-processing/**/.python-version
+data-processing/**/venv/
+data-processing/**/.venv/
