@@ -1,7 +1,7 @@
 <template>
   <section>
     <div class="container section__inner">
-      <h2>Global Conflict Patterns in the Context of Economic Compositions</h2>
+      <h3>Global Conflict Patterns in the Context of Economic Compositions</h3>
       <p class="subtitle">Analysis of conflict data from the last 10 years (2015-2024)</p>
       <div>
         <p>
@@ -19,7 +19,10 @@
       <div>
         <strong>For our project we use these datasets:</strong>
         <ul>
-          <li>ACLED (Armed Conflict Location & Event Data Project) - conflict events, fatalities, and event types (2015-2024)</li>
+          <li>
+            ACLED (Armed Conflict Location & Event Data Project) - conflict events, fatalities, and event types
+            (2015-2024)
+          </li>
           <li>World Bank - economic sector composition, GDP in USD, and population statistics</li>
           <li>UN Tourism - tourism percentage data (SDG 8.9.1, 2008-2023)</li>
         </ul>
