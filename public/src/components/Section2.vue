@@ -23,9 +23,14 @@ import WaffleChartSectors from './visualizations/WaffleChartSectors.vue'
     <div class="section__inner">
       <h3>Economic Sector Composition of Highlighted Conflict Countries</h3>
       <StackedBarChart />
-      <p style="font-style: italic; font-size: 0.9em; color: #666; margin-top: 1rem;">
-        <strong>Note:</strong> Conflict data from ACLED (2015-2024). Economic sectors from World Bank GDP data: Primary = Agriculture + Mining; Secondary = Manufacturing + Construction; Tertiary = Services. Tourism data from UN Tourism (2008-2023, 125 countries) is sometimes incomplete and a different source than sector data, where it is not explicitly included. We included it, but this might introduce slight imprecisions.
-      </p>
+      <p><strong>Note:</strong> Economic sector percentages are calculated from World Bank GDP data</p>
+      <ul>
+        <li>Primary sector: Agriculture, Hunting, Forestry, Fishing, Mining, Utilities (ISIC A-C+E)</li>
+        <li>Secondary sector: Manufacturing, Construction (ISIC D+F)</li>
+        <li>Tertiary sector: Wholesale, Gastronomy, Transport, Communication, Other (ISIC G-P)</li>
+        <li>Tourism data from UN Tourism - sometimes incomplete and from a different source than sector data.
+        Its inclusion into the third sector might introduce slight imprecisions</li>
+      </ul>
 
       <p>
        Our focus is how a country's economic situation influences or at the very least correlates with the types of and frequency of conflict events. This plot shows the previously highlighted countries of interest and their strongly differing economic compositions.

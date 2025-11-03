@@ -166,9 +166,9 @@ function createChart() {
 
 function formatLabel(key) {
   const labels = {
-    'Primary': 'Primary (Agriculture, Mining)',
-    'Secondary': 'Secondary (Manufacturing)',
-    'Tertiary': 'Tertiary (Services)',
+    'Primary': 'Primary',
+    'Secondary': 'Secondary',
+    'Tertiary': 'Tertiary',
     'Tourism': 'Tourism (part of Tertiary)'
   }
   return labels[key] || key
