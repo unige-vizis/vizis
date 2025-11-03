@@ -6,13 +6,21 @@ const chartRef = ref(null)
 const containerWidth = ref(0)
 const containerHeight = ref(0)
 const normalizeByPopulation = ref(false)
-
-// Load the data from data-processing/viz-datasets/viz1_bar_chart_sectors_conflicts.json and extract the array
-import data from '../../../../data-processing/viz-datasets/viz1_bar_chart_sectors_conflicts.json'
-const dataset = Array.isArray(data && data.data) ? data.data : []
+const dataset = ref([])
 
 // Distinct countries to highlight (analysis subset)
 const highlightedCountries = new Set(['Somalia', 'United States', 'Afghanistan', 'India', 'Ukraine', 'Mexico', 'Italy'])
+
+// Load the data from assets folder
+async function loadData() {
+  try {
+    const response = await fetch('/vizis/src/assets/data/viz1_bar_chart_sectors_conflicts.json')
+    const data = await response.json()
+    dataset.value = Array.isArray(data && data.data) ? data.data : []
+  } catch (error) {
+    console.error('Error loading bar chart data:', error)
+  }
+}
 
 // Watch for toggle changes and update chart with transitions
 watch(normalizeByPopulation, () => {
@@ -30,7 +38,8 @@ function updateDimensions() {
 
 // Set up resize observer
 let resizeObserver
-onMounted(() => {
+onMounted(async () => {
+  await loadData()
   updateDimensions()
   resizeObserver = new ResizeObserver(updateDimensions)
   if (chartRef.value) {
@@ -64,11 +73,11 @@ function createChart() {
   // Create scales - use either absolute or per capita values
   const getValue = d => normalizeByPopulation.value ? d.events_per_100k : d.event_count
   const x = d3.scaleLinear()
-    .domain([0, d3.max(dataset, d => getValue(d)) || 0])
+    .domain([0, d3.max(dataset.value, d => getValue(d)) || 0])
     .range([0, width])
 
   const y = d3.scaleBand()
-    .domain(dataset.map(d => d.country))
+    .domain(dataset.value.map(d => d.country))
     .range([0, height])
     .padding(0.2)
 
@@ -85,7 +94,7 @@ function createChart() {
 
   // Add bars
   const bars = svg.selectAll('.bar')
-    .data(dataset)
+    .data(dataset.value)
     .enter()
     .append('rect')
     .attr('class', 'bar')
@@ -113,7 +122,7 @@ function createChart() {
 
   // Add value labels
   svg.selectAll('.label')
-    .data(dataset)
+    .data(dataset.value)
     .enter()
     .append('text')
     .attr('class', 'label')
@@ -158,17 +167,17 @@ function updateChart() {
   // Update scales with new values
   const getValue = d => normalizeByPopulation.value ? d.events_per_100k : d.event_count
   const x = d3.scaleLinear()
-    .domain([0, d3.max(dataset, d => getValue(d)) || 0])
+    .domain([0, d3.max(dataset.value, d => getValue(d)) || 0])
     .range([0, width])
 
   const y = d3.scaleBand()
-    .domain(dataset.map(d => d.country))
+    .domain(dataset.value.map(d => d.country))
     .range([0, height])
     .padding(0.2)
 
   // Update bars with smooth transitions
   svg.selectAll('.bar')
-    .data(dataset)
+    .data(dataset.value)
     .transition()
     .duration(600)
     .ease(d3.easeCubicInOut)
@@ -187,7 +196,7 @@ function updateChart() {
 
   // Update value labels with smooth transitions
   svg.selectAll('.label')
-    .data(dataset)
+    .data(dataset.value)
     .transition()
     .duration(600)
     .ease(d3.easeCubicInOut)
