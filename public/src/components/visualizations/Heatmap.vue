@@ -4,8 +4,8 @@ import * as d3 from 'd3'
 
 const chartRef = ref(null)
 
-// Load the data from viz3_heatmap_event_types_years.json
-import jsonData from '@/assets/data/viz3_heatmap_event_types_years.json'
+// Load the data from viz4_heatmap_event_types_years.json
+import jsonData from '@/assets/data/viz4_heatmap_event_types_years.json'
 const data = Array.isArray(jsonData && jsonData.data) ? jsonData.data : []
 
 // Extract unique years and event types
@@ -17,9 +17,9 @@ onMounted(() => {
 })
 
 function createChart() {
-  const margin = { top: 20, right: 30, bottom: 60, left: 220 }
-  const width = 900 - margin.left - margin.right
-  const height = 400 - margin.top - margin.bottom
+  const margin = { top: 20, right: 120, bottom: 60, left: 220 }
+  const width = 1100 - margin.left - margin.right
+  const height = 420 - margin.top - margin.bottom
 
   // Clear any existing chart
   d3.select(chartRef.value).selectAll('*').remove()
@@ -42,10 +42,23 @@ function createChart() {
     .range([0, height])
     .padding(0.05)
 
-  // Color scale - based on event_count
-  const colorScale = d3.scaleSequential()
-    .interpolator(d3.interpolateRgb('#2d1b3d', '#c6c7ff'))
+  // Two monochrome color scales for dual encoding
+  // Purples for event counts (upper half)
+  const eventColorScale = d3.scaleSequential()
+    .interpolator(d3.interpolatePurples)
     .domain([0, d3.max(data, d => d.event_count)])
+
+  // Reds for fatalities (lower half) - red implies danger/death
+  const fatalityColorScale = d3.scaleSequential()
+    .interpolator(d3.interpolateReds)
+    .domain([0, d3.max(data, d => d.total_fatalities)])
+
+  // Function to determine text color based on background intensity
+  const getTextColor = (value, maxValue) => {
+    const normalized = value / maxValue
+    // Use white text for dark backgrounds (high intensity), dark text for light
+    return normalized > 0.5 ? '#ffffff' : '#1a1a1a'
+  }
 
   // Add X axis
   svg.append('g')
@@ -77,21 +90,25 @@ function createChart() {
     .style('pointer-events', 'none')
     .style('opacity', 0)
 
-  // Add cells
-  svg.selectAll('rect')
+  // Add cells with horizontal split
+  const cells = svg.selectAll('.cell')
     .data(data)
     .enter()
-    .append('rect')
+    .append('g')
+    .attr('class', 'cell')
+
+  // Upper half (event counts - blue)
+  cells.append('rect')
     .attr('x', d => x(d.year))
     .attr('y', d => y(d.event_type))
     .attr('width', x.bandwidth())
-    .attr('height', y.bandwidth())
-    .attr('fill', d => colorScale(d.event_count))
+    .attr('height', y.bandwidth() / 2)
+    .attr('fill', d => eventColorScale(d.event_count))
     .attr('stroke', '#1a1a1a')
-    .attr('stroke-width', 1)
+    .attr('stroke-width', 0.5)
     .on('mouseover', function(event, d) {
-      d3.select(this)
-        .attr('stroke', '#c6c7ff')
+      d3.select(this.parentNode).selectAll('rect')
+        .attr('stroke', '#ffffff')
         .attr('stroke-width', 2)
 
       tooltip
@@ -101,64 +118,130 @@ function createChart() {
         .style('top', (event.pageY - 10) + 'px')
     })
     .on('mouseout', function() {
-      d3.select(this)
+      d3.select(this.parentNode).selectAll('rect')
         .attr('stroke', '#1a1a1a')
-        .attr('stroke-width', 1)
+        .attr('stroke-width', 0.5)
 
       tooltip.style('opacity', 0)
     })
 
-  // Add legend
-  const legendWidth = 300
-  const legendHeight = 10
+  // Lower half (fatalities - orange)
+  cells.append('rect')
+    .attr('x', d => x(d.year))
+    .attr('y', d => y(d.event_type) + y.bandwidth() / 2)
+    .attr('width', x.bandwidth())
+    .attr('height', y.bandwidth() / 2)
+    .attr('fill', d => fatalityColorScale(d.total_fatalities))
+    .attr('stroke', '#1a1a1a')
+    .attr('stroke-width', 0.5)
+    .on('mouseover', function(event, d) {
+      d3.select(this.parentNode).selectAll('rect')
+        .attr('stroke', '#ffffff')
+        .attr('stroke-width', 2)
 
-  const legend = svg.append('g')
-    .attr('transform', `translate(${(width - legendWidth) / 2}, ${height + 40})`)
+      tooltip
+        .style('opacity', 1)
+        .html(`<strong>${d.event_type}</strong><br/>${d.year}: ${d.event_count.toLocaleString()} events<br/>Fatalities: ${d.total_fatalities.toLocaleString()}`)
+        .style('left', (event.pageX + 10) + 'px')
+        .style('top', (event.pageY - 10) + 'px')
+    })
+    .on('mouseout', function() {
+      d3.select(this.parentNode).selectAll('rect')
+        .attr('stroke', '#1a1a1a')
+        .attr('stroke-width', 0.5)
 
-  const legendScale = d3.scaleLinear()
-    .domain([0, d3.max(data, d => d.event_count)])
-    .range([0, legendWidth])
+      tooltip.style('opacity', 0)
+    })
 
-  const legendAxis = d3.axisBottom(legendScale)
-    .ticks(5)
-
-  // Create gradient
-  const defs = svg.append('defs')
-  const gradient = defs.append('linearGradient')
-    .attr('id', 'heatmap-gradient')
-
-  gradient.selectAll('stop')
-    .data([
-      { offset: '0%', color: '#2d1b3d' },
-      { offset: '100%', color: '#c6c7ff' }
-    ])
-    .enter()
-    .append('stop')
-    .attr('offset', d => d.offset)
-    .attr('stop-color', d => d.color)
-
-  legend.append('rect')
-    .attr('width', legendWidth)
-    .attr('height', legendHeight)
-    .style('fill', 'url(#heatmap-gradient)')
-
-  legend.append('g')
-    .attr('transform', `translate(0, ${legendHeight})`)
-    .call(legendAxis)
-    .selectAll('text')
-    .style('fill', '#c7c7c7')
-    .style('font-size', '11px')
-
-  legend.selectAll('.domain, .tick line')
-    .style('stroke', '#666')
-
-  legend.append('text')
-    .attr('x', legendWidth / 2)
-    .attr('y', legendHeight + 35)
+  // Add text labels for event counts (upper half - blue area)
+  cells.append('text')
+    .attr('x', d => x(d.year) + x.bandwidth() / 2)
+    .attr('y', d => y(d.event_type) + y.bandwidth() * 0.25)
     .attr('text-anchor', 'middle')
-    .style('fill', '#999')
-    .style('font-size', '12px')
-    .text('Number of Events')
+    .attr('dominant-baseline', 'middle')
+    .attr('fill', d => getTextColor(d.event_count, d3.max(data, d => d.event_count)))
+    .style('font-size', '9px')
+    .style('font-weight', '600')
+    .style('pointer-events', 'none')
+    .text(d => {
+      // Format numbers: use K for thousands
+      if (d.event_count >= 1000) {
+        return (d.event_count / 1000).toFixed(1) + 'K'
+      }
+      return d.event_count
+    })
+
+  // Add text labels for fatalities (lower half - orange area)
+  cells.append('text')
+    .attr('x', d => x(d.year) + x.bandwidth() / 2)
+    .attr('y', d => y(d.event_type) + y.bandwidth() * 0.75)
+    .attr('text-anchor', 'middle')
+    .attr('dominant-baseline', 'middle')
+    .attr('fill', d => getTextColor(d.total_fatalities, d3.max(data, d => d.total_fatalities)))
+    .style('font-size', '9px')
+    .style('font-weight', '600')
+    .style('pointer-events', 'none')
+    .text(d => {
+      // Format numbers: use K for thousands
+      if (d.total_fatalities >= 1000) {
+        return (d.total_fatalities / 1000).toFixed(1) + 'K'
+      }
+      return d.total_fatalities
+    })
+
+  // Add legend labels at the end of the first row
+  const firstEventType = eventTypes[0]
+  const lastYear = years[years.length - 1]
+
+  // Get mid-intensity colors for backgrounds
+  const maxEvents = d3.max(data, d => d.event_count)
+  const maxFatalities = d3.max(data, d => d.total_fatalities)
+  const midPurple = eventColorScale(maxEvents * 0.5)
+  const midRed = fatalityColorScale(maxFatalities * 0.5)
+
+  // "Events" label with background in upper half
+  const eventsLabelX = x(lastYear) + x.bandwidth() + 10
+  const eventsLabelY = y(firstEventType) + y.bandwidth() * 0.25
+
+  svg.append('rect')
+    .attr('x', eventsLabelX - 5)
+    .attr('y', eventsLabelY - 11)
+    .attr('width', 60)
+    .attr('height', 22)
+    .attr('fill', midPurple)
+    .attr('rx', 3)
+
+  svg.append('text')
+    .attr('x', eventsLabelX + 30)
+    .attr('y', eventsLabelY)
+    .attr('text-anchor', 'middle')
+    .attr('dominant-baseline', 'middle')
+    .attr('fill', '#ffffff')
+    .style('font-size', '13px')
+    .style('font-weight', '600')
+    .text('Events')
+
+  // "Fatalities" label with background in lower half
+  const fatalitiesLabelX = x(lastYear) + x.bandwidth() + 10
+  const fatalitiesLabelY = y(firstEventType) + y.bandwidth() * 0.75
+
+  svg.append('rect')
+    .attr('x', fatalitiesLabelX - 5)
+    .attr('y', fatalitiesLabelY - 11)
+    .attr('width', 75)
+    .attr('height', 22)
+    .attr('fill', midRed)
+    .attr('rx', 3)
+
+  svg.append('text')
+    .attr('x', fatalitiesLabelX + 37.5)
+    .attr('y', fatalitiesLabelY)
+    .attr('text-anchor', 'middle')
+    .attr('dominant-baseline', 'middle')
+    .attr('fill', '#ffffff')
+    .style('font-size', '13px')
+    .style('font-weight', '600')
+    .text('Fatalities')
 }
 </script>
 
@@ -178,14 +261,15 @@ function createChart() {
 
 .chart {
   width: 100%;
-  max-width: 950px;
-  overflow-x: auto;
+  /* Inherits max-width from global .chart (--viz-content-width) */
   position: relative;
 }
 
 .chart svg {
   display: block;
   margin: 0 auto;
+  max-width: 100%;
+  height: auto;
 }
 
 .data-note {

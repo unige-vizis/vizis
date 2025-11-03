@@ -11,6 +11,9 @@ const normalizeByPopulation = ref(false)
 import data from '../../../../data-processing/viz-datasets/viz1_bar_chart_sectors_conflicts.json'
 const dataset = Array.isArray(data && data.data) ? data.data : []
 
+// Distinct countries to highlight (analysis subset)
+const highlightedCountries = new Set(['Somalia', 'United States', 'Afghanistan', 'India', 'Ukraine', 'Mexico', 'Italy'])
+
 // Watch for toggle changes and update chart with transitions
 watch(normalizeByPopulation, () => {
   updateChart()
@@ -44,7 +47,7 @@ onUnmounted(() => {
 function createChart() {
   if (!containerWidth.value || !containerHeight.value) return
 
-  const margin = { top: 20, right: 120, bottom: 60, left: 100 }
+  const margin = { top: 20, right: 80, bottom: 60, left: 100 }
   const width = containerWidth.value - margin.left - margin.right
   const height = containerHeight.value - margin.top - margin.bottom
 
@@ -69,11 +72,6 @@ function createChart() {
     .range([0, height])
     .padding(0.2)
 
-  // Use a 0-100 domain for percentage mapping so the legend is always percent-based.
-  const color = d3.scaleSequential()
-    .domain([0, 100])
-    .interpolator(value => d3.interpolatePurples(0.3 + value * 0.7))
-
   svg.selectAll('.domain, .tick line')
     .style('stroke', '#666')
 
@@ -95,7 +93,7 @@ function createChart() {
     .attr('y', d => y(d.country))
     .attr('width', d => x(getValue(d)))
     .attr('height', y.bandwidth())
-    .attr('fill', d => color(d["Primary_%"]))
+    .attr('fill', d => highlightedCountries.has(d.country) ? '#CC9966' : '#9966cc')
     .attr('opacity', 0.9)
     .on('mouseover', function() {
       d3.select(this).attr('opacity', 1)
@@ -110,7 +108,7 @@ function createChart() {
       const value = normalizeByPopulation.value
         ? `${d.events_per_100k} per 100k`
         : d.event_count
-      return `${d.country} — Primary: ${d["Primary_%"]}%\nEvents: ${value}`
+      return `${d.country}\nEvents: ${value}`
     })
 
   // Add value labels
@@ -141,71 +139,12 @@ function createChart() {
     .style('fill', '#999')
     .style('font-size', '13px')
     .text(axisLabel)
-
-  // Legend: vertical gradient showing Primary_% from 0 to 100
-  const legendWidth = 15
-  const legendHeight = height
-  const legendX = width + 60
-  const legendY = height * 0.01
-
-  // defs + linearGradient
-  const defs = svg.append('defs')
-  const gradientId = 'legend-gradient'
-  const gradient = defs.append('linearGradient')
-    .attr('id', gradientId)
-    .attr('x1', '0%')
-    .attr('x2', '0%')
-    .attr('y1', '100%')
-    .attr('y2', '0%')
-
-  const stops = d3.range(0, 1.001, 0.05)
-  gradient.selectAll('stop')
-    .data(stops)
-    .enter()
-    .append('stop')
-    .attr('offset', d => `${d * 100}%`)
-    .attr('stop-color', d => d3.interpolatePurples(0.3 + d * 0.7))
-
-  // Draw legend rect
-  svg.append('rect')
-    .attr('x', legendX)
-    .attr('y', legendY)
-    .attr('width', legendWidth)
-    .attr('height', legendHeight)
-    .style('fill', `url(#${gradientId})`)
-    .style('stroke', '#666')
-    .style('stroke-width', 0.5)
-
-  // Legend axis scale (0-100)
-  const legendScale = d3.scaleLinear()
-    .domain([0, 100])
-    .range([legendHeight, 0])
-
-  const legendAxis = d3.axisRight(legendScale)
-    .ticks(5)
-    .tickFormat(d => d + '%')
-
-  svg.append('g')
-    .attr('transform', `translate(${legendX + legendWidth}, ${legendY})`)
-    .call(legendAxis)
-    .selectAll('text')
-    .style('fill', '#c7c7c7')
-    .style('font-size', '11px')
-
-  // Legend label
-  svg.append('text')
-    .attr('x', legendX + legendWidth / 2)
-    .attr('y', legendY - 15)
-    .style('fill', '#999')
-    .style('font-size', '12px')
-    .style('text-anchor', 'middle')
-    .text('Primary %')
 }
 
 function updateChart() {
   if (!containerWidth.value || !containerHeight.value) return
 
-  const margin = { top: 20, right: 120, bottom: 60, left: 100 }
+  const margin = { top: 20, right: 80, bottom: 60, left: 100 }
   const width = containerWidth.value - margin.left - margin.right
   const height = containerHeight.value - margin.top - margin.bottom
 
@@ -234,6 +173,7 @@ function updateChart() {
     .duration(600)
     .ease(d3.easeCubicInOut)
     .attr('width', d => x(getValue(d)))
+    .attr('fill', d => highlightedCountries.has(d.country) ? '#CC9966' : '#9966cc')
 
   // Update tooltips
   svg.selectAll('.bar')
@@ -242,7 +182,7 @@ function updateChart() {
       const value = normalizeByPopulation.value
         ? `${d.events_per_100k} per 100k`
         : d.event_count
-      return `${d.country} — Primary: ${d["Primary_%"]}%\nEvents: ${value}`
+      return `${d.country}\nEvents: ${value}`
     })
 
   // Update value labels with smooth transitions

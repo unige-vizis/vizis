@@ -1,0 +1,383 @@
+{
+  "metadata": {
+    "title": "100% Stacked Bar: Economic Sector Composition by Country",
+    "description": "Distribution of economic sectors (Primary, Secondary, Tertiary, Tourism) for top 20 conflict countries",
+    "source": "World Bank + ACLED",
+    "date_range": "2015-2024",
+    "note": "Countries ordered by total conflict events (same as Viz 1)"
+  },
+  "countries": [
+    "Ukraine",
+    "India",
+    "Mexico",
+    "Yemen",
+    "Brazil",
+    "Myanmar",
+    "United States",
+    "Pakistan",
+    "Afghanistan",
+    "Iraq",
+    "France",
+    "Nigeria",
+    "Somalia",
+    "Colombia",
+    "Lebanon",
+    "Italy",
+    "Sudan",
+    "Germany",
+    "Nepal",
+    "Azerbaijan"
+  ],
+  "data": [
+    {
+      "country": "Ukraine",
+      "sector": "Primary",
+      "percentage": 18.74
+    },
+    {
+      "country": "Ukraine",
+      "sector": "Secondary",
+      "percentage": 11.22
+    },
+    {
+      "country": "Ukraine",
+      "sector": "Tertiary",
+      "percentage": 70.04
+    },
+    {
+      "country": "India",
+      "sector": "Primary",
+      "percentage": 22.1
+    },
+    {
+      "country": "India",
+      "sector": "Secondary",
+      "percentage": 22.86
+    },
+    {
+      "country": "India",
+      "sector": "Tertiary",
+      "percentage": 55.04
+    },
+    {
+      "country": "India",
+      "sector": "Tourism",
+      "percentage": 2.6
+    },
+    {
+      "country": "Mexico",
+      "sector": "Primary",
+      "percentage": 9.99
+    },
+    {
+      "country": "Mexico",
+      "sector": "Secondary",
+      "percentage": 28.73
+    },
+    {
+      "country": "Mexico",
+      "sector": "Tertiary",
+      "percentage": 61.28
+    },
+    {
+      "country": "Mexico",
+      "sector": "Tourism",
+      "percentage": 8.46
+    },
+    {
+      "country": "Yemen",
+      "sector": "Primary",
+      "percentage": 25.29
+    },
+    {
+      "country": "Yemen",
+      "sector": "Secondary",
+      "percentage": 15.16
+    },
+    {
+      "country": "Yemen",
+      "sector": "Tertiary",
+      "percentage": 59.55
+    },
+    {
+      "country": "Brazil",
+      "sector": "Primary",
+      "percentage": 13.64
+    },
+    {
+      "country": "Brazil",
+      "sector": "Secondary",
+      "percentage": 18.61
+    },
+    {
+      "country": "Brazil",
+      "sector": "Tertiary",
+      "percentage": 67.75
+    },
+    {
+      "country": "Myanmar",
+      "sector": "Primary",
+      "percentage": 26.55
+    },
+    {
+      "country": "Myanmar",
+      "sector": "Secondary",
+      "percentage": 31.96
+    },
+    {
+      "country": "Myanmar",
+      "sector": "Tertiary",
+      "percentage": 41.49
+    },
+    {
+      "country": "United States",
+      "sector": "Primary",
+      "percentage": 4.38
+    },
+    {
+      "country": "United States",
+      "sector": "Secondary",
+      "percentage": 14.65
+    },
+    {
+      "country": "United States",
+      "sector": "Tertiary",
+      "percentage": 80.97
+    },
+    {
+      "country": "Pakistan",
+      "sector": "Primary",
+      "percentage": 29.49
+    },
+    {
+      "country": "Pakistan",
+      "sector": "Secondary",
+      "percentage": 17.07
+    },
+    {
+      "country": "Pakistan",
+      "sector": "Tertiary",
+      "percentage": 53.44
+    },
+    {
+      "country": "Afghanistan",
+      "sector": "Primary",
+      "percentage": 41.89
+    },
+    {
+      "country": "Afghanistan",
+      "sector": "Secondary",
+      "percentage": 8.9
+    },
+    {
+      "country": "Afghanistan",
+      "sector": "Tertiary",
+      "percentage": 49.21
+    },
+    {
+      "country": "Iraq",
+      "sector": "Primary",
+      "percentage": 48.81
+    },
+    {
+      "country": "Iraq",
+      "sector": "Secondary",
+      "percentage": 9.21
+    },
+    {
+      "country": "Iraq",
+      "sector": "Tertiary",
+      "percentage": 41.99
+    },
+    {
+      "country": "France",
+      "sector": "Primary",
+      "percentage": 6.02
+    },
+    {
+      "country": "France",
+      "sector": "Secondary",
+      "percentage": 16.47
+    },
+    {
+      "country": "France",
+      "sector": "Tertiary",
+      "percentage": 77.51
+    },
+    {
+      "country": "France",
+      "sector": "Tourism",
+      "percentage": 3.56
+    },
+    {
+      "country": "Nigeria",
+      "sector": "Primary",
+      "percentage": 31.1
+    },
+    {
+      "country": "Nigeria",
+      "sector": "Secondary",
+      "percentage": 25.3
+    },
+    {
+      "country": "Nigeria",
+      "sector": "Tertiary",
+      "percentage": 43.6
+    },
+    {
+      "country": "Nigeria",
+      "sector": "Tourism",
+      "percentage": 4.29
+    },
+    {
+      "country": "Somalia",
+      "sector": "Primary",
+      "percentage": 60.86
+    },
+    {
+      "country": "Somalia",
+      "sector": "Secondary",
+      "percentage": 6.68
+    },
+    {
+      "country": "Somalia",
+      "sector": "Tertiary",
+      "percentage": 32.47
+    },
+    {
+      "country": "Colombia",
+      "sector": "Primary",
+      "percentage": 20.48
+    },
+    {
+      "country": "Colombia",
+      "sector": "Secondary",
+      "percentage": 16.44
+    },
+    {
+      "country": "Colombia",
+      "sector": "Tertiary",
+      "percentage": 63.08
+    },
+    {
+      "country": "Colombia",
+      "sector": "Tourism",
+      "percentage": 2.35
+    },
+    {
+      "country": "Lebanon",
+      "sector": "Primary",
+      "percentage": 7.5
+    },
+    {
+      "country": "Lebanon",
+      "sector": "Secondary",
+      "percentage": 11.41
+    },
+    {
+      "country": "Lebanon",
+      "sector": "Tertiary",
+      "percentage": 81.09
+    },
+    {
+      "country": "Lebanon",
+      "sector": "Tourism",
+      "percentage": 9.1
+    },
+    {
+      "country": "Italy",
+      "sector": "Primary",
+      "percentage": 4.73
+    },
+    {
+      "country": "Italy",
+      "sector": "Secondary",
+      "percentage": 22.9
+    },
+    {
+      "country": "Italy",
+      "sector": "Tertiary",
+      "percentage": 72.37
+    },
+    {
+      "country": "Italy",
+      "sector": "Tourism",
+      "percentage": 5.71
+    },
+    {
+      "country": "Sudan",
+      "sector": "Primary",
+      "percentage": 15.03
+    },
+    {
+      "country": "Sudan",
+      "sector": "Secondary",
+      "percentage": 12.34
+    },
+    {
+      "country": "Sudan",
+      "sector": "Tertiary",
+      "percentage": 58.16
+    },
+    {
+      "country": "Germany",
+      "sector": "Primary",
+      "percentage": 4.65
+    },
+    {
+      "country": "Germany",
+      "sector": "Secondary",
+      "percentage": 25.65
+    },
+    {
+      "country": "Germany",
+      "sector": "Tertiary",
+      "percentage": 69.7
+    },
+    {
+      "country": "Germany",
+      "sector": "Tourism",
+      "percentage": 2.16
+    },
+    {
+      "country": "Nepal",
+      "sector": "Primary",
+      "percentage": 26.51
+    },
+    {
+      "country": "Nepal",
+      "sector": "Secondary",
+      "percentage": 11.01
+    },
+    {
+      "country": "Nepal",
+      "sector": "Tertiary",
+      "percentage": 62.48
+    },
+    {
+      "country": "Nepal",
+      "sector": "Tourism",
+      "percentage": 1.6
+    },
+    {
+      "country": "Azerbaijan",
+      "sector": "Primary",
+      "percentage": 44.24
+    },
+    {
+      "country": "Azerbaijan",
+      "sector": "Secondary",
+      "percentage": 13.15
+    },
+    {
+      "country": "Azerbaijan",
+      "sector": "Tertiary",
+      "percentage": 42.61
+    },
+    {
+      "country": "Azerbaijan",
+      "sector": "Tourism",
+      "percentage": 3.73
+    }
+  ]
+}

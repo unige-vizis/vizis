@@ -6,8 +6,8 @@ const chartRef = ref(null)
 const containerWidth = ref(0)
 const containerHeight = ref(0)
 
-// Load the data from data-processing/viz-datasets/viz1_bar_chart_sectors_conflicts.json and extract the array
-import data from '../../../../data-processing/viz-datasets/viz2_event_types.json'
+// Load the data from data-processing/viz-datasets/viz3_event_types.json and extract the array
+import data from '../../../../data-processing/viz-datasets/viz3_event_types.json'
 const dataset = Array.isArray(data && data.data) ? data.data : []
 
 // Update dimensions and redraw chart when container size changes

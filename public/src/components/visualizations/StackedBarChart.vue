@@ -3,25 +3,44 @@ import { onMounted, ref } from 'vue'
 import * as d3 from 'd3'
 
 const chartRef = ref(null)
+const data = ref([])
+const countries = ref([])
 
-// Placeholder data - event types distribution
-const data = [
-  { country: 'Syria', protests: 25, violence: 55, battles: 20 },
-  { country: 'Nigeria', protests: 40, violence: 35, battles: 25 },
-  { country: 'Iraq', protests: 30, violence: 45, battles: 25 },
-  { country: 'Pakistan', protests: 50, violence: 30, battles: 20 },
-  { country: 'India', protests: 60, violence: 25, battles: 15 },
-  { country: 'Yemen', protests: 20, violence: 50, battles: 30 }
-]
-
-onMounted(() => {
+onMounted(async () => {
+  await loadData()
   createChart()
 })
 
+async function loadData() {
+  try {
+    const response = await fetch('/vizis/src/assets/data/viz5_stacked_bar_sectors.json')
+    const jsonData = await response.json()
+
+    // Store countries order
+    countries.value = jsonData.countries
+
+    // Transform the data structure for D3
+    const countryData = {}
+    jsonData.data.forEach(item => {
+      if (!countryData[item.country]) {
+        countryData[item.country] = { country: item.country }
+      }
+      countryData[item.country][item.sector] = item.percentage
+    })
+
+    // Convert to array in the correct order
+    data.value = countries.value.map(country => countryData[country])
+  } catch (error) {
+    console.error('Error loading data:', error)
+  }
+}
+
 function createChart() {
+  if (!data.value || data.value.length === 0) return
+
   const margin = { top: 20, right: 150, bottom: 60, left: 100 }
   const width = 800 - margin.left - margin.right
-  const height = 450 - margin.top - margin.bottom
+  const height = 600 - margin.top - margin.bottom // Increased height for 20 countries
 
   // Clear any existing chart
   d3.select(chartRef.value).selectAll('*').remove()
@@ -33,23 +52,17 @@ function createChart() {
     .append('g')
     .attr('transform', `translate(${margin.left},${margin.top})`)
 
-  // Process data to calculate percentages
-  const processedData = data.map(d => {
-    const total = d.protests + d.violence + d.battles
-    return {
-      country: d.country,
-      protests: (d.protests / total) * 100,
-      violence: (d.violence / total) * 100,
-      battles: (d.battles / total) * 100
-    }
-  })
+  // Data is already in percentages, no need to recalculate
+  const processedData = data.value
 
-  const subgroups = ['protests', 'violence', 'battles']
-  const countries = data.map(d => d.country)
+  // Define sectors in the order they should be stacked
+  const subgroups = ['Primary', 'Secondary', 'Tertiary', 'Tourism']
+  const countryList = processedData.map(d => d.country)
 
-  // Stack the data
+  // Stack the data - filter out Tourism if not present
   const stackedData = d3.stack()
     .keys(subgroups)
+    .value((d, key) => d[key] || 0) // Default to 0 if Tourism is missing
     (processedData)
 
   // Create scales
@@ -58,14 +71,14 @@ function createChart() {
     .range([0, width])
 
   const y = d3.scaleBand()
-    .domain(countries)
+    .domain(countryList)
     .range([0, height])
     .padding(0.2)
 
-  // Color scale
+  // Color scale for economic sectors
   const color = d3.scaleOrdinal()
     .domain(subgroups)
-    .range(['#c6c7ff', '#9370db', '#721288'])
+    .range(['#8B4513', '#4682B4', '#9370DB', '#FFB366']) // Brown, Steel Blue, Medium Purple, Light Orange
 
   // Add X axis
   svg.append('g')
@@ -160,14 +173,15 @@ function createChart() {
     .attr('text-anchor', 'middle')
     .style('fill', '#999')
     .style('font-size', '13px')
-    .text('Percentage of Event Types (%)')
+    .text('Economic Sector Composition (%)')
 }
 
 function formatLabel(key) {
   const labels = {
-    protests: 'Protests',
-    violence: 'Violence Against Civilians',
-    battles: 'Battles'
+    'Primary': 'Primary Sector (Agriculture, Mining)',
+    'Secondary': 'Secondary Sector (Manufacturing)',
+    'Tertiary': 'Tertiary Sector (Services)',
+    'Tourism': 'Tourism'
   }
   return labels[key] || key
 }
