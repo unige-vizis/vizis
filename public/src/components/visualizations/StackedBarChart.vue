@@ -13,7 +13,7 @@ onMounted(async () => {
 
 async function loadData() {
   try {
-    const response = await fetch('/vizis/src/assets/data/viz5_stacked_bar_sectors.json')
+    const response = await fetch('/vizis/src/assets/data/viz2_stacked_bar_sectors.json')
     const jsonData = await response.json()
 
     // Store countries order
@@ -38,9 +38,10 @@ async function loadData() {
 function createChart() {
   if (!data.value || data.value.length === 0) return
 
-  const margin = { top: 20, right: 150, bottom: 60, left: 100 }
-  const width = 800 - margin.left - margin.right
-  const height = 600 - margin.top - margin.bottom // Increased height for 20 countries
+  const margin = { top: 50, right: 80, bottom: 20, left: 100 } // More space on top for legend, less on right and bottom
+  const legendItemWidth = 180 // Width allocated for each legend item
+  const width = legendItemWidth * 4 // Bar width matches legend width (4 items)
+  const height = 350 - margin.top - margin.bottom // Adjusted for 7 countries
 
   // Clear any existing chart
   d3.select(chartRef.value).selectAll('*').remove()
@@ -55,14 +56,13 @@ function createChart() {
   // Data is already in percentages, no need to recalculate
   const processedData = data.value
 
-  // Define sectors in the order they should be stacked
+  // Define sectors in the order they should be stacked (Tourism shown separately)
   const subgroups = ['Primary', 'Secondary', 'Tertiary', 'Tourism']
   const countryList = processedData.map(d => d.country)
 
-  // Stack the data - filter out Tourism if not present
+  // Stack the data
   const stackedData = d3.stack()
     .keys(subgroups)
-    .value((d, key) => d[key] || 0) // Default to 0 if Tourism is missing
     (processedData)
 
   // Create scales
@@ -73,22 +73,12 @@ function createChart() {
   const y = d3.scaleBand()
     .domain(countryList)
     .range([0, height])
-    .padding(0.2)
+    .padding(0.3)
 
-  // Color scale for economic sectors
+  // Color scale for economic sectors (4 colors)
   const color = d3.scaleOrdinal()
     .domain(subgroups)
     .range(['#8B4513', '#4682B4', '#9370DB', '#FFB366']) // Brown, Steel Blue, Medium Purple, Light Orange
-
-  // Add X axis
-  svg.append('g')
-    .attr('transform', `translate(0,${height})`)
-    .call(d3.axisBottom(x).ticks(10).tickFormat(d => d + '%'))
-    .selectAll('text')
-    .style('fill', '#c7c7c7')
-
-  svg.selectAll('.domain, .tick line')
-    .style('stroke', '#666')
 
   // Add Y axis
   svg.append('g')
@@ -142,16 +132,16 @@ function createChart() {
       tooltip.style('opacity', 0)
     })
 
-  // Add legend
+  // Add legend horizontally at the top
   const legend = svg.append('g')
-    .attr('transform', `translate(${width + 20}, 0)`)
+    .attr('transform', `translate(0, -35)`) // Position above the chart
 
   const legendItems = legend.selectAll('.legend-item')
     .data(subgroups)
     .enter()
     .append('g')
     .attr('class', 'legend-item')
-    .attr('transform', (d, i) => `translate(0, ${i * 25})`)
+    .attr('transform', (d, i) => `translate(${i * legendItemWidth}, 0)`)
 
   legendItems.append('rect')
     .attr('width', 18)
@@ -164,24 +154,31 @@ function createChart() {
     .attr('y', 13)
     .text(d => formatLabel(d))
     .style('fill', '#c7c7c7')
-    .style('font-size', '12px')
+    .style('font-size', '11px')
 
-  // Add axis labels
-  svg.append('text')
-    .attr('x', width / 2)
-    .attr('y', height + margin.bottom - 15)
-    .attr('text-anchor', 'middle')
-    .style('fill', '#999')
-    .style('font-size', '13px')
-    .text('Economic Sector Composition (%)')
+  // Add "No Data" labels for countries with missing tourism data (Tourism = 0)
+  const countriesWithNoTourism = processedData.filter(d => !d.Tourism || d.Tourism === 0)
+
+  svg.selectAll('.no-data-label')
+    .data(countriesWithNoTourism)
+    .enter()
+    .append('text')
+    .attr('class', 'no-data-label')
+    .attr('x', width - 45) // Position on the bar, near the right end
+    .attr('y', d => y(d.country) + y.bandwidth() / 2)
+    .attr('dy', '0.35em')
+    .style('fill', '#FFB366') // Same orange as Tourism segment
+    .style('font-size', '10px')
+    .style('font-weight', 'bold')
+    .text('No Data')
 }
 
 function formatLabel(key) {
   const labels = {
-    'Primary': 'Primary Sector (Agriculture, Mining)',
-    'Secondary': 'Secondary Sector (Manufacturing)',
-    'Tertiary': 'Tertiary Sector (Services)',
-    'Tourism': 'Tourism'
+    'Primary': 'Primary (Agriculture, Mining)',
+    'Secondary': 'Secondary (Manufacturing)',
+    'Tertiary': 'Tertiary (Services)',
+    'Tourism': 'Tourism (part of Tertiary)'
   }
   return labels[key] || key
 }
@@ -190,7 +187,6 @@ function formatLabel(key) {
 <template>
   <div class="chart-wrapper">
     <div ref="chartRef" class="chart"></div>
-    <p class="data-note">Note: This visualization uses placeholder data. Real data from ACLED will be integrated in the next iteration.</p>
   </div>
 </template>
 
@@ -205,20 +201,11 @@ function formatLabel(key) {
 .chart {
   width: 100%;
   max-width: 950px;
-  overflow-x: auto;
   position: relative;
 }
 
 .chart svg {
   display: block;
   margin: 0 auto;
-}
-
-.data-note {
-  margin-top: 1rem;
-  font-size: 0.85rem;
-  color: #888;
-  font-style: italic;
-  text-align: center;
 }
 </style>

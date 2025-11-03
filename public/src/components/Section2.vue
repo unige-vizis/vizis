@@ -25,25 +25,23 @@ import WaffleChart from './visualizations/WaffleChart.vue'
 
     <!-- 100% Stacked Bar Chart -->
     <div class="section__inner">
-      <h3>Distribution of Event Types in Religion-Related Conflicts</h3>
+      <h3>Economic Sector Composition of Highlighted Conflict Countries</h3>
       <p>
-        Share of protests, violence against civilians, and battles - showing whether suffering comes more from direct
-        violence, mass protests, or state repression
+        Distribution of economic sectors (Primary, Secondary, Tertiary, Tourism) for the 7 highlighted countries from the bar chart above. Tourism is shown separately but is already part of the Tertiary sector. Shows the economic makeup of each country to understand the relationship between economic structure and conflict patterns.
       </p>
     </div>
     <StackedBarChart />
 
     <div class="section__inner">
       <p>
-        [Analysis text about event type distribution will go here. Compare the proportion of different conflict types
-        and discuss what this reveals about the nature of religion-related conflicts in different contexts.]
+        [Analysis text about economic sector composition will go here. Discuss patterns such as whether countries with higher primary sector dependency experience more conflicts, or how service-based economies compare in terms of conflict events.]
       </p>
     </div>
 
     <!-- Grouped Bar Chart -->
     <div class="section__inner">
       <h3>Event types</h3>
-      <p>Comparison of event types grouped by different countreis.</p>
+      <p>Comparison of event types for the same 7 highlighted countries. Protests and riots are grouped together for clearer analysis.</p>
     </div>
     <GroupedBarChart />
 

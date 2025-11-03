@@ -15,7 +15,7 @@ function updateDimensions() {
   if (!chartRef.value) return
   const container = chartRef.value
   containerWidth.value = container.clientWidth
-  containerHeight.value = container.clientHeight || container.clientWidth * 0.6 // 60% aspect ratio if height not constrained
+  containerHeight.value = container.clientHeight || 220 // Fixed height for very narrow, compact visualization
   createChart()
 }
 
@@ -38,7 +38,7 @@ onUnmounted(() => {
 function createChart() {
   if (!containerWidth.value || !containerHeight.value) return
 
-  const margin = { top: 20, right: 30, bottom: 60, left: 80 }
+  const margin = { top: 15, right: 30, bottom: 40, left: 80 }
   const width = containerWidth.value - margin.left - margin.right
   const height = containerHeight.value - margin.top - margin.bottom
 
@@ -52,8 +52,8 @@ function createChart() {
     .append('g')
     .attr('transform', `translate(${margin.left},${margin.top})`)
 
-  // List of subgroups (years)
-  const subgroups = ['Battles', 'Protests', 'Riots', 'Explosions/Remote violence', 'Violence against civilians', 'Strategic developments']
+  // List of subgroups (event types) - updated to match viz3 data
+  const subgroups = ['Battles', 'Explosions/Remote violence', 'Protests & Riots', 'Violence against civilians']
 
   // List of groups (countries)
   const groups = dataset.map(d => d.country)
@@ -63,12 +63,12 @@ function createChart() {
   const y0 = d3.scaleBand()
     .domain(groups)
     .range([0, height])
-    .padding(0.3)
+    .padding(0.1) // Minimal padding for thicker bars
 
   const y1 = d3.scaleBand()
     .domain(subgroups)
     .range([0, y0.bandwidth()])
-    .padding(0.1)
+    .padding(0.05) // Reduced padding for thicker individual bars
 
   // x: linear scale for counts (horizontal)
   const x = d3.scaleLinear()
@@ -93,10 +93,10 @@ function createChart() {
     .style('fill', '#c7c7c7')
     .style('font-size', '12px')
 
-  // Color scale purple-orange-blue
+  // Color scale for 4 event types
   const color = d3.scaleOrdinal()
     .domain(subgroups)
-    .range(['#2563EB','#059669','#DC2626','#D97706','#0891B2 ','#DB2777'])
+    .range(['#2563EB', '#D97706', '#059669', '#DC2626']) // Blue, Orange, Green, Red
 
   // Add bars (horizontal grouped bars)
   svg.append('g')
@@ -122,9 +122,9 @@ function createChart() {
       d3.select(this).attr('opacity', 0.8)
     })
 
-  // Add legend
+  // Add legend - bottom right corner
   const legend = svg.append('g')
-    .attr('transform', `translate(${width - 150}, 150)`)
+    .attr('transform', `translate(${Math.max(width - 200, 10)}, ${height - 110})`)
 
   legend.selectAll('rect')
     .data([...subgroups])
@@ -147,25 +147,14 @@ function createChart() {
     .style('fill', '#c7c7c7')
     .style('font-size', '12px')
 
-  // Add axis label
-  // X axis label (counts)
+  // Add X axis label (counts)
   svg.append('text')
     .attr('x', width / 2)
-    .attr('y', height + margin.bottom - 5)
+    .attr('y', height + margin.bottom - 8)
     .attr('text-anchor', 'middle')
     .style('fill', '#999')
-    .style('font-size', '13px')
+    .style('font-size', '12px')
     .text('Number of Events')
-
-  // Y axis label (countries)
-  svg.append('text')
-    .attr('transform', 'rotate(-90)')
-    .attr('x', -height / 2)
-    .attr('y', -margin.left + 20)
-    .attr('text-anchor', 'middle')
-    .style('fill', '#999')
-    .style('font-size', '13px')
-    .text('Countries')
 }
 </script>
 
@@ -174,3 +163,16 @@ function createChart() {
     <div ref="chartRef" class="chart"></div>
   </div>
 </template>
+
+<style scoped>
+.chart-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.chart {
+  width: 100%;
+  max-width: 700px; /* Narrow width for compact visualization */
+}
+</style>

@@ -21,7 +21,8 @@
       "Bash(jupyter nbconvert:*)",
       "Bash(dir:*)",
       "mcp__ide__executeCode",
-      "Bash(timeout:*)"
+      "Bash(timeout:*)",
+      "Bash(npm run build:*)"
     ],
     "deny": [],
     "ask": []
