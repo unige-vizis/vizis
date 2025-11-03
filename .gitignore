@@ -16,6 +16,7 @@ dist-ssr
 coverage
 *.local
 .vite/
+py_vizis/
 
 # Editor directories and files
 .vscode/*
