@@ -3,37 +3,28 @@ import { onMounted, ref } from 'vue'
 import * as d3 from 'd3'
 
 const chartRef = ref(null)
-const data = ref([])
-const countries = ref([])
 
-onMounted(async () => {
-  await loadData()
-  createChart()
+// Load the data directly via import
+import jsonData from '@/assets/data/viz2_stacked_bar_sectors.json'
+
+// Store countries order
+const countries = ref(jsonData.countries)
+
+// Transform the data structure for D3
+const countryData = {}
+jsonData.data.forEach(item => {
+  if (!countryData[item.country]) {
+    countryData[item.country] = { country: item.country }
+  }
+  countryData[item.country][item.sector] = item.percentage
 })
 
-async function loadData() {
-  try {
-    const response = await fetch('/vizis/src/assets/data/viz2_stacked_bar_sectors.json')
-    const jsonData = await response.json()
+// Convert to array in the correct order
+const data = ref(countries.value.map(country => countryData[country]))
 
-    // Store countries order
-    countries.value = jsonData.countries
-
-    // Transform the data structure for D3
-    const countryData = {}
-    jsonData.data.forEach(item => {
-      if (!countryData[item.country]) {
-        countryData[item.country] = { country: item.country }
-      }
-      countryData[item.country][item.sector] = item.percentage
-    })
-
-    // Convert to array in the correct order
-    data.value = countries.value.map(country => countryData[country])
-  } catch (error) {
-    console.error('Error loading data:', error)
-  }
-}
+onMounted(() => {
+  createChart()
+})
 
 function createChart() {
   if (!data.value || data.value.length === 0) return
