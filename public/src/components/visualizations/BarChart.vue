@@ -276,8 +276,8 @@ function updateChart() {
 }
 
 .toggle-checkbox-hidden:checked + .toggle-switch {
-  background-color: #9966cc;
-  border-color: #aa77dd;
+  background-color: #4CAF50;
+  border-color: #66bb6a;
 }
 
 .toggle-slider {

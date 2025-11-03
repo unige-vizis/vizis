@@ -2,6 +2,7 @@
   <section>
     <div class="container section__inner">
       <h2>Global Conflict Patterns in the Context of Economic Compositions</h2>
+      <p class="subtitle">Analysis of conflict data from the last 10 years (2015-2024)</p>
       <div>
         <p>
           This analysis examines how the composition of a country's economic sectors relates to its conflict patterns.
@@ -18,8 +19,9 @@
       <div>
         <strong>For our project we use these datasets:</strong>
         <ul>
-          <li>ACLED (Armed Conflict Location & Event Data Project)</li>
-          <!-- TODO -->
+          <li>ACLED (Armed Conflict Location & Event Data Project) - conflict events, fatalities, and event types (2015-2024)</li>
+          <li>World Bank - economic sector composition, GDP in USD, and population statistics</li>
+          <li>UN Tourism - tourism percentage data (SDG 8.9.1, 2008-2023)</li>
         </ul>
       </div>
     </div>

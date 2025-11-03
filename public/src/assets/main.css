@@ -2,7 +2,7 @@
 
 * {
   font-family: "Fira Sans", sans-serif;
-  text-align: center;
+  text-align: left;
 }
 
 h1,
@@ -19,6 +19,10 @@ h6 {
   margin: 0 auto;
   padding: 2rem;
   font-weight: normal;
+}
+
+header {
+  text-align: center;
 }
 
 header h1 {
@@ -53,7 +57,7 @@ section {
 .section__inner {
   max-width: var(--text-content-width);
   margin: 0 auto;
-  text-align: center;
+  text-align: left;
   padding: 1rem 2rem;
 }
 

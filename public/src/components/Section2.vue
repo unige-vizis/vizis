@@ -10,45 +10,98 @@ import WaffleChartSectors from './visualizations/WaffleChartSectors.vue'
   <section>
     <!-- Bar Chart -->
     <div class="section__inner">
-      <h3>Top conflict countries</h3>
-      <p>Shows the countries with the highest number of conflict events.</p>
+      <h3>Countries with the most recorded conflict events</h3>
     </div>
     <BarChart />
     <div class="section__inner">
       <p>
-        <!-- TODO -->
-        [Analysis text about the bar chart results will go here. Discuss which countries show the highest
-        concentration of religion-related violent events and what this means for civilian populations in those
-        regions.]
+       This chart shows where the most conflict events were recorded over the last 10 years. In itself it is not very insightful, hiding a lot of the specifics of these conflicts and even factors like population size, which is why we offer a normalized version of this plot as well. 7 countries are highlighted in yellow, because they vary a lot in their conflict patterns and will be representative examples to guide further analysis and discussion.
       </p>
     </div>
 
     <!-- 100% Stacked Bar Chart -->
     <div class="section__inner">
       <h3>Economic Sector Composition of Highlighted Conflict Countries</h3>
-      <p>
-        Distribution of economic sectors (Primary, Secondary, Tertiary, Tourism) for the 7 highlighted countries from the bar chart above. Tourism is shown separately but is already part of the Tertiary sector. Shows the economic makeup of each country to understand the relationship between economic structure and conflict patterns.
+      <StackedBarChart />
+      <p style="font-style: italic; font-size: 0.9em; color: #666; margin-top: 1rem;">
+        <strong>Note:</strong> Conflict data from ACLED (2015-2024). Economic sectors from World Bank GDP data: Primary = Agriculture + Mining; Secondary = Manufacturing + Construction; Tertiary = Services. Tourism data from UN Tourism (2008-2023, 125 countries) is sometimes incomplete and a different source than sector data, where it is not explicitly included. We included it, but this might introduce slight imprecisions.
       </p>
-    </div>
-    <StackedBarChart />
 
-    <div class="section__inner">
       <p>
-        [Analysis text about economic sector composition will go here. Discuss patterns such as whether countries with higher primary sector dependency experience more conflicts, or how service-based economies compare in terms of conflict events.]
+       Our focus is how a country's economic situation influences or at the very least correlates with the types of and frequency of conflict events. This plot shows the previously highlighted countries of interest and their strongly differing economic compositions.
       </p>
+
     </div>
 
     <!-- Grouped Bar Chart -->
     <div class="section__inner">
-      <h3>Event types by Country</h3>
-      <p>Comparison of event types for the same 7 highlighted countries from the charts above. Protests and riots are grouped together for clearer analysis.</p>
+      <h3>What Conflict Events occur in our Countries of Interest?</h3>
+      <p>Comparison of event types for the same 7 highlighted countries from the charts above. Protests and riots are grouped together, with Strategic developments being left out for clearer analysis.</p>
     </div>
     <GroupedBarChart />
 
     <div class="section__inner">
       <p>
-        [Analysis text about regional comparison will go here. Explain the trends between Middle East and Sub-Saharan
-        Africa, discussing how conflict intensity has evolved and what factors might contribute to these patterns.]
+        Connecting this with our findings from the previous chart we obtain a better idea about our countries' true conflict character and start to make note of some trends.
+      </p>
+
+      <table style="width: 100%; border-collapse: collapse; margin: 1rem 0;">
+        <thead>
+          <tr style="border-bottom: 2px solid #ccc;">
+            <th style="text-align: left; padding: 0.5rem;">Country</th>
+            <th style="text-align: left; padding: 0.5rem;">Economy</th>
+            <th style="text-align: left; padding: 0.5rem;">Conflict Type</th>
+            <th style="text-align: right; padding: 0.5rem;">Fatalities</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom: 1px solid #eee;">
+            <td style="padding: 0.5rem;"><strong>Somalia</strong></td>
+            <td style="padding: 0.5rem;">Subsistence economy (61% Primary)</td>
+            <td style="padding: 0.5rem;">Failed state dynamics (Battles & Violence against civilians)</td>
+            <td style="text-align: right; padding: 0.5rem;">~51,000</td>
+          </tr>
+          <tr style="border-bottom: 1px solid #eee;">
+            <td style="padding: 0.5rem;"><strong>Afghanistan</strong></td>
+            <td style="padding: 0.5rem;">Traditional rural economy (42% Primary)</td>
+            <td style="padding: 0.5rem;">Insurgency warfare (61% Battles)</td>
+            <td style="text-align: right; padding: 0.5rem;">202,145</td>
+          </tr>
+          <tr style="border-bottom: 1px solid #eee;">
+            <td style="padding: 0.5rem;"><strong>India</strong></td>
+            <td style="padding: 0.5rem;">Developing industry (22% Primary, 23% Secondary, 55% Tertiary)</td>
+            <td style="padding: 0.5rem;">Democratic mobilization (76% Protests & Riots)</td>
+            <td style="text-align: right; padding: 0.5rem;">12,189</td>
+          </tr>
+          <tr style="border-bottom: 1px solid #eee;">
+            <td style="padding: 0.5rem;"><strong>Ukraine</strong></td>
+            <td style="padding: 0.5rem;">Modern service economy (70% Tertiary, 19% Primary)</td>
+            <td style="padding: 0.5rem;">Modern interstate warfare (64% Explosions/Remote violence)</td>
+            <td style="text-align: right; padding: 0.5rem;">137,716</td>
+          </tr>
+          <tr style="border-bottom: 1px solid #eee;">
+            <td style="padding: 0.5rem;"><strong>Mexico</strong></td>
+            <td style="padding: 0.5rem;">Middle-income service economy with tourism (61% Tertiary, 8.5% tourism)</td>
+            <td style="padding: 0.5rem;">Cartel violence (40% Violence against civilians, Protests)</td>
+            <td style="text-align: right; padding: 0.5rem;">57,520</td>
+          </tr>
+          <tr style="border-bottom: 1px solid #eee;">
+            <td style="padding: 0.5rem;"><strong>United States</strong></td>
+            <td style="padding: 0.5rem;">Advanced post-industrial (81% Tertiary, 4% Primary)</td>
+            <td style="padding: 0.5rem;">slightly violent civil unrest (Protests & Riots)</td>
+            <td style="text-align: right; padding: 0.5rem;">440</td>
+          </tr>
+          <tr>
+            <td style="padding: 0.5rem;"><strong>Italy</strong></td>
+            <td style="padding: 0.5rem;">Advanced industrial economy with tourism (72% Tertiary, 5.7% tourism)</td>
+            <td style="padding: 0.5rem;">Mostly peaceful protests.</td>
+            <td style="text-align: right; padding: 0.5rem;">2</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p>
+        <strong>Key Finding:</strong> It is specific conditions, that drive each country's conflict character for the most part. Modern warfare in Ukraine, cartel violence in Mexico. Nevertheless a broader trend emerges: countries with less developed, resource-focused economies (Afghanistan, Somalia) experience more violent conflict, while highly developed tertiary-sector economies tend toward peaceful protesting. Italy exemplifies this with 24,524 conflict events but only 2 recorded fatalities over 10 years.
       </p>
     </div>
 
@@ -63,16 +116,15 @@ import WaffleChartSectors from './visualizations/WaffleChartSectors.vue'
 
     <div class="section__inner">
       <p>
-        [Analysis text about temporal patterns will go here. Identify peak periods and discuss what events or
-        conditions might have triggered changes in event type frequencies during those years. Note the relationship between fatalities and event counts.]
+        We zoom out now a bit and focus more on the types of conflicts in general, not relating them to specific countries anymore. This plot confirms a concern that many people share, in that conflicts, of all kinds and especially violent ones are becoming more frequent and more deadly. Especially notable is the increase in Battle Fatalities, Violence against civilians and also the drastic increase in Protests.
       </p>
     </div>
 
     <!-- Waffle Chart: Economic Sectors by Event Type -->
     <div class="section__inner">
-      <h3>Economic Context by Event Type</h3>
+      <h3>Averaged Economic Context by Event Type</h3>
       <p>
-        Weighted average economic sector composition for countries experiencing each type of conflict event. Countries are weighted by event frequency - for example, Ukraine's economic structure has more influence on "Battles" than Germany's, since Ukraine experiences far more battle events. Each waffle chart represents 100% of the economic makeup, with each square representing 1%. Sorted by Primary sector percentage (highest to lowest). Strategic developments excluded for clarity.
+         This small multiple waffle plot depicts the average economic context each event type occurs in. Once more we identify the noticeable trend of more violent conflict in lower developed economies irrespective of specific countries.
       </p>
     </div>
     <WaffleChartSectors />
@@ -81,9 +133,6 @@ import WaffleChartSectors from './visualizations/WaffleChartSectors.vue'
       <p>
         [Analysis text about economic patterns by event type will go here. Notable findings from left to right: Battles show the highest Primary sector (29.04%), indicating they occur more in countries dependent on agriculture and natural resources. Protests show the lowest Primary sector (16.21%) and highest Tertiary sector (63.06%), suggesting they occur more in service-based economies. This gradient from primary-heavy to tertiary-heavy economies reveals how economic structure correlates with conflict types.]
       </p>
-
-      <h3>Methodology and Data Sources</h3>
-      <p>[Information about data sources (ACLED), methodology, and any limitations of the analysis will go here.]</p>
 
       <h3>Conclusion</h3>
       <p>

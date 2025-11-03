@@ -227,12 +227,10 @@ function createChart() {
   flex-direction: column;
   align-items: center;
   margin: 2rem 0;
-  overflow-x: auto;
 }
 
 .chart {
   width: 100%;
-  min-width: 700px;
   position: relative;
 }
 

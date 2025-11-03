@@ -89,12 +89,12 @@
     {
       "country": "United States",
       "sector": "Tertiary",
-      "percentage": 80.97
+      "percentage": 78.0
     },
     {
       "country": "United States",
       "sector": "Tourism",
-      "percentage": 0.0
+      "percentage": 2.97
     },
     {
       "country": "Afghanistan",
@@ -149,7 +149,7 @@
     {
       "country": "Italy",
       "sector": "Tertiary",
-      "percentage": 66.66000000000001
+      "percentage": 66.66
     },
     {
       "country": "Italy",

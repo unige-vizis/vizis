@@ -4,71 +4,57 @@
     "description": "Distribution of ACLED event types across the 7 highlighted countries",
     "source": "ACLED",
     "date_range": "2015-2024",
-    "note": "Same 7 countries as viz2, in the same order"
+    "note": "Protests & Riots combined. Strategic developments excluded. Same 7 countries as viz2."
   },
   "data": [
     {
       "country": "Ukraine",
-      "Battles": 53383.0,
-      "Explosions/Remote violence": 126721.0,
-      "Protests": 6007.0,
-      "Riots": 429.0,
-      "Strategic developments": 9638.0,
-      "Violence against civilians": 1485.0
+      "Battles": 53383,
+      "Explosions/Remote violence": 126721,
+      "Protests & Riots": 6436,
+      "Violence against civilians": 1485
     },
     {
       "country": "India",
-      "Battles": 6393.0,
-      "Explosions/Remote violence": 1663.0,
-      "Protests": 129041.0,
-      "Riots": 21865.0,
-      "Strategic developments": 4666.0,
-      "Violence against civilians": 6518.0
+      "Battles": 6393,
+      "Explosions/Remote violence": 1663,
+      "Protests & Riots": 150906,
+      "Violence against civilians": 6518
     },
     {
       "country": "Mexico",
-      "Battles": 9115.0,
-      "Explosions/Remote violence": 190.0,
-      "Protests": 37658.0,
-      "Riots": 4956.0,
-      "Strategic developments": 4519.0,
-      "Violence against civilians": 38103.0
+      "Battles": 9115,
+      "Explosions/Remote violence": 190,
+      "Protests & Riots": 42614,
+      "Violence against civilians": 38103
     },
     {
       "country": "United States",
-      "Battles": 24.0,
-      "Explosions/Remote violence": 18.0,
-      "Protests": 67708.0,
-      "Riots": 1480.0,
-      "Strategic developments": 3750.0,
-      "Violence against civilians": 388.0
+      "Battles": 24,
+      "Explosions/Remote violence": 18,
+      "Protests & Riots": 69188,
+      "Violence against civilians": 388
     },
     {
       "country": "Afghanistan",
-      "Battles": 40917.0,
-      "Explosions/Remote violence": 17393.0,
-      "Protests": 1346.0,
-      "Riots": 155.0,
-      "Strategic developments": 2645.0,
-      "Violence against civilians": 4738.0
+      "Battles": 40917,
+      "Explosions/Remote violence": 17393,
+      "Protests & Riots": 1501,
+      "Violence against civilians": 4738
     },
     {
       "country": "Somalia",
-      "Battles": 15646.0,
-      "Explosions/Remote violence": 6479.0,
-      "Protests": 1148.0,
-      "Riots": 363.0,
-      "Strategic developments": 2263.0,
-      "Violence against civilians": 4938.0
+      "Battles": 15646,
+      "Explosions/Remote violence": 6479,
+      "Protests & Riots": 1511,
+      "Violence against civilians": 4938
     },
     {
       "country": "Italy",
-      "Battles": 0.0,
-      "Explosions/Remote violence": 14.0,
-      "Protests": 23206.0,
-      "Riots": 687.0,
-      "Strategic developments": 574.0,
-      "Violence against civilians": 43.0
+      "Battles": 0,
+      "Explosions/Remote violence": 14,
+      "Protests & Riots": 23893,
+      "Violence against civilians": 43
     }
   ]
 }
