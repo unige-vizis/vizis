@@ -40,8 +40,8 @@ import WaffleChartSectors from './visualizations/WaffleChartSectors.vue'
 
     <!-- Grouped Bar Chart -->
     <div class="section__inner">
-      <h3>Event types</h3>
-      <p>Comparison of event types for the same 7 highlighted countries. Protests and riots are grouped together for clearer analysis.</p>
+      <h3>Event types by Country</h3>
+      <p>Comparison of event types for the same 7 highlighted countries from the charts above. Protests and riots are grouped together for clearer analysis.</p>
     </div>
     <GroupedBarChart />
 
@@ -49,21 +49,6 @@ import WaffleChartSectors from './visualizations/WaffleChartSectors.vue'
       <p>
         [Analysis text about regional comparison will go here. Explain the trends between Middle East and Sub-Saharan
         Africa, discussing how conflict intensity has evolved and what factors might contribute to these patterns.]
-      </p>
-    </div>
-
-    <!-- Waffle Chart: Economic Sectors by Event Type -->
-    <div class="section__inner">
-      <h3>Economic Context by Event Type</h3>
-      <p>
-        Weighted average economic sector composition for countries experiencing each type of conflict event. Countries are weighted by event frequency - for example, Ukraine's economic structure has more influence on "Battles" than Germany's, since Ukraine experiences far more battle events. Each waffle chart represents 100% of the economic makeup, with each square representing 1%. Sorted by Primary sector percentage (highest to lowest). Strategic developments excluded for clarity.
-      </p>
-    </div>
-    <WaffleChartSectors />
-
-    <div class="section__inner">
-      <p>
-        [Analysis text about economic patterns by event type will go here. Notable findings from left to right: Battles show the highest Primary sector (29.04%), indicating they occur more in countries dependent on agriculture and natural resources. Protests show the lowest Primary sector (16.21%) and highest Tertiary sector (63.06%), suggesting they occur more in service-based economies. This gradient from primary-heavy to tertiary-heavy economies reveals how economic structure correlates with conflict types.]
       </p>
     </div>
 
@@ -80,6 +65,21 @@ import WaffleChartSectors from './visualizations/WaffleChartSectors.vue'
       <p>
         [Analysis text about temporal patterns will go here. Identify peak periods and discuss what events or
         conditions might have triggered changes in event type frequencies during those years. Note the relationship between fatalities and event counts.]
+      </p>
+    </div>
+
+    <!-- Waffle Chart: Economic Sectors by Event Type -->
+    <div class="section__inner">
+      <h3>Economic Context by Event Type</h3>
+      <p>
+        Weighted average economic sector composition for countries experiencing each type of conflict event. Countries are weighted by event frequency - for example, Ukraine's economic structure has more influence on "Battles" than Germany's, since Ukraine experiences far more battle events. Each waffle chart represents 100% of the economic makeup, with each square representing 1%. Sorted by Primary sector percentage (highest to lowest). Strategic developments excluded for clarity.
+      </p>
+    </div>
+    <WaffleChartSectors />
+
+    <div class="section__inner">
+      <p>
+        [Analysis text about economic patterns by event type will go here. Notable findings from left to right: Battles show the highest Primary sector (29.04%), indicating they occur more in countries dependent on agriculture and natural resources. Protests show the lowest Primary sector (16.21%) and highest Tertiary sector (63.06%), suggesting they occur more in service-based economies. This gradient from primary-heavy to tertiary-heavy economies reveals how economic structure correlates with conflict types.]
       </p>
 
       <h3>Methodology and Data Sources</h3>

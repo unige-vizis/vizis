@@ -1,9 +1,10 @@
 {
   "metadata": {
     "title": "Event Types by Country (2015-2024)",
-    "description": "Distribution of ACLED event types across countries",
+    "description": "Distribution of ACLED event types across the 7 highlighted countries",
     "source": "ACLED",
-    "date_range": "2015-2024"
+    "date_range": "2015-2024",
+    "note": "Same 7 countries as viz2, in the same order"
   },
   "data": [
     {
@@ -25,15 +26,6 @@
       "Violence against civilians": 6518.0
     },
     {
-      "country": "Syria",
-      "Battles": 27334.0,
-      "Explosions/Remote violence": 78230.0,
-      "Protests": 4953.0,
-      "Riots": 541.0,
-      "Strategic developments": 9796.0,
-      "Violence against civilians": 12591.0
-    },
-    {
       "country": "Mexico",
       "Battles": 9115.0,
       "Explosions/Remote violence": 190.0,
@@ -41,33 +33,6 @@
       "Riots": 4956.0,
       "Strategic developments": 4519.0,
       "Violence against civilians": 38103.0
-    },
-    {
-      "country": "Yemen",
-      "Battles": 24213.0,
-      "Explosions/Remote violence": 47086.0,
-      "Protests": 11665.0,
-      "Riots": 504.0,
-      "Strategic developments": 5809.0,
-      "Violence against civilians": 4598.0
-    },
-    {
-      "country": "Brazil",
-      "Battles": 33492.0,
-      "Explosions/Remote violence": 960.0,
-      "Protests": 22718.0,
-      "Riots": 4477.0,
-      "Strategic developments": 3330.0,
-      "Violence against civilians": 26076.0
-    },
-    {
-      "country": "Myanmar",
-      "Battles": 19585.0,
-      "Explosions/Remote violence": 18764.0,
-      "Protests": 16083.0,
-      "Riots": 152.0,
-      "Strategic developments": 14845.0,
-      "Violence against civilians": 9076.0
     },
     {
       "country": "United States",
@@ -79,15 +44,6 @@
       "Violence against civilians": 388.0
     },
     {
-      "country": "Pakistan",
-      "Battles": 4656.0,
-      "Explosions/Remote violence": 2822.0,
-      "Protests": 56188.0,
-      "Riots": 3014.0,
-      "Strategic developments": 1123.0,
-      "Violence against civilians": 2969.0
-    },
-    {
       "country": "Afghanistan",
       "Battles": 40917.0,
       "Explosions/Remote violence": 17393.0,
@@ -95,6 +51,24 @@
       "Riots": 155.0,
       "Strategic developments": 2645.0,
       "Violence against civilians": 4738.0
+    },
+    {
+      "country": "Somalia",
+      "Battles": 15646.0,
+      "Explosions/Remote violence": 6479.0,
+      "Protests": 1148.0,
+      "Riots": 363.0,
+      "Strategic developments": 2263.0,
+      "Violence against civilians": 4938.0
+    },
+    {
+      "country": "Italy",
+      "Battles": 0.0,
+      "Explosions/Remote violence": 14.0,
+      "Protests": 23206.0,
+      "Riots": 687.0,
+      "Strategic developments": 574.0,
+      "Violence against civilians": 43.0
     }
   ]
 }

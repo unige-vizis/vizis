@@ -5,10 +5,17 @@ import * as d3 from 'd3'
 const chartRef = ref(null)
 const containerWidth = ref(0)
 const containerHeight = ref(0)
+const dataset = ref([])
 
-// Load the data from data-processing/viz-datasets/viz3_event_types.json and extract the array
-import data from '../../../../data-processing/viz-datasets/viz3_event_types.json'
-const dataset = Array.isArray(data && data.data) ? data.data : []
+async function loadData() {
+  try {
+    const response = await fetch('/vizis/src/assets/data/viz3_event_types.json')
+    const data = await response.json()
+    dataset.value = Array.isArray(data && data.data) ? data.data : []
+  } catch (error) {
+    console.error('Error loading viz3 data:', error)
+  }
+}
 
 // Update dimensions and redraw chart when container size changes
 function updateDimensions() {
@@ -21,7 +28,8 @@ function updateDimensions() {
 
 // Set up resize observer
 let resizeObserver
-onMounted(() => {
+onMounted(async () => {
+  await loadData()
   updateDimensions()
   resizeObserver = new ResizeObserver(updateDimensions)
   if (chartRef.value) {
@@ -36,7 +44,7 @@ onUnmounted(() => {
 })
 
 function createChart() {
-  if (!containerWidth.value || !containerHeight.value) return
+  if (!containerWidth.value || !containerHeight.value || !dataset.value.length) return
 
   const margin = { top: 15, right: 30, bottom: 40, left: 80 }
   const width = containerWidth.value - margin.left - margin.right
@@ -56,7 +64,7 @@ function createChart() {
   const subgroups = ['Battles', 'Explosions/Remote violence', 'Protests & Riots', 'Violence against civilians']
 
   // List of groups (countries)
-  const groups = dataset.map(d => d.country)
+  const groups = dataset.value.map(d => d.country)
 
   // Create scales for horizontal grouped bars
   // y0: country bands (vertical position), y1: subgroups within each country
@@ -72,7 +80,7 @@ function createChart() {
 
   // x: linear scale for counts (horizontal)
   const x = d3.scaleLinear()
-    .domain([0, d3.max(dataset, d => d3.max(subgroups, k => (d[k] || 0))) || 0])
+    .domain([0, d3.max(dataset.value, d => d3.max(subgroups, k => (d[k] || 0))) || 0])
     .range([0, width])
 
   // Add X axis (counts)
@@ -101,7 +109,7 @@ function createChart() {
   // Add bars (horizontal grouped bars)
   svg.append('g')
     .selectAll('g')
-    .data(dataset)
+    .data(dataset.value)
     .enter()
     .append('g')
     .attr('transform', d => `translate(0,${y0(d.country)})`)
