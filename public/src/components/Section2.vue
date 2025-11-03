@@ -40,9 +40,9 @@ import WaffleChart from './visualizations/WaffleChart.vue'
 
       <!-- Heatmap -->
       <div>
-        <h3>Monthly Frequency of Religion-Related Protests Across Countries</h3>
+        <h3>Temporal Distribution of Event Types (2015-2024)</h3>
         <p>
-          Highlights temporal patterns, showing peaks when populations experience heightened instability or repression
+          Visualizes the intensity of different conflict event types across years, showing how patterns of violence, protests, and strategic developments have evolved over time
         </p>
         <Heatmap />
       </div>
@@ -50,7 +50,7 @@ import WaffleChart from './visualizations/WaffleChart.vue'
       <div>
         <p>
           [Analysis text about temporal patterns will go here. Identify peak periods and discuss what events or
-          conditions might have triggered increased protest activity during those times.]
+          conditions might have triggered changes in event type frequencies during those years. Note the relationship between fatalities and event counts.]
         </p>
       </div>
 

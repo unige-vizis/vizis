@@ -1,0 +1,371 @@
+{
+  "metadata": {
+    "title": "Heatmap: Event Types by Year (2015-2024)",
+    "description": "Temporal distribution of ACLED event types showing both event counts and fatalities",
+    "source": "ACLED",
+    "date_range": "2015-2024",
+    "note": "Color intensity based on event_count, fatalities included for additional context"
+  },
+  "data": [
+    {
+      "year": 2015,
+      "event_type": "Battles",
+      "event_count": 7804,
+      "total_fatalities": 32841
+    },
+    {
+      "year": 2015,
+      "event_type": "Explosions/Remote violence",
+      "event_count": 8217,
+      "total_fatalities": 15506
+    },
+    {
+      "year": 2015,
+      "event_type": "Protests",
+      "event_count": 9522,
+      "total_fatalities": 255
+    },
+    {
+      "year": 2015,
+      "event_type": "Riots",
+      "event_count": 4391,
+      "total_fatalities": 1361
+    },
+    {
+      "year": 2015,
+      "event_type": "Strategic developments",
+      "event_count": 1432,
+      "total_fatalities": 82
+    },
+    {
+      "year": 2015,
+      "event_type": "Violence against civilians",
+      "event_count": 4800,
+      "total_fatalities": 12422
+    },
+    {
+      "year": 2016,
+      "event_type": "Battles",
+      "event_count": 12484,
+      "total_fatalities": 59976
+    },
+    {
+      "year": 2016,
+      "event_type": "Explosions/Remote violence",
+      "event_count": 17337,
+      "total_fatalities": 40042
+    },
+    {
+      "year": 2016,
+      "event_type": "Protests",
+      "event_count": 26229,
+      "total_fatalities": 674
+    },
+    {
+      "year": 2016,
+      "event_type": "Riots",
+      "event_count": 6633,
+      "total_fatalities": 1241
+    },
+    {
+      "year": 2016,
+      "event_type": "Strategic developments",
+      "event_count": 3195,
+      "total_fatalities": 424
+    },
+    {
+      "year": 2016,
+      "event_type": "Violence against civilians",
+      "event_count": 8810,
+      "total_fatalities": 18102
+    },
+    {
+      "year": 2017,
+      "event_type": "Battles",
+      "event_count": 28845,
+      "total_fatalities": 102636
+    },
+    {
+      "year": 2017,
+      "event_type": "Explosions/Remote violence",
+      "event_count": 36997,
+      "total_fatalities": 62835
+    },
+    {
+      "year": 2017,
+      "event_type": "Protests",
+      "event_count": 26855,
+      "total_fatalities": 187
+    },
+    {
+      "year": 2017,
+      "event_type": "Riots",
+      "event_count": 7513,
+      "total_fatalities": 1346
+    },
+    {
+      "year": 2017,
+      "event_type": "Strategic developments",
+      "event_count": 3548,
+      "total_fatalities": 610
+    },
+    {
+      "year": 2017,
+      "event_type": "Violence against civilians",
+      "event_count": 9574,
+      "total_fatalities": 18758
+    },
+    {
+      "year": 2018,
+      "event_type": "Battles",
+      "event_count": 54871,
+      "total_fatalities": 101691
+    },
+    {
+      "year": 2018,
+      "event_type": "Explosions/Remote violence",
+      "event_count": 35261,
+      "total_fatalities": 42806
+    },
+    {
+      "year": 2018,
+      "event_type": "Protests",
+      "event_count": 71438,
+      "total_fatalities": 485
+    },
+    {
+      "year": 2018,
+      "event_type": "Riots",
+      "event_count": 15689,
+      "total_fatalities": 2243
+    },
+    {
+      "year": 2018,
+      "event_type": "Strategic developments",
+      "event_count": 10021,
+      "total_fatalities": 462
+    },
+    {
+      "year": 2018,
+      "event_type": "Violence against civilians",
+      "event_count": 26204,
+      "total_fatalities": 31096
+    },
+    {
+      "year": 2019,
+      "event_type": "Battles",
+      "event_count": 48337,
+      "total_fatalities": 80951
+    },
+    {
+      "year": 2019,
+      "event_type": "Explosions/Remote violence",
+      "event_count": 37406,
+      "total_fatalities": 39057
+    },
+    {
+      "year": 2019,
+      "event_type": "Protests",
+      "event_count": 88592,
+      "total_fatalities": 497
+    },
+    {
+      "year": 2019,
+      "event_type": "Riots",
+      "event_count": 18363,
+      "total_fatalities": 2747
+    },
+    {
+      "year": 2019,
+      "event_type": "Strategic developments",
+      "event_count": 11494,
+      "total_fatalities": 511
+    },
+    {
+      "year": 2019,
+      "event_type": "Violence against civilians",
+      "event_count": 26581,
+      "total_fatalities": 30464
+    },
+    {
+      "year": 2020,
+      "event_type": "Battles",
+      "event_count": 40621,
+      "total_fatalities": 81064
+    },
+    {
+      "year": 2020,
+      "event_type": "Explosions/Remote violence",
+      "event_count": 26210,
+      "total_fatalities": 21913
+    },
+    {
+      "year": 2020,
+      "event_type": "Protests",
+      "event_count": 141387,
+      "total_fatalities": 260
+    },
+    {
+      "year": 2020,
+      "event_type": "Riots",
+      "event_count": 17110,
+      "total_fatalities": 2660
+    },
+    {
+      "year": 2020,
+      "event_type": "Strategic developments",
+      "event_count": 14501,
+      "total_fatalities": 642
+    },
+    {
+      "year": 2020,
+      "event_type": "Violence against civilians",
+      "event_count": 27688,
+      "total_fatalities": 32469
+    },
+    {
+      "year": 2021,
+      "event_type": "Battles",
+      "event_count": 36346,
+      "total_fatalities": 91011
+    },
+    {
+      "year": 2021,
+      "event_type": "Explosions/Remote violence",
+      "event_count": 26207,
+      "total_fatalities": 26050
+    },
+    {
+      "year": 2021,
+      "event_type": "Protests",
+      "event_count": 161372,
+      "total_fatalities": 801
+    },
+    {
+      "year": 2021,
+      "event_type": "Riots",
+      "event_count": 18283,
+      "total_fatalities": 2844
+    },
+    {
+      "year": 2021,
+      "event_type": "Strategic developments",
+      "event_count": 17587,
+      "total_fatalities": 721
+    },
+    {
+      "year": 2021,
+      "event_type": "Violence against civilians",
+      "event_count": 31794,
+      "total_fatalities": 37617
+    },
+    {
+      "year": 2022,
+      "event_type": "Battles",
+      "event_count": 38099,
+      "total_fatalities": 81938
+    },
+    {
+      "year": 2022,
+      "event_type": "Explosions/Remote violence",
+      "event_count": 54894,
+      "total_fatalities": 38796
+    },
+    {
+      "year": 2022,
+      "event_type": "Protests",
+      "event_count": 143418,
+      "total_fatalities": 304
+    },
+    {
+      "year": 2022,
+      "event_type": "Riots",
+      "event_count": 18911,
+      "total_fatalities": 3675
+    },
+    {
+      "year": 2022,
+      "event_type": "Strategic developments",
+      "event_count": 26446,
+      "total_fatalities": 428
+    },
+    {
+      "year": 2022,
+      "event_type": "Violence against civilians",
+      "event_count": 35766,
+      "total_fatalities": 42294
+    },
+    {
+      "year": 2023,
+      "event_type": "Battles",
+      "event_count": 45897,
+      "total_fatalities": 101410
+    },
+    {
+      "year": 2023,
+      "event_type": "Explosions/Remote violence",
+      "event_count": 72906,
+      "total_fatalities": 50692
+    },
+    {
+      "year": 2023,
+      "event_type": "Protests",
+      "event_count": 144958,
+      "total_fatalities": 170
+    },
+    {
+      "year": 2023,
+      "event_type": "Riots",
+      "event_count": 19819,
+      "total_fatalities": 3660
+    },
+    {
+      "year": 2023,
+      "event_type": "Strategic developments",
+      "event_count": 28259,
+      "total_fatalities": 692
+    },
+    {
+      "year": 2023,
+      "event_type": "Violence against civilians",
+      "event_count": 37000,
+      "total_fatalities": 40991
+    },
+    {
+      "year": 2024,
+      "event_type": "Battles",
+      "event_count": 44479,
+      "total_fatalities": 112064
+    },
+    {
+      "year": 2024,
+      "event_type": "Explosions/Remote violence",
+      "event_count": 83465,
+      "total_fatalities": 46582
+    },
+    {
+      "year": 2024,
+      "event_type": "Protests",
+      "event_count": 124434,
+      "total_fatalities": 277
+    },
+    {
+      "year": 2024,
+      "event_type": "Riots",
+      "event_count": 15208,
+      "total_fatalities": 3932
+    },
+    {
+      "year": 2024,
+      "event_type": "Strategic developments",
+      "event_count": 27166,
+      "total_fatalities": 390
+    },
+    {
+      "year": 2024,
+      "event_type": "Violence against civilians",
+      "event_count": 30996,
+      "total_fatalities": 35366
+    }
+  ]
+}

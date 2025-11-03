@@ -3,143 +3,189 @@
     "title": "Top Conflict Countries by Economic Sector (2015-2024)",
     "description": "Top 15 sorted by primary sector %, showing economic structure vs conflict",
     "source": "ACLED + World Bank",
-    "date_range": "2015-2024"
+    "date_range": "2015-2024",
+    "notes": "Per capita rates calculated per 100,000 population"
   },
   "data": [
     {
       "country": "Somalia",
       "event_count": 30837,
       "total_fatalities": 54487,
+      "events_per_100k": 175.24,
+      "fatalities_per_100k": 309.63,
       "Primary_%": 60.86,
       "Secondary_%": 6.68,
       "Tertiary_%": 32.47,
-      "Tourism_%": 0.0
+      "Tourism_%": 0.0,
+      "Population": 17597511
     },
     {
       "country": "Iraq",
       "event_count": 59606,
       "total_fatalities": 106705,
+      "events_per_100k": 133.96,
+      "fatalities_per_100k": 239.81,
       "Primary_%": 48.81,
       "Secondary_%": 9.21,
       "Tertiary_%": 41.99,
-      "Tourism_%": 0.0
+      "Tourism_%": 0.0,
+      "Population": 44496122
     },
     {
       "country": "Afghanistan",
       "event_count": 67194,
       "total_fatalities": 202145,
+      "events_per_100k": 163.37,
+      "fatalities_per_100k": 491.49,
       "Primary_%": 41.89,
       "Secondary_%": 8.9,
       "Tertiary_%": 49.21,
-      "Tourism_%": 0.0
+      "Tourism_%": 0.0,
+      "Population": 41128771
     },
     {
       "country": "Nigeria",
       "event_count": 32148,
       "total_fatalities": 80338,
+      "events_per_100k": 14.71,
+      "fatalities_per_100k": 36.76,
       "Primary_%": 31.1,
       "Secondary_%": 25.3,
       "Tertiary_%": 43.6,
-      "Tourism_%": 4.29
+      "Tourism_%": 4.29,
+      "Population": 218541212
     },
     {
       "country": "Pakistan",
       "event_count": 70772,
       "total_fatalities": 19536,
+      "events_per_100k": 30.01,
+      "fatalities_per_100k": 8.28,
       "Primary_%": 29.49,
       "Secondary_%": 17.07,
       "Tertiary_%": 53.44,
-      "Tourism_%": 0.0
+      "Tourism_%": 0.0,
+      "Population": 235824862
     },
     {
       "country": "Myanmar",
       "event_count": 78505,
       "total_fatalities": 79808,
+      "events_per_100k": 144.9,
+      "fatalities_per_100k": 147.3,
       "Primary_%": 26.55,
       "Secondary_%": 31.96,
       "Tertiary_%": 41.49,
-      "Tourism_%": 0.0
+      "Tourism_%": 0.0,
+      "Population": 54179306
     },
     {
       "country": "Yemen",
       "event_count": 93875,
       "total_fatalities": 162361,
+      "events_per_100k": 278.59,
+      "fatalities_per_100k": 481.83,
       "Primary_%": 25.29,
       "Secondary_%": 15.16,
       "Tertiary_%": 59.55,
-      "Tourism_%": 0.0
+      "Tourism_%": 0.0,
+      "Population": 33696614
     },
     {
       "country": "India",
       "event_count": 170146,
       "total_fatalities": 12189,
+      "events_per_100k": 12.01,
+      "fatalities_per_100k": 0.86,
       "Primary_%": 22.1,
       "Secondary_%": 22.86,
       "Tertiary_%": 55.04,
-      "Tourism_%": 2.6
+      "Tourism_%": 2.6,
+      "Population": 1417173173
     },
     {
       "country": "Colombia",
       "event_count": 29049,
       "total_fatalities": 12547,
+      "events_per_100k": 56.0,
+      "fatalities_per_100k": 24.19,
       "Primary_%": 20.48,
       "Secondary_%": 16.44,
       "Tertiary_%": 63.08,
-      "Tourism_%": 2.35
+      "Tourism_%": 2.35,
+      "Population": 51874024
     },
     {
       "country": "Ukraine",
       "event_count": 197663,
       "total_fatalities": 137716,
+      "events_per_100k": 520.17,
+      "fatalities_per_100k": 362.41,
       "Primary_%": 18.74,
       "Secondary_%": 11.22,
       "Tertiary_%": 70.04,
-      "Tourism_%": 0.0
+      "Tourism_%": 0.0,
+      "Population": 38000000
     },
     {
       "country": "Brazil",
       "event_count": 91053,
       "total_fatalities": 47537,
+      "events_per_100k": 42.29,
+      "fatalities_per_100k": 22.08,
       "Primary_%": 13.64,
       "Secondary_%": 18.61,
       "Tertiary_%": 67.75,
-      "Tourism_%": 0.0
+      "Tourism_%": 0.0,
+      "Population": 215313498
     },
     {
       "country": "Mexico",
       "event_count": 94541,
       "total_fatalities": 57520,
+      "events_per_100k": 74.15,
+      "fatalities_per_100k": 45.11,
       "Primary_%": 9.99,
       "Secondary_%": 28.73,
       "Tertiary_%": 61.28,
-      "Tourism_%": 8.46
+      "Tourism_%": 8.46,
+      "Population": 127504125
     },
     {
       "country": "Lebanon",
       "event_count": 27843,
       "total_fatalities": 3947,
+      "events_per_100k": 507.18,
+      "fatalities_per_100k": 71.9,
       "Primary_%": 7.5,
       "Secondary_%": 11.41,
       "Tertiary_%": 81.09,
-      "Tourism_%": 9.1
+      "Tourism_%": 9.1,
+      "Population": 5489739
     },
     {
       "country": "France",
       "event_count": 36000,
       "total_fatalities": 43,
+      "events_per_100k": 52.96,
+      "fatalities_per_100k": 0.06,
       "Primary_%": 6.02,
       "Secondary_%": 16.47,
       "Tertiary_%": 77.51,
-      "Tourism_%": 3.56
+      "Tourism_%": 3.56,
+      "Population": 67971311
     },
     {
       "country": "United States",
       "event_count": 73368,
       "total_fatalities": 440,
+      "events_per_100k": 22.01,
+      "fatalities_per_100k": 0.13,
       "Primary_%": 4.38,
       "Secondary_%": 14.65,
       "Tertiary_%": 80.97,
-      "Tourism_%": 0.0
+      "Tourism_%": 0.0,
+      "Population": 333287557
     }
   ]
 }

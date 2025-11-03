@@ -18,7 +18,10 @@
       "Bash(mv:*)",
       "Bash(rm:*)",
       "Bash(pip install:*)",
-      "Bash(jupyter nbconvert:*)"
+      "Bash(jupyter nbconvert:*)",
+      "Bash(dir:*)",
+      "mcp__ide__executeCode",
+      "Bash(timeout:*)"
     ],
     "deny": [],
     "ask": []

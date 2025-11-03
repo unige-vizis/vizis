@@ -4,29 +4,20 @@ import * as d3 from 'd3'
 
 const chartRef = ref(null)
 
-// Placeholder data - monthly frequency of religion-related protests across countries
-const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-const countries = ['Syria', 'Nigeria', 'Iraq', 'Pakistan', 'India', 'Yemen']
+// Load the data from viz3_heatmap_event_types_years.json
+import jsonData from '@/assets/data/viz3_heatmap_event_types_years.json'
+const data = Array.isArray(jsonData && jsonData.data) ? jsonData.data : []
 
-// Generate placeholder data
-const data = []
-countries.forEach(country => {
-  months.forEach((month, i) => {
-    data.push({
-      country,
-      month,
-      monthIndex: i,
-      value: Math.floor(Math.random() * 50) + 10
-    })
-  })
-})
+// Extract unique years and event types
+const years = [...new Set(data.map(d => d.year))].sort()
+const eventTypes = [...new Set(data.map(d => d.event_type))].sort()
 
 onMounted(() => {
   createChart()
 })
 
 function createChart() {
-  const margin = { top: 20, right: 30, bottom: 60, left: 100 }
+  const margin = { top: 20, right: 30, bottom: 60, left: 220 }
   const width = 900 - margin.left - margin.right
   const height = 400 - margin.top - margin.bottom
 
@@ -42,19 +33,19 @@ function createChart() {
 
   // Create scales
   const x = d3.scaleBand()
-    .domain(months)
+    .domain(years)
     .range([0, width])
     .padding(0.05)
 
   const y = d3.scaleBand()
-    .domain(countries)
+    .domain(eventTypes)
     .range([0, height])
     .padding(0.05)
 
-  // Color scale
+  // Color scale - based on event_count
   const colorScale = d3.scaleSequential()
     .interpolator(d3.interpolateRgb('#2d1b3d', '#c6c7ff'))
-    .domain([0, d3.max(data, d => d.value)])
+    .domain([0, d3.max(data, d => d.event_count)])
 
   // Add X axis
   svg.append('g')
@@ -91,11 +82,11 @@ function createChart() {
     .data(data)
     .enter()
     .append('rect')
-    .attr('x', d => x(d.month))
-    .attr('y', d => y(d.country))
+    .attr('x', d => x(d.year))
+    .attr('y', d => y(d.event_type))
     .attr('width', x.bandwidth())
     .attr('height', y.bandwidth())
-    .attr('fill', d => colorScale(d.value))
+    .attr('fill', d => colorScale(d.event_count))
     .attr('stroke', '#1a1a1a')
     .attr('stroke-width', 1)
     .on('mouseover', function(event, d) {
@@ -105,7 +96,7 @@ function createChart() {
 
       tooltip
         .style('opacity', 1)
-        .html(`<strong>${d.country}</strong><br/>${d.month}: ${d.value} events`)
+        .html(`<strong>${d.event_type}</strong><br/>${d.year}: ${d.event_count.toLocaleString()} events<br/>Fatalities: ${d.total_fatalities.toLocaleString()}`)
         .style('left', (event.pageX + 10) + 'px')
         .style('top', (event.pageY - 10) + 'px')
     })
@@ -125,7 +116,7 @@ function createChart() {
     .attr('transform', `translate(${(width - legendWidth) / 2}, ${height + 40})`)
 
   const legendScale = d3.scaleLinear()
-    .domain([0, d3.max(data, d => d.value)])
+    .domain([0, d3.max(data, d => d.event_count)])
     .range([0, legendWidth])
 
   const legendAxis = d3.axisBottom(legendScale)
@@ -167,14 +158,13 @@ function createChart() {
     .attr('text-anchor', 'middle')
     .style('fill', '#999')
     .style('font-size', '12px')
-    .text('Number of Protests')
+    .text('Number of Events')
 }
 </script>
 
 <template>
   <div class="chart-wrapper">
     <div ref="chartRef" class="chart"></div>
-    <p class="data-note">Note: This visualization uses placeholder data. Real data from ACLED will be integrated in the next iteration.</p>
   </div>
 </template>
 

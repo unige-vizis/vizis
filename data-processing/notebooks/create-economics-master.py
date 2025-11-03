@@ -148,9 +148,31 @@ df_dev_ind = pd.read_csv('../raw-data/World_Bank/world_bank_development_indicato
 # Extract year from date column
 df_dev_ind['Year'] = pd.to_datetime(df_dev_ind['date']).dt.year
 
-# Select GDP in USD column
-df_gdp_usd = df_dev_ind[['country', 'Year', 'GDP_current_US']].copy()
-df_gdp_usd.columns = ['Country', 'Year', 'GDP_USD']
+# Select GDP in USD and population columns
+df_gdp_usd = df_dev_ind[['country', 'Year', 'GDP_current_US', 'population']].copy()
+df_gdp_usd.columns = ['Country', 'Year', 'GDP_USD', 'Population']
+
+# Standardize country names to match ACLED naming conventions
+country_name_map = {
+    'Yemen, Rep.': 'Yemen',
+    'Egypt, Arab Rep.': 'Egypt',
+    'Congo, Dem. Rep.': 'Democratic Republic of Congo',
+    'Congo, Rep.': 'Republic of Congo',
+    'Bahamas, The': 'Bahamas',
+    'Gambia, The': 'Gambia',
+    'Korea, Rep.': 'South Korea',
+    'Korea, Dem. People\'s Rep.': 'North Korea',
+    'Kyrgyz Republic': 'Kyrgyzstan',
+    'Lao PDR': 'Laos',
+    'Russian Federation': 'Russia',
+    'Syrian Arab Republic': 'Syria',
+    'Turkiye': 'Turkey',
+    'Venezuela, RB': 'Venezuela',
+    'West Bank and Gaza': 'Palestine',
+    'Slovak Republic': 'Slovakia'
+}
+
+df_gdp_usd['Country'] = df_gdp_usd['Country'].replace(country_name_map)
 
 # Merge GDP USD
 df_master = df_master.merge(
@@ -160,7 +182,9 @@ df_master = df_master.merge(
 )
 
 gdp_coverage = df_master['GDP_USD'].notna().sum()
+population_coverage = df_master['Population'].notna().sum()
 print(f"  > Merged: {gdp_coverage:,} records now have GDP in USD")
+print(f"  > Merged: {population_coverage:,} records now have Population")
 
 # ============================================================================
 # STEP 8: Create Final Master Dataset with Explicit NULLs
@@ -175,7 +199,8 @@ df_final = df_master[[
     'Secondary_%',
     'Tertiary_%',
     'Tourism_%',
-    'GDP_USD'
+    'GDP_USD',
+    'Population'
 ]].copy()
 
 # Round percentages to 2 decimal places
@@ -185,7 +210,7 @@ df_final['Tertiary_%'] = df_final['Tertiary_%'].round(2)
 df_final['Tourism_%'] = df_final['Tourism_%'].round(2)
 
 # Ensure all numeric columns use proper float64 with NaN for missing
-numeric_cols = ['Primary_%', 'Secondary_%', 'Tertiary_%', 'Tourism_%', 'GDP_USD']
+numeric_cols = ['Primary_%', 'Secondary_%', 'Tertiary_%', 'Tourism_%', 'GDP_USD', 'Population']
 for col in numeric_cols:
     df_final[col] = pd.to_numeric(df_final[col], errors='coerce')
 
@@ -239,6 +264,7 @@ print(f"  - Secondary_% (Manufacturing + Construction)")
 print(f"  - Tertiary_% (Services)")
 print(f"  - Tourism_% (2008-2023, 125 countries)")
 print(f"  - GDP_USD (current US dollars)")
+print(f"  - Population (total population)")
 print(f"\nNOTE: Missing values are represented as empty cells in CSV (NULL)")
 print("\nOK Ready to merge with conflict data!")
 print("=" * 80)
