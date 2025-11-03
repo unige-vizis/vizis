@@ -5,17 +5,10 @@ import * as d3 from 'd3'
 const chartRef = ref(null)
 const containerWidth = ref(0)
 const containerHeight = ref(0)
-const dataset = ref([])
 
-async function loadData() {
-  try {
-    const response = await fetch('/vizis/src/assets/data/viz3_event_types.json')
-    const data = await response.json()
-    dataset.value = Array.isArray(data && data.data) ? data.data : []
-  } catch (error) {
-    console.error('Error loading viz3 data:', error)
-  }
-}
+// Load the data directly via import
+import jsonData from '@/assets/data/viz3_event_types.json'
+const dataset = ref(Array.isArray(jsonData && jsonData.data) ? jsonData.data : [])
 
 // Update dimensions and redraw chart when container size changes
 function updateDimensions() {
@@ -28,8 +21,7 @@ function updateDimensions() {
 
 // Set up resize observer
 let resizeObserver
-onMounted(async () => {
-  await loadData()
+onMounted(() => {
   updateDimensions()
   resizeObserver = new ResizeObserver(updateDimensions)
   if (chartRef.value) {
@@ -44,7 +36,7 @@ onUnmounted(() => {
 })
 
 function createChart() {
-  if (!containerWidth.value || !containerHeight.value || !dataset.value.length) return
+  if (!containerWidth.value || !containerHeight.value || dataset.value.length === 0) return
 
   const margin = { top: 15, right: 30, bottom: 40, left: 80 }
   const width = containerWidth.value - margin.left - margin.right

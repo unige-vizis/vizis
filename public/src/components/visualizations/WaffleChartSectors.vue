@@ -3,21 +3,14 @@ import { onMounted, ref } from 'vue'
 import * as d3 from 'd3'
 
 const chartRef = ref(null)
-const data = ref(null)
 
-onMounted(async () => {
-  await loadData()
+// Load the data directly via import
+import jsonData from '@/assets/data/viz5_waffle_sectors_by_event_type.json'
+const data = ref(jsonData)
+
+onMounted(() => {
   createChart()
 })
-
-async function loadData() {
-  try {
-    const response = await fetch('/vizis/src/assets/data/viz5_waffle_sectors_by_event_type.json')
-    data.value = await response.json()
-  } catch (error) {
-    console.error('Error loading viz5 data:', error)
-  }
-}
 
 function createChart() {
   if (!data.value) return
