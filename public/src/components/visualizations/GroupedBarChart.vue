@@ -22,7 +22,7 @@ function updateDimensions() {
   if (!chartRef.value) return
   const container = chartRef.value
   containerWidth.value = container.clientWidth
-  containerHeight.value = container.clientHeight || 500 // Fixed height for very narrow, compact visualization
+  containerHeight.value = container.clientHeight || 220 // Fixed height for very narrow, compact visualization
   createChart()
 }
 

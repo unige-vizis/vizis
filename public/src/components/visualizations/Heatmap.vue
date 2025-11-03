@@ -3,27 +3,16 @@ import { onMounted, ref } from 'vue'
 import * as d3 from 'd3'
 
 const chartRef = ref(null)
-const data = ref([])
-const years = ref([])
-const eventTypes = ref([])
 
-// Load the data from assets folder
-async function loadData() {
-  try {
-    const response = await fetch('/vizis/src/assets/data/viz4_heatmap_event_types_years.json')
-    const jsonData = await response.json()
-    data.value = Array.isArray(jsonData && jsonData.data) ? jsonData.data : []
+// Load the data from viz4_heatmap_event_types_years.json
+import jsonData from '@/assets/data/viz4_heatmap_event_types_years.json'
+const data = Array.isArray(jsonData && jsonData.data) ? jsonData.data : []
 
-    // Extract unique years and event types
-    years.value = [...new Set(data.value.map(d => d.year))].sort()
-    eventTypes.value = [...new Set(data.value.map(d => d.event_type))].sort()
-  } catch (error) {
-    console.error('Error loading heatmap data:', error)
-  }
-}
+// Extract unique years and event types
+const years = [...new Set(data.map(d => d.year))].sort()
+const eventTypes = [...new Set(data.map(d => d.event_type))].sort()
 
-onMounted(async () => {
-  await loadData()
+onMounted(() => {
   createChart()
 })
 
@@ -44,12 +33,12 @@ function createChart() {
 
   // Create scales
   const x = d3.scaleBand()
-    .domain(years.value)
+    .domain(years)
     .range([0, width])
     .padding(0.05)
 
   const y = d3.scaleBand()
-    .domain(eventTypes.value)
+    .domain(eventTypes)
     .range([0, height])
     .padding(0.05)
 
@@ -57,12 +46,12 @@ function createChart() {
   // Purples for event counts (upper half)
   const eventColorScale = d3.scaleSequential()
     .interpolator(d3.interpolatePurples)
-    .domain([0, d3.max(data.value, d => d.event_count)])
+    .domain([0, d3.max(data, d => d.event_count)])
 
   // Reds for fatalities (lower half) - red implies danger/death
   const fatalityColorScale = d3.scaleSequential()
     .interpolator(d3.interpolateReds)
-    .domain([0, d3.max(data.value, d => d.total_fatalities)])
+    .domain([0, d3.max(data, d => d.total_fatalities)])
 
   // Function to determine text color based on background intensity
   const getTextColor = (value, maxValue) => {
@@ -103,7 +92,7 @@ function createChart() {
 
   // Add cells with horizontal split
   const cells = svg.selectAll('.cell')
-    .data(data.value)
+    .data(data)
     .enter()
     .append('g')
     .attr('class', 'cell')
@@ -170,7 +159,7 @@ function createChart() {
     .attr('y', d => y(d.event_type) + y.bandwidth() * 0.25)
     .attr('text-anchor', 'middle')
     .attr('dominant-baseline', 'middle')
-    .attr('fill', d => getTextColor(d.event_count, d3.max(data.value, d => d.event_count)))
+    .attr('fill', d => getTextColor(d.event_count, d3.max(data, d => d.event_count)))
     .style('font-size', '9px')
     .style('font-weight', '600')
     .style('pointer-events', 'none')
@@ -188,7 +177,7 @@ function createChart() {
     .attr('y', d => y(d.event_type) + y.bandwidth() * 0.75)
     .attr('text-anchor', 'middle')
     .attr('dominant-baseline', 'middle')
-    .attr('fill', d => getTextColor(d.total_fatalities, d3.max(data.value, d => d.total_fatalities)))
+    .attr('fill', d => getTextColor(d.total_fatalities, d3.max(data, d => d.total_fatalities)))
     .style('font-size', '9px')
     .style('font-weight', '600')
     .style('pointer-events', 'none')
@@ -201,12 +190,12 @@ function createChart() {
     })
 
   // Add legend labels at the end of the first row
-  const firstEventType = eventTypes.value[0]
-  const lastYear = years.value[years.value.length - 1]
+  const firstEventType = eventTypes[0]
+  const lastYear = years[years.length - 1]
 
   // Get mid-intensity colors for backgrounds
-  const maxEvents = d3.max(data.value, d => d.event_count)
-  const maxFatalities = d3.max(data.value, d => d.total_fatalities)
+  const maxEvents = d3.max(data, d => d.event_count)
+  const maxFatalities = d3.max(data, d => d.total_fatalities)
   const midPurple = eventColorScale(maxEvents * 0.5)
   const midRed = fatalityColorScale(maxFatalities * 0.5)
 
