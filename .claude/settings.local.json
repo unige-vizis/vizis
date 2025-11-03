@@ -22,7 +22,11 @@
       "Bash(dir:*)",
       "mcp__ide__executeCode",
       "Bash(timeout:*)",
-      "Bash(npm run build:*)"
+      "Bash(npm run build:*)",
+      "Bash(NUL)",
+      "Bash(findstr:*)",
+      "Bash(copy:*)",
+      "Bash(cp:*)"
     ],
     "deny": [],
     "ask": []

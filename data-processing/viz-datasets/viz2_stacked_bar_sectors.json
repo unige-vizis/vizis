@@ -29,12 +29,12 @@
     {
       "country": "Ukraine",
       "sector": "Tertiary",
-      "percentage": 70.04
+      "percentage": NaN
     },
     {
       "country": "Ukraine",
       "sector": "Tourism",
-      "percentage": 0.0
+      "percentage": NaN
     },
     {
       "country": "India",
@@ -89,12 +89,12 @@
     {
       "country": "United States",
       "sector": "Tertiary",
-      "percentage": 80.97
+      "percentage": NaN
     },
     {
       "country": "United States",
       "sector": "Tourism",
-      "percentage": 0.0
+      "percentage": NaN
     },
     {
       "country": "Afghanistan",
@@ -109,12 +109,12 @@
     {
       "country": "Afghanistan",
       "sector": "Tertiary",
-      "percentage": 49.21
+      "percentage": NaN
     },
     {
       "country": "Afghanistan",
       "sector": "Tourism",
-      "percentage": 0.0
+      "percentage": NaN
     },
     {
       "country": "Somalia",
@@ -129,12 +129,12 @@
     {
       "country": "Somalia",
       "sector": "Tertiary",
-      "percentage": 32.47
+      "percentage": NaN
     },
     {
       "country": "Somalia",
       "sector": "Tourism",
-      "percentage": 0.0
+      "percentage": NaN
     },
     {
       "country": "Italy",

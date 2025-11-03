@@ -1,0 +1,106 @@
+{
+  "metadata": {
+    "title": "Waffle Chart: Economic Sector Composition by Event Type",
+    "description": "Weighted average economic sector distribution for countries experiencing each type of conflict event",
+    "source": "ACLED + World Bank",
+    "date_range": "2015-2024",
+    "note": "Percentages are WEIGHTED by event frequency per country. Countries with more events of a type have proportionally more influence on the average. Tourism sector removed. NaN values excluded. Strategic developments excluded. Sorted by Primary sector percentage."
+  },
+  "data": [
+    {
+      "event_type": "Battles",
+      "event_count": 306713,
+      "sectors": [
+        {
+          "sector": "Primary",
+          "percentage": 29.04
+        },
+        {
+          "sector": "Secondary",
+          "percentage": 15.86
+        },
+        {
+          "sector": "Tertiary",
+          "percentage": 55.1
+        }
+      ],
+      "total_percentage": 100.0
+    },
+    {
+      "event_type": "Explosions/Remote violence",
+      "event_count": 291287,
+      "sectors": [
+        {
+          "sector": "Primary",
+          "percentage": 25.77
+        },
+        {
+          "sector": "Secondary",
+          "percentage": 13.52
+        },
+        {
+          "sector": "Tertiary",
+          "percentage": 60.71
+        }
+      ],
+      "total_percentage": 100.0
+    },
+    {
+      "event_type": "Violence against civilians",
+      "event_count": 207049,
+      "sectors": [
+        {
+          "sector": "Primary",
+          "percentage": 22.57
+        },
+        {
+          "sector": "Secondary",
+          "percentage": 21.26
+        },
+        {
+          "sector": "Tertiary",
+          "percentage": 56.18
+        }
+      ],
+      "total_percentage": 100.00999999999999
+    },
+    {
+      "event_type": "Riots",
+      "event_count": 108648,
+      "sectors": [
+        {
+          "sector": "Primary",
+          "percentage": 20.28
+        },
+        {
+          "sector": "Secondary",
+          "percentage": 20.74
+        },
+        {
+          "sector": "Tertiary",
+          "percentage": 58.99
+        }
+      ],
+      "total_percentage": 100.00999999999999
+    },
+    {
+      "event_type": "Protests",
+      "event_count": 794593,
+      "sectors": [
+        {
+          "sector": "Primary",
+          "percentage": 16.21
+        },
+        {
+          "sector": "Secondary",
+          "percentage": 20.73
+        },
+        {
+          "sector": "Tertiary",
+          "percentage": 63.06
+        }
+      ],
+      "total_percentage": 100.0
+    }
+  ]
+}

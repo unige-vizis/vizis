@@ -3,7 +3,7 @@ import BarChart from './visualizations/BarChart.vue'
 import GroupedBarChart from './visualizations/GroupedBarChart.vue'
 import Heatmap from './visualizations/Heatmap.vue'
 import StackedBarChart from './visualizations/StackedBarChart.vue'
-import WaffleChart from './visualizations/WaffleChart.vue'
+import WaffleChartSectors from './visualizations/WaffleChartSectors.vue'
 </script>
 
 <template>
@@ -52,6 +52,21 @@ import WaffleChart from './visualizations/WaffleChart.vue'
       </p>
     </div>
 
+    <!-- Waffle Chart: Economic Sectors by Event Type -->
+    <div class="section__inner">
+      <h3>Economic Context by Event Type</h3>
+      <p>
+        Weighted average economic sector composition for countries experiencing each type of conflict event. Countries are weighted by event frequency - for example, Ukraine's economic structure has more influence on "Battles" than Germany's, since Ukraine experiences far more battle events. Each waffle chart represents 100% of the economic makeup, with each square representing 1%. Sorted by Primary sector percentage (highest to lowest). Strategic developments excluded for clarity.
+      </p>
+    </div>
+    <WaffleChartSectors />
+
+    <div class="section__inner">
+      <p>
+        [Analysis text about economic patterns by event type will go here. Notable findings from left to right: Battles show the highest Primary sector (29.04%), indicating they occur more in countries dependent on agriculture and natural resources. Protests show the lowest Primary sector (16.21%) and highest Tertiary sector (63.06%), suggesting they occur more in service-based economies. This gradient from primary-heavy to tertiary-heavy economies reveals how economic structure correlates with conflict types.]
+      </p>
+    </div>
+
     <!-- Heatmap -->
     <div class="section__inner">
       <h3>Temporal Distribution of Event Types (2015-2024)</h3>
@@ -65,20 +80,6 @@ import WaffleChart from './visualizations/WaffleChart.vue'
       <p>
         [Analysis text about temporal patterns will go here. Identify peak periods and discuss what events or
         conditions might have triggered changes in event type frequencies during those years. Note the relationship between fatalities and event counts.]
-      </p>
-    </div>
-
-    <!-- Waffle Chart -->
-    <div class="section__inner">
-      <h3>Scale of Human Impact: Religion-Related Events</h3>
-      <p>Visual representation of the proportion and scale of religion-related events globally</p>
-    </div>
-    <WaffleChart />
-
-    <div class="section__inner">
-      <p>
-        [Analysis text about the overall scale and impact will go here. Provide context about what these numbers mean
-        for human suffering and the global scope of religion-related conflicts.]
       </p>
 
       <h3>Methodology and Data Sources</h3>
