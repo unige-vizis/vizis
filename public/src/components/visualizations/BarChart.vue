@@ -47,7 +47,7 @@ onUnmounted(() => {
 function createChart() {
   if (!containerWidth.value || !containerHeight.value) return
 
-  const margin = { top: 20, right: 80, bottom: 60, left: 100 }
+  const margin = { top: 20, right: 80, bottom: 60, left: 130 }
   const width = containerWidth.value - margin.left - margin.right
   const height = containerHeight.value - margin.top - margin.bottom
 
@@ -80,8 +80,7 @@ function createChart() {
     .attr('class', 'y-axis')
     .call(d3.axisLeft(y))
     .selectAll('text')
-    .style('fill', '#c7c7c7')
-    .style('font-size', '12px')
+    .style('font-size', '1rem')
 
   // Add bars
   const bars = svg.selectAll('.bar')
@@ -123,12 +122,11 @@ function createChart() {
     .text(d => normalizeByPopulation.value
       ? d.events_per_100k.toFixed(1)
       : d.event_count)
-    .style('fill', '#e0e0e0')
-    .style('font-size', '11px')
+    .style('font-size', '1rem')
 
   // Add axis labels
   const axisLabel = normalizeByPopulation.value
-    ? 'Conflict Events per 100,000 Population'
+    ? 'Conflict Events per 100000 Population'
     : 'Number of Conflict Events'
 
   svg.append('text')
@@ -136,8 +134,7 @@ function createChart() {
     .attr('x', width / 2)
     .attr('y', height + margin.bottom - 10)
     .attr('text-anchor', 'middle')
-    .style('fill', '#999')
-    .style('font-size', '13px')
+    .style('font-size', '1rem')
     .text(axisLabel)
 }
 
@@ -208,7 +205,7 @@ function updateChart() {
 
   // Update axis label
   const axisLabel = normalizeByPopulation.value
-    ? 'Conflict Events per 100,000 Population'
+    ? 'Conflict Events per 100000 Population'
     : 'Number of Conflict Events'
 
   svg.select('.x-axis-label')
@@ -220,11 +217,7 @@ function updateChart() {
   <div class="chart-wrapper">
     <div class="chart-controls">
       <label class="toggle-label">
-        <input
-          type="checkbox"
-          v-model="normalizeByPopulation"
-          class="toggle-checkbox-hidden"
-        />
+        <input type="checkbox" v-model="normalizeByPopulation" class="toggle-checkbox-hidden" />
         <span class="toggle-switch">
           <span class="toggle-slider"></span>
         </span>
@@ -234,82 +227,3 @@ function updateChart() {
     <div ref="chartRef" class="chart"></div>
   </div>
 </template>
-
-<style scoped>
-.chart-wrapper {
-  position: relative;
-}
-
-.chart-controls {
-  display: flex;
-  justify-content: flex-start;
-  margin-bottom: 15px;
-  padding: 10px 0;
-}
-
-.toggle-label {
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-  font-size: 14px;
-  color: #c7c7c7;
-  user-select: none;
-  gap: 10px;
-}
-
-.toggle-checkbox-hidden {
-  position: absolute;
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
-
-.toggle-switch {
-  position: relative;
-  display: inline-block;
-  width: 44px;
-  height: 24px;
-  background-color: #444;
-  border-radius: 24px;
-  transition: background-color 0.3s ease;
-  border: 1px solid #666;
-}
-
-.toggle-checkbox-hidden:checked + .toggle-switch {
-  background-color: #4CAF50;
-  border-color: #66bb6a;
-}
-
-.toggle-slider {
-  position: absolute;
-  top: 2px;
-  left: 2px;
-  width: 18px;
-  height: 18px;
-  background-color: #fff;
-  border-radius: 50%;
-  transition: transform 0.3s ease;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-}
-
-.toggle-checkbox-hidden:checked + .toggle-switch .toggle-slider {
-  transform: translateX(20px);
-}
-
-.toggle-text {
-  transition: color 0.2s;
-}
-
-.toggle-label:hover .toggle-text {
-  color: #e0e0e0;
-}
-
-.toggle-label:hover .toggle-switch {
-  border-color: #888;
-}
-
-.chart {
-  width: 100%;
-  min-height: 400px;
-}
-</style>

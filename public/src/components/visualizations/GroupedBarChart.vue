@@ -15,7 +15,7 @@ function updateDimensions() {
   if (!chartRef.value) return
   const container = chartRef.value
   containerWidth.value = container.clientWidth
-  containerHeight.value = container.clientHeight || 220 // Fixed height for very narrow, compact visualization
+  containerHeight.value = container.clientHeight || 500 // Fixed height for very narrow, compact visualization
   createChart()
 }
 
@@ -38,7 +38,7 @@ onUnmounted(() => {
 function createChart() {
   if (!containerWidth.value || !containerHeight.value || dataset.value.length === 0) return
 
-  const margin = { top: 15, right: 30, bottom: 40, left: 80 }
+  const margin = { top: 15, right: 30, bottom: 60, left: 110 }
   const width = containerWidth.value - margin.left - margin.right
   const height = containerHeight.value - margin.top - margin.bottom
 
@@ -80,8 +80,7 @@ function createChart() {
     .attr('transform', `translate(0,${height})`)
     .call(d3.axisBottom(x).ticks(6).tickFormat(d3.format(',')))
     .selectAll('text')
-    .style('fill', '#c7c7c7')
-    .style('font-size', '12px')
+    .style('font-size', '1rem')
 
   svg.selectAll('.domain, .tick line')
     .style('stroke', '#666')
@@ -90,8 +89,7 @@ function createChart() {
   svg.append('g')
     .call(d3.axisLeft(y0))
     .selectAll('text')
-    .style('fill', '#c7c7c7')
-    .style('font-size', '12px')
+    .style('font-size', '1rem')
 
   // Color scale for 4 event types
   const color = d3.scaleOrdinal()
@@ -144,16 +142,14 @@ function createChart() {
     .attr('x', 25)
     .attr('y', (d, i) => i * 25 + 13)
     .text(d => d)
-    .style('fill', '#c7c7c7')
-    .style('font-size', '12px')
+    .style('font-size', '1rem')
 
   // Add X axis label (counts)
   svg.append('text')
     .attr('x', width / 2)
     .attr('y', height + margin.bottom - 8)
     .attr('text-anchor', 'middle')
-    .style('fill', '#999')
-    .style('font-size', '12px')
+    .style('font-size', '1rem')
     .text('Number of Events')
 }
 </script>
@@ -163,16 +159,3 @@ function createChart() {
     <div ref="chartRef" class="chart"></div>
   </div>
 </template>
-
-<style scoped>
-.chart-wrapper {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-}
-
-.chart {
-  width: 100%;
-  max-width: 700px; /* Narrow width for compact visualization */
-}
-</style>

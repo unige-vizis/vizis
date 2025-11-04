@@ -6,14 +6,14 @@
       <div>
         <p>
           This analysis examines how the composition of a country's economic sectors relates to its conflict patterns.
-          Using ACLED event data and economic sector classifications (primary, secondary, tertiary sectors), we compare
-          the frequency, severity, and type of conflicts in countries with different industrial structures. Our
-          visualizations show whether resource-dependent economies exhibit different conflict patterns than diversified
-          industrial or service economies, thereby contributing to a broader discussion on the relationship between
-          economic structure and violence.
+          Every country has a unique economic structure, often dominated by certain economic areas such as agriculture,
+          manufacturing, or services. The distribution of these sectors can influence social stability, resource
+          allocation, and vulnerabilities. For our analysis, we use the four-sector-model, which devides economies in
+          four main sectors: primary sector, secondary sector, tertiary sector, and tourism sector.
         </p>
-        <p>
-          <!-- TODO: dominance of ecnomic sectors -->
+        <p class="main-message">
+          Our goal is to show, whether resource-dependent economies exhibit different conflict pattern compared to
+          industrial or service economies.
         </p>
       </div>
       <div>
