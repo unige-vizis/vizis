@@ -27,13 +27,15 @@ import WaffleChartSectors from './visualizations/WaffleChartSectors.vue'
     <div class="section__inner">
       <h3>Economic Sector Composition of Highlighted Conflict Countries</h3>
       <StackedBarChart />
-      <p>
-        <!-- TODO -->
-        <strong>Note:</strong> Conflict data from ACLED (2015-2024). Economic sectors from World Bank GDP data: Primary
-        = Agriculture + Mining; Secondary = Manufacturing + Construction; Tertiary = Services. Tourism data from UN
-        Tourism (2008-2023, 125 countries) is sometimes incomplete and a different source than sector data, where it is
-        not explicitly included. We included it, but this might introduce slight imprecisions.
-      </p>
+      <p><strong>Note:</strong> Economic sector percentages are calculated from World Bank GDP data</p>
+      <ul>
+        <li>Primary sector: Agriculture, Hunting, Forestry, Fishing, Mining, Utilities (ISIC A-C+E)</li>
+        <li>Secondary sector: Manufacturing, Construction (ISIC D+F)</li>
+        <li>Tertiary sector: Wholesale, Gastronomy, Transport, Communication, Other (ISIC G-P)</li>
+        <li>Tourism data from UN Tourism - sometimes incomplete and from a different source than sector data.
+        Its inclusion into the third sector might introduce slight imprecisions</li>
+      </ul>
+
       <p>
         Let's first take a look at how the four sectors are represented in each of the seven countries. Almost every
         country dominates in the tertiary sector. Only <strong>Afghanistan and Somalia</strong> have a majority in the
