@@ -14,8 +14,8 @@ import WaffleChartSectors from './visualizations/WaffleChartSectors.vue'
       <BarChart />
       <div class="section__inner">
         <p>
-          This chart shows where the most conflict events were recorded over the last 10 years. In addition we provide a
-          normalized version, which shows the number of events per 100000 inhabitants, to account for population size
+          This chart shows where the most conflict events were recorded over the last 10 years. In addition, we provide
+          a normalized version that shows the number of events per 100000 inhabitants, to account for population size
           differences. In the following section we will focus on the seven highlighted countries. These seven countries
           vary a lot in their conflict patterns and will be representative examples to guide further analysis and
           discussion.
@@ -32,10 +32,11 @@ import WaffleChartSectors from './visualizations/WaffleChartSectors.vue'
         <li>Primary sector: Agriculture, Hunting, Forestry, Fishing, Mining, Utilities (ISIC A-C+E)</li>
         <li>Secondary sector: Manufacturing, Construction (ISIC D+F)</li>
         <li>Tertiary sector: Wholesale, Gastronomy, Transport, Communication, Other (ISIC G-P)</li>
-        <li>Tourism data from UN Tourism - sometimes incomplete and from a different source than sector data.
-        Its inclusion into the third sector might introduce slight imprecisions</li>
+        <li>
+          Tourism data from UN Tourism - sometimes incomplete and from a different source than sector data. Its
+          inclusion into the third sector might introduce slight imprecisions
+        </li>
       </ul>
-
       <p>
         Let's first take a look at how the four sectors are represented in each of the seven countries. Almost every
         country dominates in the tertiary sector. Only <strong>Afghanistan and Somalia</strong> have a majority in the
@@ -84,36 +85,36 @@ import WaffleChartSectors from './visualizations/WaffleChartSectors.vue'
             <td><strong>Somalia</strong></td>
             <td>Subsistence economy (61% Primary)</td>
             <td>Failed state dynamics (Battles & Violence against civilians)</td>
-            <td>~51,000</td>
+            <td>~51000</td>
           </tr>
           <tr>
             <td><strong>Afghanistan</strong></td>
             <td>Traditional rural economy (42% Primary)</td>
             <td>Insurgency warfare (61% Battles)</td>
-            <td>202,145</td>
+            <td>202145</td>
           </tr>
           <tr>
             <td><strong>India</strong></td>
             <td>Developing industry (22% Primary, 23% Secondary, 55% Tertiary)</td>
             <td>Democratic mobilization (76% Protests & Riots)</td>
-            <td>12,189</td>
+            <td>12189</td>
           </tr>
           <tr>
             <td><strong>Ukraine</strong></td>
             <td>Modern service economy (70% Tertiary, 19% Primary)</td>
             <td>Modern interstate warfare (64% Explosions/Remote violence)</td>
-            <td>137,716</td>
+            <td>137716</td>
           </tr>
           <tr>
             <td><strong>Mexico</strong></td>
             <td>Middle-income service economy with tourism (61% Tertiary, 8.5% tourism)</td>
             <td>Cartel violence (40% Violence against civilians, Protests)</td>
-            <td>57,520</td>
+            <td>57520</td>
           </tr>
           <tr>
             <td><strong>United States</strong></td>
             <td>Advanced post-industrial (81% Tertiary, 4% Primary)</td>
-            <td>slightly violent civil unrest (Protests & Riots)</td>
+            <td>Slightly violent civil unrest (Protests & Riots)</td>
             <td>440</td>
           </tr>
           <tr>
@@ -126,11 +127,11 @@ import WaffleChartSectors from './visualizations/WaffleChartSectors.vue'
       </table>
 
       <p>
-        <strong>Key Finding:</strong> It is specific conditions, that drive each country's conflict character for the
-        most part. Modern warfare in Ukraine, cartel violence in Mexico. Nevertheless a broader trend emerges: countries
-        with less developed, resource-focused economies (Afghanistan, Somalia) experience more violent conflict, while
-        highly developed tertiary-sector economies tend toward peaceful protesting. Italy exemplifies this with 24,524
-        conflict events but only 2 recorded fatalities over 10 years.
+        <strong>Key Finding:</strong> Specific conditions largely determine each country's conflict character. For
+        example, modern warfare in Ukraine, cartel violence in Mexico illustrate different drivers. Nevertheless a
+        broader trend emerges: countries with less developed, resource-focused economies (Afghanistan, Somalia)
+        experience more violent conflict, while highly developed tertiary-sector economies tend toward peaceful
+        protesting. Italy exemplifies this with 24524 conflict events but only 2 recorded fatalities over 10 years.
       </p>
     </div>
 
@@ -142,13 +143,13 @@ import WaffleChartSectors from './visualizations/WaffleChartSectors.vue'
         <Heatmap :show="'fatalities'" :y_labels="true" />
       </div>
       <p>
-        No lets have a look into the details. This two heatmap show the distribution of event types over time in terms
-        of event counts and fatalities. The top heatmap illustrates the frequency of different conflict event types from
-        2015 to 2024, while the bottom heatmap displays the corresponding fatalities associated with each event type.
-        Notably, we observe a significant increase in both the number of events and fatalities over the years, with a
-        tip in 2022, likely attributable to the escalation of the conflict in Ukraine. The data reveals that
-        "Explosions/Remote violence" and "Battles" are the most frequent event types, with "Explosions/Remote violence"
-        also accounting for the highest fatalities.
+        Now let's have a look into the details. These two heatmap show the distribution of event types over time in
+        terms of event counts and fatalities. The top heatmap illustrates the frequency of different conflict event
+        types from 2015 to 2024, while the bottom heatmap displays the corresponding fatalities associated with each
+        event type. Notably, we observe a significant increase in both the number of events and fatalities over the
+        years, with a tip in 2022, likely attributable to the escalation of the conflict in Ukraine. The data reveals
+        that "Explosions/Remote violence" and "Battles" are the most frequent event types, with "Explosions/Remote
+        violence" also accounting for the highest fatalities.
       </p>
       <p>
         With this chart we zoom out a bit to look at the bigger picture. By focusing more on the types of conflicts in
@@ -164,8 +165,8 @@ import WaffleChartSectors from './visualizations/WaffleChartSectors.vue'
       <h3>Averaged Economic Context by Event Type</h3>
       <WaffleChartSectors />
       <p>
-        This small multiple waffle plot depicts the average economic context each event type occurs in. Once more we
-        identify the noticeable trend of more violent conflict in lower developed economies irrespective of specific
+        This small multiple waffle plot depicts the average economic context each event type occurs in. Once again we
+        identify the noticeable trend of more violent conflict in less-developed economies, regardless of specific
         countries.
       </p>
     </div>
@@ -193,7 +194,7 @@ import WaffleChartSectors from './visualizations/WaffleChartSectors.vue'
         vulnerability, and the evolving character of global conflict. Religion, in this context, is not an isolated
         cause of violence but one of the many human frameworks through which economic and political realities are
         experienced and contested. Recognizing this interplay allows for a more integrated understanding of geopolitical
-        conflict, that connects data, structure, and the lived experience of suffering.
+        conflict that connects data, structure, and the lived experience of suffering.
       </p>
     </div>
   </section>
