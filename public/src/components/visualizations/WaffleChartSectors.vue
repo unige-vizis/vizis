@@ -59,7 +59,7 @@ function createChart() {
     .style('color', '#fff')
     .style('padding', '8px 12px')
     .style('border-radius', '4px')
-    .style('font-size', '12px')
+    .style('font-size', '1rem')
     .style('pointer-events', 'none')
     .style('opacity', 0)
     .style('z-index', 1000)
@@ -81,8 +81,7 @@ function createChart() {
       .attr('x', chartWidth / 2)
       .attr('y', -35)
       .attr('text-anchor', 'middle')
-      .style('fill', '#c7c7c7')
-      .style('font-size', '12px')
+      .style('font-size', '0.7rem')
       .style('font-weight', 'bold')
       .text(eventType.event_type)
 
@@ -92,7 +91,7 @@ function createChart() {
       .attr('y', -18)
       .attr('text-anchor', 'middle')
       .style('fill', sectorColors['Primary'])
-      .style('font-size', '14px')
+      .style('font-size', '1rem')
       .style('font-weight', 'bold')
       .text(`${primaryPct.toFixed(1)}% Primary`)
 
@@ -192,8 +191,7 @@ function createChart() {
       .attr('x', 22)
       .attr('y', 12)
       .text(sector)
-      .style('fill', '#c7c7c7')
-      .style('font-size', '12px')
+      .style('font-size', '1rem')
   })
 
   // Add note about data
@@ -201,8 +199,7 @@ function createChart() {
     .attr('x', totalWidth / 2)
     .attr('y', totalHeight - 10)
     .attr('text-anchor', 'middle')
-    .style('fill', '#999')
-    .style('font-size', '10px')
+    .style('font-size', '1rem')
     .text('Sorted by Primary sector percentage • Each square = 1% • Weighted by event frequency')
 }
 </script>
@@ -212,25 +209,3 @@ function createChart() {
     <div ref="chartRef" class="chart"></div>
   </div>
 </template>
-
-<style scoped>
-.chart-wrapper {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 2rem 0;
-}
-
-.chart {
-  width: 100%;
-  position: relative;
-}
-
-.chart svg {
-  display: block;
-  margin: 0 auto;
-  width: 100%;
-  height: auto;
-}
-</style>

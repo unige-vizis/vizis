@@ -58,7 +58,7 @@ function createChart() {
     .style('color', '#fff')
     .style('padding', '8px 12px')
     .style('border-radius', '4px')
-    .style('font-size', '12px')
+    .style('font-size', '1rem')
     .style('pointer-events', 'none')
     .style('opacity', 0)
 
@@ -127,8 +127,7 @@ function createChart() {
     .attr('x', 28)
     .attr('y', 15)
     .text(d => `${d.label} (${d.percentage}%)`)
-    .style('fill', '#c7c7c7')
-    .style('font-size', '12px')
+    .style('font-size', '1rem')
 
   // Add explanatory text
   svg.append('text')
@@ -136,7 +135,7 @@ function createChart() {
     .attr('y', height + 60)
     .attr('text-anchor', 'middle')
     .style('fill', '#999')
-    .style('font-size', '11px')
+    .style('font-size', '1rem')
     .text('Each square represents 1% of all conflict events globally')
 }
 </script>
@@ -144,35 +143,8 @@ function createChart() {
 <template>
   <div class="chart-wrapper">
     <div ref="chartRef" class="chart"></div>
-    <p class="data-note">Note: This visualization uses placeholder data. Real data from ACLED will be integrated in the next iteration.</p>
+    <p class="data-note">
+      Note: This visualization uses placeholder data. Real data from ACLED will be integrated in the next iteration.
+    </p>
   </div>
 </template>
-
-<style scoped>
-.chart-wrapper {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.chart {
-  width: 100%;
-  max-width: 350px;
-  overflow-x: auto;
-  position: relative;
-}
-
-.chart svg {
-  display: block;
-  margin: 0 auto;
-}
-
-.data-note {
-  margin-top: 1rem;
-  font-size: 0.85rem;
-  color: #888;
-  font-style: italic;
-  text-align: center;
-}
-</style>
