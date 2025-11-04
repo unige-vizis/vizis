@@ -15,7 +15,7 @@ onMounted(() => {
 function createChart() {
   if (!data.value) return
 
-  const margin = { top: 60, right: 20, bottom: 80, left: 20 }
+  const margin = { top: 70, right: 20, bottom: 90, left: 20 }
   const squareSize = 10
   const squareGap = 2
   const columns = 10
@@ -37,12 +37,20 @@ function createChart() {
   // Clear any existing chart
   d3.select(chartRef.value).selectAll('*').remove()
 
-  const svg = d3.select(chartRef.value)
-    .append('svg')
+  const contDiv = d3.select(chartRef.value)
+    .append('div')
     .attr('width', totalWidth)
     .attr('height', totalHeight)
     .attr('viewBox', `0 0 ${totalWidth} ${totalHeight}`)
     .attr('preserveAspectRatio', 'xMidYMid meet')
+    .style('margin-bottom', '2rem')
+
+    const chartDiv = contDiv.append('div')
+    .attr('width', totalWidth)
+    .attr('height', totalHeight)
+    .style('display', "flex")
+    .style('flex-wrap', "wrap")
+    .style('justify-content', "center")
 
   // Color scale for sectors - matching viz2 colors
   const sectorColors = {
@@ -66,8 +74,13 @@ function createChart() {
 
   // Create a waffle chart for each event type (all in one row)
   eventTypes.forEach((eventType, index) => {
-    const xOffset = margin.left + index * (chartWidth + gapBetweenCharts)
+    const xOffset = 0
     const yOffset = margin.top
+
+    const svg = chartDiv.append('svg')
+      .attr('height', chartHeight + margin.bottom)
+      .style('flex', "0")
+      .style('min-width', "120px")
 
     const chartGroup = svg.append('g')
       .attr('transform', `translate(${xOffset}, ${yOffset})`)
@@ -77,13 +90,45 @@ function createChart() {
     const primaryPct = primarySector ? primarySector.percentage : 0
 
     // Add title for this waffle chart
-    chartGroup.append('text')
+    const titleText = chartGroup.append('text')
       .attr('x', chartWidth / 2)
-      .attr('y', -35)
+      .attr('y', -55)
       .attr('text-anchor', 'middle')
-      .style('font-size', '0.7rem')
-      .style('font-weight', 'bold')
-      .text(eventType.event_type)
+      .style('font-size', '0.8rem')
+      .style('font-weight', '700')
+
+    const text = eventType.event_type;
+
+    // Measure text width (approximate)
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    ctx.font = 'bold 0.8rem sans-serif';
+    const textWidth = ctx.measureText(text).width;
+
+    if (textWidth > (chartWidth / 2)) {
+      // Split text into words
+      const words = text.split(' ');
+      const mid = Math.ceil(words.length / 2);
+
+      // First line
+      titleText.append('tspan')
+        .attr('x', chartWidth / 2)
+        .attr('dy', 0)
+        .text(words.slice(0, mid).join(' '))
+        .style('font-size', '0.8rem')
+        .style('font-weight', '700');
+
+      // Second line
+      titleText.append('tspan')
+        .attr('x', chartWidth / 2)
+        .attr('dy', '1em')
+        .text(words.slice(mid).join(' '))
+        .style('font-size', '0.8rem')
+        .style('font-weight', '700');
+    } else {
+      // Single line
+      titleText.text(text);
+    }
 
     // Add primary sector percentage below title
     chartGroup.append('text')
@@ -169,11 +214,19 @@ function createChart() {
 
   // Add global legend at the bottom
   const legendY = totalHeight - 50
-  const legend = svg.append('g')
-    .attr('transform', `translate(${totalWidth / 2 - 225}, ${legendY})`)
+  const legendItemWidth = 120
+  const contLegend = contDiv.append('div')
+  .style('margin-top', "0")
+  .style('display', "flex")
+  .style('justify-content', "center")
+
+  const legend = contLegend.append('svg')
+    .attr('transform', `translate(0, 0)`)
+    .style('margin', `0`)
+    .attr('width', `${legendItemWidth * 3}`)
+    .style('height', "2rem")
 
   const sectors = ['Primary', 'Secondary', 'Tertiary']
-  const legendItemWidth = 150
 
   sectors.forEach((sector, i) => {
     const legendItem = legend.append('g')
@@ -195,11 +248,13 @@ function createChart() {
   })
 
   // Add note about data
-  svg.append('text')
+  contDiv.append('div')
     .attr('x', totalWidth / 2)
     .attr('y', totalHeight - 10)
     .attr('text-anchor', 'middle')
     .style('font-size', '1rem')
+    .style('margin','0 auto')
+    .style('width','fit-content')
     .text('Sorted by Primary sector percentage • Each square = 1% • Weighted by event frequency')
 }
 </script>

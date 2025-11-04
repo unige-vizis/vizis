@@ -169,18 +169,29 @@ import WaffleChartSectors from './visualizations/WaffleChartSectors.vue'
     </div>
 
     <div class="section__inner">
+      <h3>Economic Patterns by Event Type</h3>
       <p>
-        [Analysis text about economic patterns by event type will go here. Notable findings from left to right: Battles
-        show the highest Primary sector (29.04%), indicating they occur more in countries dependent on agriculture and
-        natural resources. Protests show the lowest Primary sector (16.21%) and highest Tertiary sector (63.06%),
-        suggesting they occur more in service-based economies. This gradient from primary-heavy to tertiary-heavy
-        economies reveals how economic structure correlates with conflict types.]
+        The data shows a clear gradient connecting economic structure and conflict form. Battles occur mostly in
+        primary-sector economies (29.0%), where dependence on agriculture and extraction correlates with higher levels
+        of organized violence. Explosions and violence against civilians follow similar patterns. In contrast, protests
+        are concentrated in tertiary-sector economies (63.1%), where political disputes tend to manifest through
+        collective action rather than warfare. As economies shift from resource-based to service-oriented, conflict
+        expression transitions from violent confrontation to civic mobilization.
       </p>
 
       <h3>Conclusion</h3>
       <p>
-        [Concluding remarks synthesizing the findings from all visualizations and their implications for understanding
-        religion's role in geopolitical conflicts and human suffering.]
+        The combined data from ACLED and World Bank sources reveal a clear structural connection between economic
+        composition and conflict dynamics. Countries with large primary sectors experience more frequent and deadly
+        events, while service-based economies show higher rates of protest but significantly fewer fatalities. This
+        gradient, consistent across all visualizations, demonstrates how development level and sector diversification
+        influence not only the prevalence but also the form of violence. As economies move from resource dependence
+        toward industrial and service diversification, conflict tends to shift from armed confrontation to civic
+        mobilization. Visualizing these patterns makes visible how economic structures shape collective stability,
+        vulnerability, and the evolving character of global conflict. Religion, in this context, is not an isolated
+        cause of violence but one of the many human frameworks through which economic and political realities are
+        experienced and contested. Recognizing this interplay allows for a more integrated understanding of geopolitical
+        conflict, that connects data, structure, and the lived experience of suffering.
       </p>
     </div>
   </section>

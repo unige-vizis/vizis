@@ -13,7 +13,6 @@ const props = defineProps({
 const chartRef = ref(null)
 const containerWidth = ref(0)
 const containerHeight = ref(0)
-const normalizeByPopulation = ref(false)
 
 // Load the data from viz4_heatmap_event_types_years.json
 import jsonData from '@/assets/data/viz4_heatmap_event_types_years.json'
@@ -53,7 +52,7 @@ function createChart() {
 
   const margin = { top: 20, right: 120, bottom: 60, left: 220 }
   const width = containerWidth.value - margin.left - margin.right
-  const height = 300 || containerHeight.value - margin.top - margin.bottom
+  const height = 300
 
   // Clear any existing chart
   d3.select(chartRef.value).selectAll('*').remove()
@@ -68,8 +67,9 @@ function createChart() {
   // Create scales
   const x = d3.scaleBand()
     .domain(years)
-    .range([0, width])
-    .padding(0.05)
+    .rangeRound([0, width])
+    .paddingInner(0.02)
+    .paddingOuter(0)
 
   const y = d3.scaleBand()
     .domain(eventTypes)
@@ -155,7 +155,7 @@ function createChart() {
     .attr('text-anchor', 'middle')
     .attr('dominant-baseline', 'middle')
     .attr('fill', d => getTextColor(d[metricKey], maxMetric))
-    .style('font-size', '1rem')
+    .style('font-size', '0.8rem')
     .style('font-weight', '600')
     .style('pointer-events', 'none')
     .text(d => (d[metricKey] >= 1000 ? (d[metricKey] / 1000).toFixed(1) + 'K' : d[metricKey]))
