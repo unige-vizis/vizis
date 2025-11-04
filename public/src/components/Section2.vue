@@ -11,12 +11,16 @@ import WaffleChartSectors from './visualizations/WaffleChartSectors.vue'
     <!-- Bar Chart -->
     <div class="section__inner">
       <h3>Countries with the most recorded conflict events</h3>
-    </div>
-    <BarChart />
-    <div class="section__inner">
-      <p>
-       This chart shows where the most conflict events were recorded over the last 10 years. In itself it is not very insightful, hiding a lot of the specifics of these conflicts and even factors like population size, which is why we offer a normalized version of this plot as well. 7 countries are highlighted in yellow, because they vary a lot in their conflict patterns and will be representative examples to guide further analysis and discussion.
-      </p>
+      <BarChart />
+      <div class="section__inner">
+        <p>
+          This chart shows where the most conflict events were recorded over the last 10 years. In addition we provide a
+          normalized version, which shows the number of events per 100000 inhabitants, to account for population size
+          differences. In the following section we will focus on the seven highlighted countries. These seven countries
+          vary a lot in their conflict patterns and will be representative examples to guide further analysis and
+          discussion.
+        </p>
+      </div>
     </div>
 
     <!-- 100% Stacked Bar Chart -->
@@ -33,116 +37,163 @@ import WaffleChartSectors from './visualizations/WaffleChartSectors.vue'
       </ul>
 
       <p>
-       Our focus is how a country's economic situation influences or at the very least correlates with the types of and frequency of conflict events. This plot shows the previously highlighted countries of interest and their strongly differing economic compositions.
+        Let's first take a look at how the four sectors are represented in each of the seven countries. Almost every
+        country dominates in the tertiary sector. Only <strong>Afghanistan and Somalia</strong> have a majority in the
+        primary sector, which indicates a more subsistence-based economy. <strong>India</strong> has a more balanced
+        distribution, with a significant secondary sector share, indicating a developing industrial economy. Tourism
+        plays a notable role in <strong>Mexico and Italy</strong>, which could influence their economic stability and
+        conflict dynamics. The <strong>States and Ukraine</strong> have highly developed service economies, which shows
+        their advanced economic status.
       </p>
-
     </div>
 
     <!-- Grouped Bar Chart -->
     <div class="section__inner">
       <h3>What Conflict Events occur in our Countries of Interest?</h3>
-      <p>Comparison of event types for the same 7 highlighted countries from the charts above. Protests and riots are grouped together, with Strategic developments being left out for clearer analysis.</p>
+      <GroupedBarChart />
+      <p>
+        This chart provides insight into the types of conflict events that predominate in each of our seven highlighted
+        countries. Protests and riots are grouped together, while strategic developments are excluded because of limited
+        data. As you can see, different countries exhibit distinct conflict profiles. For instance,
+        <strong>Afghanistan and Somalia</strong> show a high prevalence of battles and explosions/remote violence,
+        indicating ongoing armed conflicts and instability. In contrast,
+        <strong>India and the United States</strong> have a significant number of protests and riots, reflecting social
+        and political unrest. <strong>Ukraine</strong> is characterized by a high number of explosions/ remote violence,
+        likely due to the ongoing conflict in the region. <strong>Mexico</strong> displays a mix of violence against
+        civilians and protests, highlighting issues related to organized crime and social movements.
+      </p>
     </div>
-    <GroupedBarChart />
 
     <div class="section__inner">
       <p>
-        Connecting this with our findings from the previous chart we obtain a better idea about our countries' true conflict character and start to make note of some trends.
+        Connecting this with our findings from the previous chart we obtain a better idea about our countries' true
+        conflict character and start to make note of some trends.
       </p>
 
       <table style="width: 100%; border-collapse: collapse; margin: 1rem 0;">
         <thead>
-          <tr style="border-bottom: 2px solid #ccc;">
-            <th style="text-align: left; padding: 0.5rem;">Country</th>
-            <th style="text-align: left; padding: 0.5rem;">Economy</th>
-            <th style="text-align: left; padding: 0.5rem;">Conflict Type</th>
-            <th style="text-align: right; padding: 0.5rem;">Fatalities</th>
+          <tr>
+            <th>Country</th>
+            <th>Economy</th>
+            <th>Conflict Type</th>
+            <th>Fatalities</th>
           </tr>
         </thead>
         <tbody>
-          <tr style="border-bottom: 1px solid #eee;">
-            <td style="padding: 0.5rem;"><strong>Somalia</strong></td>
-            <td style="padding: 0.5rem;">Subsistence economy (61% Primary)</td>
-            <td style="padding: 0.5rem;">Failed state dynamics (Battles & Violence against civilians)</td>
-            <td style="text-align: right; padding: 0.5rem;">~51,000</td>
-          </tr>
-          <tr style="border-bottom: 1px solid #eee;">
-            <td style="padding: 0.5rem;"><strong>Afghanistan</strong></td>
-            <td style="padding: 0.5rem;">Traditional rural economy (42% Primary)</td>
-            <td style="padding: 0.5rem;">Insurgency warfare (61% Battles)</td>
-            <td style="text-align: right; padding: 0.5rem;">202,145</td>
-          </tr>
-          <tr style="border-bottom: 1px solid #eee;">
-            <td style="padding: 0.5rem;"><strong>India</strong></td>
-            <td style="padding: 0.5rem;">Developing industry (22% Primary, 23% Secondary, 55% Tertiary)</td>
-            <td style="padding: 0.5rem;">Democratic mobilization (76% Protests & Riots)</td>
-            <td style="text-align: right; padding: 0.5rem;">12,189</td>
-          </tr>
-          <tr style="border-bottom: 1px solid #eee;">
-            <td style="padding: 0.5rem;"><strong>Ukraine</strong></td>
-            <td style="padding: 0.5rem;">Modern service economy (70% Tertiary, 19% Primary)</td>
-            <td style="padding: 0.5rem;">Modern interstate warfare (64% Explosions/Remote violence)</td>
-            <td style="text-align: right; padding: 0.5rem;">137,716</td>
-          </tr>
-          <tr style="border-bottom: 1px solid #eee;">
-            <td style="padding: 0.5rem;"><strong>Mexico</strong></td>
-            <td style="padding: 0.5rem;">Middle-income service economy with tourism (61% Tertiary, 8.5% tourism)</td>
-            <td style="padding: 0.5rem;">Cartel violence (40% Violence against civilians, Protests)</td>
-            <td style="text-align: right; padding: 0.5rem;">57,520</td>
-          </tr>
-          <tr style="border-bottom: 1px solid #eee;">
-            <td style="padding: 0.5rem;"><strong>United States</strong></td>
-            <td style="padding: 0.5rem;">Advanced post-industrial (81% Tertiary, 4% Primary)</td>
-            <td style="padding: 0.5rem;">slightly violent civil unrest (Protests & Riots)</td>
-            <td style="text-align: right; padding: 0.5rem;">440</td>
+          <tr>
+            <td><strong>Somalia</strong></td>
+            <td>Subsistence economy (61% Primary)</td>
+            <td>Failed state dynamics (Battles & Violence against civilians)</td>
+            <td>~51,000</td>
           </tr>
           <tr>
-            <td style="padding: 0.5rem;"><strong>Italy</strong></td>
-            <td style="padding: 0.5rem;">Advanced industrial economy with tourism (72% Tertiary, 5.7% tourism)</td>
-            <td style="padding: 0.5rem;">Mostly peaceful protests.</td>
-            <td style="text-align: right; padding: 0.5rem;">2</td>
+            <td><strong>Afghanistan</strong></td>
+            <td>Traditional rural economy (42% Primary)</td>
+            <td>Insurgency warfare (61% Battles)</td>
+            <td>202,145</td>
+          </tr>
+          <tr>
+            <td><strong>India</strong></td>
+            <td>Developing industry (22% Primary, 23% Secondary, 55% Tertiary)</td>
+            <td>Democratic mobilization (76% Protests & Riots)</td>
+            <td>12,189</td>
+          </tr>
+          <tr>
+            <td><strong>Ukraine</strong></td>
+            <td>Modern service economy (70% Tertiary, 19% Primary)</td>
+            <td>Modern interstate warfare (64% Explosions/Remote violence)</td>
+            <td>137,716</td>
+          </tr>
+          <tr>
+            <td><strong>Mexico</strong></td>
+            <td>Middle-income service economy with tourism (61% Tertiary, 8.5% tourism)</td>
+            <td>Cartel violence (40% Violence against civilians, Protests)</td>
+            <td>57,520</td>
+          </tr>
+          <tr>
+            <td><strong>United States</strong></td>
+            <td>Advanced post-industrial (81% Tertiary, 4% Primary)</td>
+            <td>slightly violent civil unrest (Protests & Riots)</td>
+            <td>440</td>
+          </tr>
+          <tr>
+            <td><strong>Italy</strong></td>
+            <td>Advanced industrial economy with tourism (72% Tertiary, 5.7% tourism)</td>
+            <td>Mostly peaceful protests.</td>
+            <td>2</td>
           </tr>
         </tbody>
       </table>
 
       <p>
-        <strong>Key Finding:</strong> It is specific conditions, that drive each country's conflict character for the most part. Modern warfare in Ukraine, cartel violence in Mexico. Nevertheless a broader trend emerges: countries with less developed, resource-focused economies (Afghanistan, Somalia) experience more violent conflict, while highly developed tertiary-sector economies tend toward peaceful protesting. Italy exemplifies this with 24,524 conflict events but only 2 recorded fatalities over 10 years.
+        <strong>Key Finding:</strong> It is specific conditions, that drive each country's conflict character for the
+        most part. Modern warfare in Ukraine, cartel violence in Mexico. Nevertheless a broader trend emerges: countries
+        with less developed, resource-focused economies (Afghanistan, Somalia) experience more violent conflict, while
+        highly developed tertiary-sector economies tend toward peaceful protesting. Italy exemplifies this with 24,524
+        conflict events but only 2 recorded fatalities over 10 years.
       </p>
     </div>
 
     <!-- Heatmap -->
     <div class="section__inner">
       <h3>Temporal Distribution of Event Types (2015-2024)</h3>
+      <div class="">
+        <Heatmap :show="'events'" :y_labels="true" />
+        <Heatmap :show="'fatalities'" :y_labels="true" />
+      </div>
       <p>
-        Dual-metric visualization showing both event frequency (purple, top) and fatalities (red, bottom) for each conflict type and year. The horizontal split reveals whether high event counts correlate with high death tolls or if certain event types are deadlier than others.
+        No lets have a look into the details. This two heatmap show the distribution of event types over time in terms
+        of event counts and fatalities. The top heatmap illustrates the frequency of different conflict event types from
+        2015 to 2024, while the bottom heatmap displays the corresponding fatalities associated with each event type.
+        Notably, we observe a significant increase in both the number of events and fatalities over the years, with a
+        tip in 2022, likely attributable to the escalation of the conflict in Ukraine. The data reveals that
+        "Explosions/Remote violence" and "Battles" are the most frequent event types, with "Explosions/Remote violence"
+        also accounting for the highest fatalities.
       </p>
-    </div>
-    <Heatmap />
-
-    <div class="section__inner">
       <p>
-        We zoom out now a bit and focus more on the types of conflicts in general, not relating them to specific countries anymore. This plot confirms a concern that many people share, in that conflicts, of all kinds and especially violent ones are becoming more frequent and more deadly. Especially notable is the increase in Battle Fatalities, Violence against civilians and also the drastic increase in Protests.
+        With this chart we zoom out a bit to look at the bigger picture. By focusing more on the types of conflicts in
+        general and not relating them to specific countries we can illustrate a concern, that many people share:
+        conflicts, of all kinds and especially violent ones, are becoming more frequent and more deadly. Especially
+        notable is the increase in battle fatalities, violence against civilians and also the drastic increase in
+        protests.
       </p>
     </div>
 
     <!-- Waffle Chart: Economic Sectors by Event Type -->
     <div class="section__inner">
       <h3>Averaged Economic Context by Event Type</h3>
+      <WaffleChartSectors />
       <p>
-         This small multiple waffle plot depicts the average economic context each event type occurs in. Once more we identify the noticeable trend of more violent conflict in lower developed economies irrespective of specific countries.
+        This small multiple waffle plot depicts the average economic context each event type occurs in. Once more we
+        identify the noticeable trend of more violent conflict in lower developed economies irrespective of specific
+        countries.
       </p>
     </div>
-    <WaffleChartSectors />
 
     <div class="section__inner">
+      <h3>Economic Patterns by Event Type</h3>
       <p>
-        [Analysis text about economic patterns by event type will go here. Notable findings from left to right: Battles show the highest Primary sector (29.04%), indicating they occur more in countries dependent on agriculture and natural resources. Protests show the lowest Primary sector (16.21%) and highest Tertiary sector (63.06%), suggesting they occur more in service-based economies. This gradient from primary-heavy to tertiary-heavy economies reveals how economic structure correlates with conflict types.]
+        The data shows a clear gradient connecting economic structure and conflict form. Battles occur mostly in
+        primary-sector economies (29.0%), where dependence on agriculture and extraction correlates with higher levels
+        of organized violence. Explosions and violence against civilians follow similar patterns. In contrast, protests
+        are concentrated in tertiary-sector economies (63.1%), where political disputes tend to manifest through
+        collective action rather than warfare. As economies shift from resource-based to service-oriented, conflict
+        expression transitions from violent confrontation to civic mobilization.
       </p>
 
       <h3>Conclusion</h3>
       <p>
-        [Concluding remarks synthesizing the findings from all visualizations and their implications for understanding
-        religion's role in geopolitical conflicts and human suffering.]
+        The combined data from ACLED and World Bank sources reveal a clear structural connection between economic
+        composition and conflict dynamics. Countries with large primary sectors experience more frequent and deadly
+        events, while service-based economies show higher rates of protest but significantly fewer fatalities. This
+        gradient, consistent across all visualizations, demonstrates how development level and sector diversification
+        influence not only the prevalence but also the form of violence. As economies move from resource dependence
+        toward industrial and service diversification, conflict tends to shift from armed confrontation to civic
+        mobilization. Visualizing these patterns makes visible how economic structures shape collective stability,
+        vulnerability, and the evolving character of global conflict. Religion, in this context, is not an isolated
+        cause of violence but one of the many human frameworks through which economic and political realities are
+        experienced and contested. Recognizing this interplay allows for a more integrated understanding of geopolitical
+        conflict, that connects data, structure, and the lived experience of suffering.
       </p>
     </div>
   </section>

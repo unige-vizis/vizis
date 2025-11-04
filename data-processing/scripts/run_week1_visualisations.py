@@ -102,7 +102,7 @@ metadata = {
     'description': 'Top 20 countries sorted by number of conflict events',
     'source': 'ACLED + World Bank',
     'date_range': '2015-2024',
-    'notes': 'Per capita rates calculated per 100,000 population'
+    'notes': 'Per capita rates calculated per 100000 population'
 }
 
 viz_datasets_path = Path('../viz-datasets')
