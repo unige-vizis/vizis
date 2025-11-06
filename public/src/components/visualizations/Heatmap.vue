@@ -164,6 +164,6 @@ function createChart() {
 
 <template>
   <div class="chart-wrapper">
-    <div ref="chartRef" class="chart"></div>
+    <div ref="chartRef" class="chart chart-min-width"></div>
   </div>
 </template>

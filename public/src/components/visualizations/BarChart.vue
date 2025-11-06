@@ -49,7 +49,7 @@ function createChart() {
 
   const margin = { top: 20, right: 80, bottom: 60, left: 130 }
   const width = containerWidth.value - margin.left - margin.right
-  const height = containerHeight.value - margin.top - margin.bottom
+  const height = 500
 
   // Clear any existing chart
   d3.select(chartRef.value).selectAll('*').remove()
@@ -143,7 +143,7 @@ function updateChart() {
 
   const margin = { top: 20, right: 80, bottom: 60, left: 100 }
   const width = containerWidth.value - margin.left - margin.right
-  const height = containerHeight.value - margin.top - margin.bottom
+  const height = 500
 
   // Select the existing SVG group
   const svg = d3.select(chartRef.value).select('svg g')
@@ -224,6 +224,6 @@ function updateChart() {
         <span class="toggle-text">Normalized by population</span>
       </label>
     </div>
-    <div ref="chartRef" class="chart"></div>
+    <div ref="chartRef" class="chart chart-min-width"></div>
   </div>
 </template>

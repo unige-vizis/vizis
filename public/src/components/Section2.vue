@@ -12,15 +12,13 @@ import WaffleChartSectors from './visualizations/WaffleChartSectors.vue'
     <div class="section__inner">
       <h3>Countries with the most recorded conflict events</h3>
       <BarChart />
-      <div class="section__inner">
-        <p>
-          This chart shows where the most conflict events were recorded over the last 10 years. In addition, we provide
-          a normalized version that shows the number of events per 100000 inhabitants, to account for population size
-          differences. In the following section we will focus on the seven highlighted countries. These seven countries
-          vary a lot in their conflict patterns and will be representative examples to guide further analysis and
-          discussion.
-        </p>
-      </div>
+      <p>
+        This chart shows where the most conflict events were recorded over the last 10 years. In addition, we provide a
+        normalized version that shows the number of events per 100000 inhabitants, to account for population size
+        differences. In the following section we will focus on the seven highlighted countries. These seven countries
+        vary a lot in their conflict patterns and will be representative examples to guide further analysis and
+        discussion.
+      </p>
     </div>
 
     <!-- 100% Stacked Bar Chart -->
@@ -71,60 +69,62 @@ import WaffleChartSectors from './visualizations/WaffleChartSectors.vue'
         conflict character and start to make note of some trends.
       </p>
 
-      <table style="width: 100%; border-collapse: collapse; margin: 1rem 0;">
-        <thead>
-          <tr>
-            <th>Country</th>
-            <th>Economy</th>
-            <th>Conflict Type</th>
-            <th>Fatalities</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><strong>Somalia</strong></td>
-            <td>Subsistence economy (61% Primary)</td>
-            <td>Failed state dynamics (Battles & Violence against civilians)</td>
-            <td>~51000</td>
-          </tr>
-          <tr>
-            <td><strong>Afghanistan</strong></td>
-            <td>Traditional rural economy (42% Primary)</td>
-            <td>Insurgency warfare (61% Battles)</td>
-            <td>202145</td>
-          </tr>
-          <tr>
-            <td><strong>India</strong></td>
-            <td>Developing industry (22% Primary, 23% Secondary, 55% Tertiary)</td>
-            <td>Democratic mobilization (76% Protests & Riots)</td>
-            <td>12189</td>
-          </tr>
-          <tr>
-            <td><strong>Ukraine</strong></td>
-            <td>Modern service economy (70% Tertiary, 19% Primary)</td>
-            <td>Modern interstate warfare (64% Explosions/Remote violence)</td>
-            <td>137716</td>
-          </tr>
-          <tr>
-            <td><strong>Mexico</strong></td>
-            <td>Middle-income service economy with tourism (61% Tertiary, 8.5% tourism)</td>
-            <td>Cartel violence (40% Violence against civilians, Protests)</td>
-            <td>57520</td>
-          </tr>
-          <tr>
-            <td><strong>United States</strong></td>
-            <td>Advanced post-industrial (81% Tertiary, 4% Primary)</td>
-            <td>Slightly violent civil unrest (Protests & Riots)</td>
-            <td>440</td>
-          </tr>
-          <tr>
-            <td><strong>Italy</strong></td>
-            <td>Advanced industrial economy with tourism (72% Tertiary, 5.7% tourism)</td>
-            <td>Mostly peaceful protests.</td>
-            <td>2</td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="table">
+        <table style="width: 100%; border-collapse: collapse; margin: 1rem 0;">
+          <thead>
+            <tr>
+              <th>Country</th>
+              <th>Economy</th>
+              <th>Conflict Type</th>
+              <th>Fatalities</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Afghanistan</strong></td>
+              <td>Traditional rural economy (42% Primary)</td>
+              <td>Insurgency warfare (61% Battles)</td>
+              <td>202145</td>
+            </tr>
+            <tr>
+              <td><strong>Ukraine</strong></td>
+              <td>Modern service economy (70% Tertiary, 19% Primary)</td>
+              <td>Modern interstate warfare (64% Explosions/Remote violence)</td>
+              <td>137716</td>
+            </tr>
+            <tr>
+              <td><strong>Mexico</strong></td>
+              <td>Middle-income service economy with tourism (61% Tertiary, 8.5% tourism)</td>
+              <td>Cartel violence (40% Violence against civilians, Protests)</td>
+              <td>57520</td>
+            </tr>
+            <tr>
+              <td><strong>Somalia</strong></td>
+              <td>Subsistence economy (61% Primary)</td>
+              <td>Failed state dynamics (Battles & Violence against civilians)</td>
+              <td>~51000</td>
+            </tr>
+            <tr>
+              <td><strong>India</strong></td>
+              <td>Developing industry (22% Primary, 23% Secondary, 55% Tertiary)</td>
+              <td>Democratic mobilization (76% Protests & Riots)</td>
+              <td>12189</td>
+            </tr>
+            <tr>
+              <td><strong>United States</strong></td>
+              <td>Advanced post-industrial (81% Tertiary, 4% Primary)</td>
+              <td>Slightly violent civil unrest (Protests & Riots)</td>
+              <td>440</td>
+            </tr>
+            <tr>
+              <td><strong>Italy</strong></td>
+              <td>Advanced industrial economy with tourism (72% Tertiary, 5.7% tourism)</td>
+              <td>Mostly peaceful protests.</td>
+              <td>2</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 
       <p>
         <strong>Key Finding:</strong> Specific conditions largely determine each country's conflict character. For
@@ -138,8 +138,11 @@ import WaffleChartSectors from './visualizations/WaffleChartSectors.vue'
     <!-- Heatmap -->
     <div class="section__inner">
       <h3>Temporal Distribution of Event Types (2015-2024)</h3>
+      <p class="subtitle">Cumulative data across the highlighted countries.</p>
       <div class="">
+        <h4>Event Frequency by Event Type and Year</h4>
         <Heatmap :show="'events'" :y_labels="true" />
+        <h4>Fatalities by Event Type and Year</h4>
         <Heatmap :show="'fatalities'" :y_labels="true" />
       </div>
       <p>
