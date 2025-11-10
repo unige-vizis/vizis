@@ -20,7 +20,7 @@ Events: ${M}`}),m.selectAll(".label").data(o).transition().duration(600).ease(hi
           <strong>${X}</strong><br/>
           <strong>${K.count} countries:</strong><br/>
           ${P.join(", ")}
-        `).style("visibility","visible")}).on("mousemove",function(j){M.style("top",j.pageY-10+"px").style("left",j.pageX+10+"px")}).on("mouseout",function(){Y(this).attr("opacity",.8),M.style("visibility","hidden")}),h.append("text").attr("x",f/2-G(K.count)-5).attr("y",k(X)+k.bandwidth()/2).attr("dy","0.35em").attr("text-anchor","end").attr("class","axis-text").text(K.count)}),m.forEach(K=>{const X=K.GDP_bracket;h.append("rect").attr("x",f/2).attr("y",k(X)).attr("width",G(K.count)).attr("height",k.bandwidth()).attr("fill","#9370DB").attr("opacity",.8).style("cursor","pointer").on("mouseover",function(j){Y(this).attr("opacity",1);const P=K.countries||[];M.html(`
+        `).style("visibility","visible")}).on("mousemove",function(j){M.style("top",j.pageY-10+"px").style("left",j.pageX+10+"px")}).on("mouseout",function(){Y(this).attr("opacity",.8),M.style("visibility","hidden")}),h.append("text").attr("x",f/2-G(K.count)-5).attr("y",k(X)+k.bandwidth()/2).attr("dy","0.35em").attr("text-anchor","end").attr("class","axis-text").text(K.count).style("font-size","1rem")}),m.forEach(K=>{const X=K.GDP_bracket;h.append("rect").attr("x",f/2).attr("y",k(X)).attr("width",G(K.count)).attr("height",k.bandwidth()).attr("fill","#9370DB").attr("opacity",.8).style("cursor","pointer").on("mouseover",function(j){Y(this).attr("opacity",1);const P=K.countries||[];M.html(`
           <strong>${X}</strong><br/>
           <strong>${K.count} countries:</strong><br/>
           ${P.join(", ")}
