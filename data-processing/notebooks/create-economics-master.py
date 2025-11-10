@@ -93,13 +93,13 @@ print("\n[6/8] Merging tourism data...")
 df_master = df_pivot.merge(df_tourism_clean, on=['Country', 'Year'], how='left')
 print(f"Merged: {df_master['Tourism_%'].notna().sum():,} records have tourism data")
 
-# [7/8] Load and merge GDP USD and Population
-print("\n[7/8] Loading GDP and population data...")
+# [7/8] Load and merge GDP USD, Population, Inflation, and Debt
+print("\n[7/8] Loading GDP, population, inflation, and debt data...")
 df_dev_ind = pd.read_csv('../raw-data/World_Bank/world_bank_development_indicators.csv')
 df_dev_ind['Year'] = pd.to_datetime(df_dev_ind['date']).dt.year
 
-df_gdp_usd = df_dev_ind[['country', 'Year', 'GDP_current_US', 'population']].copy()
-df_gdp_usd.columns = ['Country', 'Year', 'GDP_USD', 'Population']
+df_gdp_usd = df_dev_ind[['country', 'Year', 'GDP_current_US', 'population', 'inflation_annual%', 'central_goverment_debt%']].copy()
+df_gdp_usd.columns = ['Country', 'Year', 'GDP_USD', 'Population', 'Inflation_%', 'Debt_%']
 
 country_name_map = {
     'Yemen, Rep.': 'Yemen',
@@ -132,20 +132,22 @@ df_gdp_usd['Country'] = df_gdp_usd['Country'].replace(country_name_map)
 
 df_master = df_master.merge(df_gdp_usd, on=['Country', 'Year'], how='left')
 print(f"Merged: {df_master['GDP_USD'].notna().sum():,} records have GDP data")
+print(f"Merged: {df_master['Inflation_%'].notna().sum():,} records have inflation data")
+print(f"Merged: {df_master['Debt_%'].notna().sum():,} records have debt data")
 
 # [8/8] Create final dataset
 print("\n[8/8] Creating final dataset...")
 df_final = df_master[[
     'Country', 'Year', 'Primary_%', 'Secondary_%', 'Tertiary_%',
-    'Tourism_%', 'GDP_USD', 'Population'
+    'Tourism_%', 'GDP_USD', 'Population', 'Inflation_%', 'Debt_%'
 ]].copy()
 
 # Round percentages
-for col in ['Primary_%', 'Secondary_%', 'Tertiary_%', 'Tourism_%']:
+for col in ['Primary_%', 'Secondary_%', 'Tertiary_%', 'Tourism_%', 'Inflation_%', 'Debt_%']:
     df_final[col] = df_final[col].round(2)
 
 # Ensure numeric types
-numeric_cols = ['Primary_%', 'Secondary_%', 'Tertiary_%', 'Tourism_%', 'GDP_USD', 'Population']
+numeric_cols = ['Primary_%', 'Secondary_%', 'Tertiary_%', 'Tourism_%', 'GDP_USD', 'Population', 'Inflation_%', 'Debt_%']
 for col in numeric_cols:
     df_final[col] = pd.to_numeric(df_final[col], errors='coerce')
 
@@ -210,5 +212,5 @@ print(f"\nFile: {output_path}")
 print(f"Size: {len(df_final):,} records")
 print(f"Countries: {df_final['Country'].nunique()}")
 print(f"Years: {df_final['Year'].min()}-{df_final['Year'].max()}")
-print("\nColumns: Country, Year, Primary_%, Secondary_%, Tertiary_%, Tourism_%, GDP_USD, Population")
+print("\nColumns: Country, Year, Primary_%, Secondary_%, Tertiary_%, Tourism_%, GDP_USD, Population, Inflation_%, Debt_%")
 print("="*80)
