@@ -82,8 +82,8 @@ function createChart() {
   svg.append('g')
     .attr('transform', `translate(0,${height})`)
     .call(d3.axisBottom(x))
-    .style('font-size', '1rem')
     .selectAll('text')
+    .style('font-size', '1rem')
     .style('text-anchor', 'middle')
 
   // Add horizontal grid lines

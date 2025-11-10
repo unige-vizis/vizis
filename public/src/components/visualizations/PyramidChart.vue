@@ -233,18 +233,18 @@ function createChart() {
       .attr('y', y(bracket) + y.bandwidth() / 2)
       .attr('dy', '0.35em')
       .attr('text-anchor', 'start')
-      .style('font-size', '1rem')
       .text(d.count)
+      .style('font-size', '1rem')
   })
 
   // Y-axis (GDP brackets) on the left - two separate axes
   svg.append('g')
     .call(d3.axisLeft(yLow))
-    .style('font-size', '0.95rem')
+    .style('font-size', '1rem')
 
   svg.append('g')
     .call(d3.axisLeft(yHigh))
-    .style('font-size', '0.95rem')
+    .style('font-size', '1rem')
 
   // Add category labels
   svg.append('text')
