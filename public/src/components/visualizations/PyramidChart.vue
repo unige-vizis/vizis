@@ -233,8 +233,8 @@ function createChart() {
       .attr('y', y(bracket) + y.bandwidth() / 2)
       .attr('dy', '0.35em')
       .attr('text-anchor', 'start')
-      .attr('class', 'axis-text')
       .text(d.count)
+      .style('font-size', '1rem')
   })
 
   // Y-axis (GDP brackets) on the left - two separate axes
@@ -260,6 +260,11 @@ function createChart() {
     .attr('y', -30)
     .attr('text-anchor', 'middle')
     .text('Number of Countries')
+    .style('font-size', '1rem')
+
+  svg.append('g')
+    .call(d3.axisLeft(yHigh))
+    .style('font-size', '1rem')
 
   // Add category labels
   svg.append('text')

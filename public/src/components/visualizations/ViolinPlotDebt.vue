@@ -82,8 +82,8 @@ function createChart() {
   svg.append('g')
     .attr('transform', `translate(0,${height})`)
     .call(d3.axisBottom(x))
-    .attr('class', 'axis-text')
     .selectAll('text')
+    .style('font-size', '1rem')
     .style('text-anchor', 'middle')
     .style('font-size', '1rem')
     .attr('class', d => {
