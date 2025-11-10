@@ -13,6 +13,8 @@
   /* Default width constraints */
   --container-content-width: 1400px;
   --text-content-width: 1100px;
+  --container-content-width: 1400px;
+  --text-content-width: 1100px;
 }
 
 * {
