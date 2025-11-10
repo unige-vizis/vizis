@@ -48,7 +48,7 @@ function createChart() {
   console.log('Creating chart with data:', dataset.value)
   console.log('Tooltip ref:', tooltipRef.value)
 
-  const margin = { top: 40, right: 40, bottom: 80, left: 100 }
+  const margin = { top: 60, right: 40, bottom: 40, left: 100 }
   const width = containerWidth.value - margin.left - margin.right
   const height = 210
 
@@ -259,48 +259,26 @@ function createChart() {
   // Add note
   svg.append('text')
     .attr('x', width / 2)
+    .attr('y', -35)
+    .attr('text-anchor', 'middle')
+    .style('font-size', '1rem')
+    .style('font-style', 'italic')
+    .text('Displaying last reported value per country within 10-year timeframe')
+  svg.append('text')
+    .attr('x', width / 2)
     .attr('y', -15)
     .attr('text-anchor', 'middle')
     .style('font-size', '1rem')
     .style('font-style', 'italic')
-    .text('Displaying last reported value per country within 10-year timeframe (sparse data coverage in World Bank Data)')
+    .text('(sparse data coverage in World Bank Data).')
 }
 </script>
 
 <template>
   <div class="chart-wrapper">
-    <div ref="chartRef" class="chart"></div>
+    <div ref="chartRef" class="chart chart-min-width"></div>
     <div ref="tooltipRef" class="tooltip"></div>
   </div>
 </template>
 
-<style scoped>
-.chart-wrapper {
-  position: relative;
-  width: 100%;
-  height: 100%;
-}
-
-.chart {
-  width: 100%;
-  height: 100%;
-}
-
-.tooltip {
-  position: fixed;
-  padding: 10px;
-  background: rgba(0, 0, 0, 0.85);
-  color: white;
-  border-radius: 5px;
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.2s;
-  font-size: 0.9rem;
-  z-index: 1000;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-}
-
-.bubble {
-  cursor: pointer;
-}
-</style>
+<style scoped></style>

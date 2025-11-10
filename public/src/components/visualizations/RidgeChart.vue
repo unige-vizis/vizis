@@ -39,7 +39,7 @@ onUnmounted(() => {
 function createChart() {
   if (!containerWidth.value || !containerHeight.value || !dataset.value.length) return
 
-  const margin = { top: 100, right: 150, bottom: 80, left: 80 }
+  const margin = { top: 100, right: 20, bottom: 80, left: 80 }
   const width = containerWidth.value - margin.left - margin.right
   const ridgeHeight = 60
   const ridgeSpacing = 45
@@ -213,6 +213,6 @@ function createChart() {
 
 <template>
   <div class="chart-wrapper">
-    <div ref="chartRef" class="chart"></div>
+    <div ref="chartRef" class="chart chart-min-width"></div>
   </div>
 </template>

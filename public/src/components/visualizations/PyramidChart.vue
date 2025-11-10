@@ -42,9 +42,9 @@ onUnmounted(() => {
 function createChart() {
   if (!containerWidth.value || !containerHeight.value || !dataset.value.length) return
 
-  const margin = { top: 40, right: 100, bottom: 60, left: 100 }
+  const margin = { top: 40, right: 20, bottom: 60, left: 100 }
   const width = containerWidth.value - margin.left - margin.right
-  const height = 600
+  const height = 300
 
   // Clear any existing chart and tooltips
   d3.select(chartRef.value).selectAll('*').remove()
@@ -278,6 +278,6 @@ function createChart() {
 
 <template>
   <div class="chart-wrapper">
-    <div ref="chartRef" class="chart"></div>
+    <div ref="chartRef" class="chart chart-min-width"></div>
   </div>
 </template>

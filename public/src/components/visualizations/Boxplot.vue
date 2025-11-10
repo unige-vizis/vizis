@@ -44,7 +44,7 @@ onUnmounted(() => {
 function createChart() {
   if (!containerWidth.value || !containerHeight.value) return
 
-  const margin = { top: 20, right: 20, bottom: 60, left: 80 }
+  const margin = { top: 20, right: 0, bottom: 60, left: 80 }
   const width = containerWidth.value - margin.left - margin.right
   const height = 400
   const subgroups = ['Primary_%', 'Secondary_%', 'Tertiary_%', 'Tourism_%']
@@ -194,6 +194,6 @@ function createChart() {
 
 <template>
   <div class="chart-wrapper">
-    <div ref="chartRef" class="chart"></div>
+    <div ref="chartRef" class="chart chart-min-width"></div>
   </div>
 </template>
