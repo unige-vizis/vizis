@@ -166,7 +166,7 @@ function createChart() {
   svg.append('text')
     .attr('transform', 'rotate(-90)')
     .attr('x', -height / 2)
-    .attr('y', -margin.left + 10)
+    .attr('y', -margin.left + 20)
     .attr('text-anchor', 'middle')
     .attr('class', 'axis-label')
     .text('Year')

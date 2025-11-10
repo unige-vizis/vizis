@@ -254,13 +254,13 @@ function createChart() {
     .attr('text-anchor', 'middle')
     .text('Number of Countries')
 
+
   svg.append('text')
     .attr('class', 'pyramid-legend-header pyramid-legend-header-tertiary')
     .attr('x', width * 3 / 4)
     .attr('y', -30)
     .attr('text-anchor', 'middle')
     .text('Number of Countries')
-    .style('font-size', '1rem')
 
   svg.append('g')
     .call(d3.axisLeft(yHigh))
