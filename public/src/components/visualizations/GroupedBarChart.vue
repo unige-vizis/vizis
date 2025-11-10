@@ -40,7 +40,7 @@ function createChart() {
 
   const margin = { top: 15, right: 30, bottom: 60, left: 110 }
   const width = containerWidth.value - margin.left - margin.right
-  const height = containerHeight.value - margin.top - margin.bottom
+  const height = 500
 
   // Clear any existing chart
   d3.select(chartRef.value).selectAll('*').remove()
@@ -63,7 +63,7 @@ function createChart() {
   const y0 = d3.scaleBand()
     .domain(groups)
     .range([0, height])
-    .padding(0.1) // Minimal padding for thicker bars
+    .padding(0.3) // Minimal padding for thicker bars
 
   const y1 = d3.scaleBand()
     .domain(subgroups)
@@ -78,18 +78,21 @@ function createChart() {
   // Add X axis (counts)
   svg.append('g')
     .attr('transform', `translate(0,${height})`)
-    .call(d3.axisBottom(x).ticks(6).tickFormat(d3.format(',')))
+    .call(d3.axisBottom(x).ticks(6).tickFormat(d3.format('')))
     .selectAll('text')
     .style('font-size', '1rem')
 
   svg.selectAll('.domain, .tick line')
     .style('stroke', '#666')
 
-  // Add Y axis (countries)
-  svg.append('g')
-    .call(d3.axisLeft(y0))
-    .selectAll('text')
+  // Add Y axis (countries) — hide axis line and tick marks
+  const yAxis = svg.append('g')
+    .attr('class', 'y-axis')
+    .call(d3.axisLeft(y0).tickSize(0))
+  yAxis.selectAll('text')
     .style('font-size', '1rem')
+  yAxis.select('.domain').remove()
+  yAxis.selectAll('.tick line').remove()
 
   // Color scale for 4 event types
   const color = d3.scaleOrdinal()
@@ -120,7 +123,7 @@ function createChart() {
       d3.select(this).attr('opacity', 0.8)
     })
 
-  // Add legend - bottom right corner
+  // Add legend
   const legend = svg.append('g')
     .attr('transform', `translate(${Math.max(width - 200, 10)}, ${height - 110})`)
 
@@ -156,6 +159,6 @@ function createChart() {
 
 <template>
   <div class="chart-wrapper">
-    <div ref="chartRef" class="chart"></div>
+    <div ref="chartRef" class="chart chart-min-width"></div>
   </div>
 </template>

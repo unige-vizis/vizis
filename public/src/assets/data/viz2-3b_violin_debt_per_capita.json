@@ -1,0 +1,471 @@
+{
+  "metadata": {
+    "title": "National Debt per Capita Distribution by Economic Sector",
+    "description": "Violin plot comparing the distribution of national debt per capita between countries dominated by Primary+Secondary sectors vs Tertiary sector.",
+    "source": "World Bank Development Indicators",
+    "date_range": "2015-2024",
+    "notes": "Debt per capita calculated as (GDP × Central Government Debt%) / Population. Each country shows its average across all available years.",
+    "categories": [
+      "Primary+Secondary Dominated",
+      "Tertiary Dominated"
+    ]
+  },
+  "data": [
+    {
+      "category": "Primary+Secondary Dominated",
+      "data_points": [
+        {
+          "country": "Azerbaijan",
+          "year_range": "2020-2021",
+          "value": 924.1908076876548
+        },
+        {
+          "country": "Bhutan",
+          "year_range": "2015-2018",
+          "value": 2954.797833382725
+        },
+        {
+          "country": "Burkina Faso",
+          "year_range": "2018-2021",
+          "value": 453.7492749325282
+        },
+        {
+          "country": "Ethiopia",
+          "year_range": "2015-2019",
+          "value": 223.85065078384605
+        },
+        {
+          "country": "Indonesia",
+          "year_range": "2015-2021",
+          "value": 1379.695094269836
+        },
+        {
+          "country": "Iraq",
+          "year_range": "2017-2018",
+          "value": 1615.7704533385267
+        },
+        {
+          "country": "Mongolia",
+          "year_range": "2018-2021",
+          "value": 2873.7087958897187
+        },
+        {
+          "country": "Mozambique",
+          "year_range": "2017-2021",
+          "value": 414.16974033506705
+        },
+        {
+          "country": "Papua New Guinea",
+          "year_range": "2015-2020",
+          "value": 921.6902576915619
+        },
+        {
+          "country": "Solomon Islands",
+          "year_range": "2016-2020",
+          "value": 191.64735144968984
+        },
+        {
+          "country": "Uganda",
+          "year_range": "2018-2021",
+          "value": 354.78106137351773
+        },
+        {
+          "country": "Zambia",
+          "year_range": "2021",
+          "value": 810.3122237583169
+        }
+      ],
+      "values": [
+        924.1908076876548,
+        2954.797833382725,
+        453.7492749325282,
+        223.85065078384605,
+        1379.695094269836,
+        1615.7704533385267,
+        2873.7087958897187,
+        414.16974033506705,
+        921.6902576915619,
+        191.64735144968984,
+        354.78106137351773,
+        810.3122237583169
+      ],
+      "count": 12,
+      "mean": 1093.196962074416,
+      "median": 866.0012407249394,
+      "min": 191.64735144968984,
+      "max": 2954.797833382725
+    },
+    {
+      "category": "Tertiary Dominated",
+      "data_points": [
+        {
+          "country": "Albania",
+          "year_range": "2015-2021",
+          "value": 3880.004630974575
+        },
+        {
+          "country": "Armenia",
+          "year_range": "2019-2021",
+          "value": 2753.3552088015294
+        },
+        {
+          "country": "Australia",
+          "year_range": "2015-2022",
+          "value": 32843.45715098134
+        },
+        {
+          "country": "Austria",
+          "year_range": "2015-2021",
+          "value": 44516.55346996133
+        },
+        {
+          "country": "Barbados",
+          "year_range": "2015-2016",
+          "value": 24756.604964661055
+        },
+        {
+          "country": "Belarus",
+          "year_range": "2015-2019",
+          "value": 2228.9878035736647
+        },
+        {
+          "country": "Belgium",
+          "year_range": "2015-2021",
+          "value": 49083.48574427602
+        },
+        {
+          "country": "Bhutan",
+          "year_range": "2019-2020",
+          "value": 3376.2078139781393
+        },
+        {
+          "country": "Bosnia and Herzegovina",
+          "year_range": "2016-2022",
+          "value": 2830.7970970560973
+        },
+        {
+          "country": "Botswana",
+          "year_range": "2015-2020",
+          "value": 1068.7191710312443
+        },
+        {
+          "country": "Brazil",
+          "year_range": "2015-2022",
+          "value": 7163.115992091597
+        },
+        {
+          "country": "Bulgaria",
+          "year_range": "2015-2021",
+          "value": 2890.255535678412
+        },
+        {
+          "country": "Canada",
+          "year_range": "2015-2022",
+          "value": 28260.75996351914
+        },
+        {
+          "country": "Colombia",
+          "year_range": "2015-2022",
+          "value": 4451.280061600363
+        },
+        {
+          "country": "Croatia",
+          "year_range": "2015-2021",
+          "value": 12920.347899857534
+        },
+        {
+          "country": "El Salvador",
+          "year_range": "2015-2021",
+          "value": 2351.6989833553735
+        },
+        {
+          "country": "Estonia",
+          "year_range": "2015-2021",
+          "value": 3747.1761663855245
+        },
+        {
+          "country": "France",
+          "year_range": "2015-2021",
+          "value": 42458.57130926686
+        },
+        {
+          "country": "Georgia",
+          "year_range": "2015-2022",
+          "value": 2157.224535418836
+        },
+        {
+          "country": "Greece",
+          "year_range": "2015-2021",
+          "value": 40110.32611343154
+        },
+        {
+          "country": "Hungary",
+          "year_range": "2015-2021",
+          "value": 14056.872321563073
+        },
+        {
+          "country": "Iceland",
+          "year_range": "2015-2022",
+          "value": 63085.981848821546
+        },
+        {
+          "country": "India",
+          "year_range": "2015-2018",
+          "value": 865.3261032524053
+        },
+        {
+          "country": "Iraq",
+          "year_range": "2015-2016",
+          "value": 1239.444327355102
+        },
+        {
+          "country": "Ireland",
+          "year_range": "2015-2021",
+          "value": 57843.40449280619
+        },
+        {
+          "country": "Jamaica",
+          "year_range": "2015-2020",
+          "value": 5657.5283289083445
+        },
+        {
+          "country": "Japan",
+          "year_range": "2015-2021",
+          "value": 78684.50524753708
+        },
+        {
+          "country": "Jordan",
+          "year_range": "2015-2020",
+          "value": 3115.7961968901154
+        },
+        {
+          "country": "Kazakhstan",
+          "year_range": "2015-2021",
+          "value": 1906.9599691695798
+        },
+        {
+          "country": "Lesotho",
+          "year_range": "2015-2020",
+          "value": 322.6350355475768
+        },
+        {
+          "country": "Lithuania",
+          "year_range": "2015-2021",
+          "value": 8591.89208398395
+        },
+        {
+          "country": "Malawi",
+          "year_range": "2015-2019",
+          "value": 195.82155214039378
+        },
+        {
+          "country": "Malaysia",
+          "year_range": "2015-2021",
+          "value": 5714.275174373471
+        },
+        {
+          "country": "Marshall Islands",
+          "year_range": "2015-2019",
+          "value": 2042.7467364556462
+        },
+        {
+          "country": "Mauritius",
+          "year_range": "2017-2019",
+          "value": 6382.097695124001
+        },
+        {
+          "country": "Mexico",
+          "year_range": "2019-2021",
+          "value": 4345.820915392322
+        },
+        {
+          "country": "Mozambique",
+          "year_range": "2016",
+          "value": 401.95659495752835
+        },
+        {
+          "country": "Namibia",
+          "year_range": "2015-2019",
+          "value": 264.48725251299015
+        },
+        {
+          "country": "Nepal",
+          "year_range": "2019-2021",
+          "value": 437.4717862398336
+        },
+        {
+          "country": "New Zealand",
+          "year_range": "2015-2022",
+          "value": 18832.2908167407
+        },
+        {
+          "country": "Palau",
+          "year_range": "2015-2019",
+          "value": 12217.528951876928
+        },
+        {
+          "country": "Peru",
+          "year_range": "2015-2021",
+          "value": 1802.6908469454127
+        },
+        {
+          "country": "Romania",
+          "year_range": "2015-2021",
+          "value": 5704.393326790757
+        },
+        {
+          "country": "Russian Federation",
+          "year_range": "2015-2021",
+          "value": 1893.0547126921454
+        },
+        {
+          "country": "San Marino",
+          "year_range": "2015-2021",
+          "value": 31926.690035615142
+        },
+        {
+          "country": "Seychelles",
+          "year_range": "2015",
+          "value": 9339.739749709239
+        },
+        {
+          "country": "Singapore",
+          "year_range": "2015-2021",
+          "value": 79656.27824332673
+        },
+        {
+          "country": "Solomon Islands",
+          "year_range": "2015",
+          "value": 143.8351971005537
+        },
+        {
+          "country": "South Africa",
+          "year_range": "2015-2021",
+          "value": 4061.4922068430283
+        },
+        {
+          "country": "Spain",
+          "year_range": "2015-2021",
+          "value": 32914.95460674276
+        },
+        {
+          "country": "Sri Lanka",
+          "year_range": "2015",
+          "value": 2933.414686590251
+        },
+        {
+          "country": "Sweden",
+          "year_range": "2015-2021",
+          "value": 23336.470285450912
+        },
+        {
+          "country": "Switzerland",
+          "year_range": "2015-2021",
+          "value": 16883.65357822708
+        },
+        {
+          "country": "Thailand",
+          "year_range": "2015-2021",
+          "value": 2988.6680181760444
+        },
+        {
+          "country": "Tonga",
+          "year_range": "2015-2016",
+          "value": 2036.6624854688228
+        },
+        {
+          "country": "Ukraine",
+          "year_range": "2015-2020",
+          "value": 1667.166207125835
+        },
+        {
+          "country": "United Kingdom",
+          "year_range": "2015-2021",
+          "value": 71221.77541653809
+        },
+        {
+          "country": "United States",
+          "year_range": "2015-2022",
+          "value": 68895.87140655042
+        },
+        {
+          "country": "Uruguay",
+          "year_range": "2015-2020",
+          "value": 8659.625656022632
+        },
+        {
+          "country": "Zambia",
+          "year_range": "2015-2020",
+          "value": 777.8355569825111
+        }
+      ],
+      "values": [
+        3880.004630974575,
+        2753.3552088015294,
+        32843.45715098134,
+        44516.55346996133,
+        24756.604964661055,
+        2228.9878035736647,
+        49083.48574427602,
+        3376.2078139781393,
+        2830.7970970560973,
+        1068.7191710312443,
+        7163.115992091597,
+        2890.255535678412,
+        28260.75996351914,
+        4451.280061600363,
+        12920.347899857534,
+        2351.6989833553735,
+        3747.1761663855245,
+        42458.57130926686,
+        2157.224535418836,
+        40110.32611343154,
+        14056.872321563073,
+        63085.981848821546,
+        865.3261032524053,
+        1239.444327355102,
+        57843.40449280619,
+        5657.5283289083445,
+        78684.50524753708,
+        3115.7961968901154,
+        1906.9599691695798,
+        322.6350355475768,
+        8591.89208398395,
+        195.82155214039378,
+        5714.275174373471,
+        2042.7467364556462,
+        6382.097695124001,
+        4345.820915392322,
+        401.95659495752835,
+        264.48725251299015,
+        437.4717862398336,
+        18832.2908167407,
+        12217.528951876928,
+        1802.6908469454127,
+        5704.393326790757,
+        1893.0547126921454,
+        31926.690035615142,
+        9339.739749709239,
+        79656.27824332673,
+        143.8351971005537,
+        4061.4922068430283,
+        32914.95460674276,
+        2933.414686590251,
+        23336.470285450912,
+        16883.65357822708,
+        2988.6680181760444,
+        2036.6624854688228,
+        1667.166207125835,
+        71221.77541653809,
+        68895.87140655042,
+        8659.625656022632,
+        777.8355569825111
+      ],
+      "count": 60,
+      "mean": 16114.967421174124,
+      "median": 4398.550488496343,
+      "min": 143.8351971005537,
+      "max": 79656.27824332673
+    }
+  ]
+}

@@ -11,7 +11,12 @@
   --color-text: #151212;
 
   /* Default width constraints */
+<<<<<<< HEAD
+  --container-content-width: 1400px;
+  --text-content-width: 1100px;
+=======
   --text-content-width: 1400px;
+>>>>>>> main
 }
 
 * {
@@ -82,6 +87,12 @@ h3 {
   font-weight: 600;
 }
 
+h4 {
+  font-size: 1.2rem;
+  margin: 0 0 0.5rem 0;
+  font-weight: 600;
+}
+
 .subtitle {
   color: var(--color-heading);
   margin-bottom: 1.5rem;
@@ -119,13 +130,22 @@ strong {
   align-items: center;
   height: 100%;
   margin: 0 auto;
+  overflow-x: auto;
+}
+
+.chart-min-width {
+  min-width: 600px;
 }
 
 .chart {
   flex: 1;
   width: 100%;
+<<<<<<< HEAD
+  min-height: 300px;
+=======
   max-width: var(--text-content-width);
   min-height: 0;
+>>>>>>> main
   margin: 0 auto;
   font-size: 1.2rem;
 }
@@ -230,4 +250,142 @@ tbody td:last-child {
   color: #888;
   font-style: italic;
   text-align: center;
+}
+
+.tooltip {
+  position: fixed;
+  padding: 10px;
+  background: rgba(0, 0, 0, 0.85);
+  color: white;
+  border-radius: 5px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s;
+  font-size: 0.9rem;
+  z-index: 1000;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.bubble {
+  cursor: pointer;
+}
+
+/* Chart Text Styles */
+.axis-text {
+  font-size: 1rem;
+}
+
+.axis-label {
+  font-size: 1rem;
+}
+
+.chart-note {
+  font-size: 1rem;
+  font-style: italic;
+}
+
+/* Pyramid Chart Styles */
+.pyramid-legend-header {
+  font-size: 1rem;
+  fill: #333;
+}
+
+.pyramid-legend-header-primary {
+  fill: #8B4513;
+}
+
+.pyramid-legend-header-tertiary {
+  fill: #9370DB;
+}
+
+.pyramid-category-label {
+  font-size: 1rem;
+}
+
+.pyramid-category-label-primary {
+  fill: #8B4513;
+}
+
+.pyramid-category-label-tertiary {
+  fill: #9370DB;
+}
+
+/* Ridge Chart Styles */
+.ridge-legend-rect {
+  opacity: 1;
+}
+
+.ridge-legend-rect-primary {
+  fill: #8B4513;
+}
+
+.ridge-legend-rect-tertiary {
+  fill: #9370DB;
+}
+
+.ridge-legend-text {
+  font-size: 1rem;
+}
+
+.ridge-legend-text-primary {
+  fill: #8B4513;
+}
+
+.ridge-legend-text-tertiary {
+  fill: #9370DB;
+}
+
+/* Violin Plot Styles */
+.violin-legend-text {
+  font-size: 1rem;
+}
+
+.violin-legend-text-primary {
+  fill: #8B4513;
+}
+
+.violin-legend-text-tertiary {
+  fill: #9370DB;
+}
+
+@media (max-width: 768px) {
+  #app {
+    padding: 1.5rem;
+  }
+
+  header h1 {
+    font-size: 2.2rem;
+  }
+
+  h2 {
+    font-size: 1.8rem;
+    margin: 0 0 0.5rem 0;
+  }
+
+  h3 {
+    font-size: 1.5rem;
+    margin: 0 0 0.5rem 0;
+    font-weight: 600;
+  }
+
+  body {
+    font-size: 1.2rem;
+  }
+
+  section {
+    padding: 1rem 0.5rem;
+  }
+
+  .section__inner {
+    padding: 1rem 0.5rem;
+  }
+
+  .table {
+    overflow-x: auto;
+  }
+
+  .table table {
+    width: 100%;
+    min-width: 600px;
+  }
 }

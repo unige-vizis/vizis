@@ -7,8 +7,8 @@ const containerWidth = ref(0)
 const containerHeight = ref(0)
 const normalizeByPopulation = ref(false)
 
-// Load the data from data-processing/viz-datasets/viz1_bar_chart_sectors_conflicts.json and extract the array
-import data from '../../../../data-processing/viz-datasets/viz1_bar_chart_sectors_conflicts.json'
+// Load the data from /viz1_bar_chart_sectors_conflicts.json and extract the array
+import data from '@/assets/data/viz1_bar_chart_sectors_conflicts.json'
 const dataset = Array.isArray(data && data.data) ? data.data : []
 
 // Distinct countries to highlight (analysis subset)
@@ -49,7 +49,7 @@ function createChart() {
 
   const margin = { top: 20, right: 80, bottom: 60, left: 130 }
   const width = containerWidth.value - margin.left - margin.right
-  const height = containerHeight.value - margin.top - margin.bottom
+  const height = 500
 
   // Clear any existing chart
   d3.select(chartRef.value).selectAll('*').remove()
@@ -92,7 +92,7 @@ function createChart() {
     .attr('y', d => y(d.country))
     .attr('width', d => x(getValue(d)))
     .attr('height', y.bandwidth())
-    .attr('fill', d => highlightedCountries.has(d.country) ? '#CC9966' : '#9966cc')
+    .attr('fill', d => highlightedCountries.has(d.country) ? '#5F9EA0' : '#999999')
     .attr('opacity', 0.9)
     .on('mouseover', function() {
       d3.select(this).attr('opacity', 1)
@@ -143,7 +143,7 @@ function updateChart() {
 
   const margin = { top: 20, right: 80, bottom: 60, left: 100 }
   const width = containerWidth.value - margin.left - margin.right
-  const height = containerHeight.value - margin.top - margin.bottom
+  const height = 500
 
   // Select the existing SVG group
   const svg = d3.select(chartRef.value).select('svg g')
@@ -170,7 +170,7 @@ function updateChart() {
     .duration(600)
     .ease(d3.easeCubicInOut)
     .attr('width', d => x(getValue(d)))
-    .attr('fill', d => highlightedCountries.has(d.country) ? '#CC9966' : '#9966cc')
+    .attr('fill', d => highlightedCountries.has(d.country) ? '#5F9EA0' : '#999999')
 
   // Update tooltips
   svg.selectAll('.bar')
@@ -224,6 +224,6 @@ function updateChart() {
         <span class="toggle-text">Normalized by population</span>
       </label>
     </div>
-    <div ref="chartRef" class="chart"></div>
+    <div ref="chartRef" class="chart chart-min-width"></div>
   </div>
 </template>
