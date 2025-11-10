@@ -7,10 +7,9 @@ const containerWidth = ref(0)
 const containerHeight = ref(0)
 const normalizeByPopulation = ref(false)
 
-// Load the data from data-processing/viz-datasets/viz1_bar_chart_sectors_conflicts.json and extract the array
-import data from '../../../../data-processing/viz-datasets/viz2-1_boxplot_fatalities_per_million_inhabitants.json'
+// Load the data and extract the array
+import data from '@/assets/data/viz1_bar_chart_sectors_conflicts.json'
 const dataset = Array.isArray(data && data.data) ? data.data : []
-console.log('Boxplot dataset:', dataset);
 
 // Watch for toggle changes and update chart with transitions
 watch(normalizeByPopulation, () => {
@@ -45,9 +44,17 @@ onUnmounted(() => {
 function createChart() {
   if (!containerWidth.value || !containerHeight.value) return
 
-  const margin = { top: 20, right: 80, bottom: 60, left: 80 }
+  const margin = { top: 20, right: 20, bottom: 60, left: 80 }
   const width = containerWidth.value - margin.left - margin.right
   const height = 400
+  const subgroups = ['Primary_%', 'Secondary_%', 'Tertiary_%', 'Tourism_%']
+  // human-friendly labels for the x axis
+  const xLabels = {
+    'Primary_%': 'Primary',
+    'Secondary_%': 'Secondary',
+    'Tertiary_%': 'Tertiary',
+    'Tourism_%': 'Tourism'
+  }
 
   // Clear any existing chart
   d3.select(chartRef.value).selectAll('*').remove()
@@ -60,50 +67,127 @@ function createChart() {
     .attr('transform', `translate(0,0)`)
 
   // Scale
+  // // compute numeric max across subgroups, coercing values to numbers and ignoring NaN
+  const maxVal = d3.max(dataset, d => d3.max(subgroups, key => {
+    const v = +d[key];
+    return isNaN(v) ? undefined : v;
+  })) || 1;
   const y = d3.scaleLinear()
-    .domain([0, d3.max(dataset.map(d => Math.max(d.Primary_Impact, d.Secondary_Impact, d.Tertiary_Impact, d.Tourism_Impact)))])
+    .domain([0, Math.ceil(maxVal / 10) * 10])
     .range([height - margin.bottom, margin.top]);
 
+  // increase padding to give more horizontal space between items
   const x = d3.scaleBand()
-    .domain(["Primary_Impact", "Secondary_Impact", "Tertiary_Impact", "Tourism_Impact"])
+    .domain(subgroups)
     .range([margin.left, width - margin.right])
-    .padding(0.4);
+    .padding(0.7);
 
   svg.append("g")
       .attr("transform", `translate(0,${height - margin.bottom})`)
-      .call(d3.axisBottom(x))
+      .call(d3.axisBottom(x)
+        .tickFormat(d => xLabels[d] || d)
+        .tickSizeOuter(0)
+        .tickPadding(12)
+      )
       .style('font-size', '1rem')
+      .call(g => g.selectAll('text')
+        .attr('transform', null)
+        .style('text-anchor', 'middle')
+        .attr('dy', '0.75em')
+      )
 
   svg.append("g")
-      .attr("transform", `translate(${margin.left},0)`)
-      .call(d3.axisLeft(y))
-      .style('font-size', '1rem')
+    .attr("transform", `translate(${margin.left},0)`)
+    .call(d3.axisLeft(y).tickFormat(d => d + '%'))
+    .style('font-size', '1rem')
 
-  const impacts = ["Primary_Impact", "Secondary_Impact", "Tertiary_Impact", "Tourism_Impact"];
 
-  impacts.forEach((impact, i) => {
-    const values = dataset.map(d => d[impact]).sort(d3.ascending);
+  // numeric formatter for labels
+  const fmt = d3.format('.2f');
+
+  subgroups.forEach((sector, i) => {
+    // Coerce to numbers and filter out non-numeric values before computing quantiles
+    const values = dataset
+      .map(d => +d[sector])
+      .filter(v => !isNaN(v))
+      .sort(d3.ascending);
+
+    // Skip drawing if no numeric data for this sector
+    if (values.length === 0) return;
+
     const q1 = d3.quantile(values, 0.25);
     const median = d3.quantile(values, 0.5);
     const q3 = d3.quantile(values, 0.75);
     const min = d3.min(values);
     const max = d3.max(values);
 
-    // Draw box
-    svg.append("rect")
-        .attr("x", x(impact))
-        .attr("y", y(q3))
-        .attr("height", y(q1) - y(q3))
-        .attr("width", x.bandwidth())
-        .attr("fill", "steelblue");
+    const center = x(sector) + x.bandwidth() / 2;
+
+    // Draw box (guard against undefined quantiles)
+    svg.append('rect')
+      .attr('x', x(sector))
+      .attr('y', y(q3))
+      .attr('height', Math.abs(y(q1) - y(q3)))
+      .attr('width', x.bandwidth())
+      .attr('fill', '#8d6aff')
 
     // Median line
-    svg.append("line")
-        .attr("x1", x(impact))
-        .attr("x2", x(impact) + x.bandwidth())
-        .attr("y1", y(median))
-        .attr("y2", y(median))
-        .attr("stroke", "black");
+    svg.append('line')
+      .attr('x1', x(sector))
+      .attr('x2', x(sector) + x.bandwidth())
+      .attr('y1', y(median))
+      .attr('y2', y(median))
+      .attr('stroke', 'black');
+
+    // Whisker to max: vertical line and cap + label
+    if (q3 != null && max != null) {
+      svg.append('line')
+        .attr('x1', center)
+        .attr('x2', center)
+        .attr('y1', y(q3))
+        .attr('y2', y(max))
+        .attr('stroke', 'black');
+
+      svg.append('line')
+        .attr('x1', center - x.bandwidth() * 0.25)
+        .attr('x2', center + x.bandwidth() * 0.25)
+        .attr('y1', y(max))
+        .attr('y2', y(max))
+        .attr('stroke', 'black');
+
+      svg.append('text')
+        .text(fmt(max) + "%")
+        .attr('x', center + x.bandwidth() * 0.55)
+        .attr('y', y(max))
+        .attr('dy', '0.35em')
+        .style('font-size', '1rem')
+        .style('fill', '#333');
+    }
+
+    // Whisker to min: vertical line and cap + label
+    if (q1 != null && min != null) {
+      svg.append('line')
+        .attr('x1', center)
+        .attr('x2', center)
+        .attr('y1', y(q1))
+        .attr('y2', y(min))
+        .attr('stroke', 'black');
+
+      svg.append('line')
+        .attr('x1', center - x.bandwidth() * 0.25)
+        .attr('x2', center + x.bandwidth() * 0.25)
+        .attr('y1', y(min))
+        .attr('y2', y(min))
+        .attr('stroke', 'black');
+
+      svg.append('text')
+        .text(fmt(min))
+        .attr('x', center + x.bandwidth() * 0.55)
+        .attr('y', y(min))
+        .attr('dy', (min === 0) ? '-.2em' : '0.35em')
+        .style('font-size', '1rem')
+        .style('fill', '#333');
+    }
   });
 }
 </script>
