@@ -11,12 +11,10 @@
   --color-text: #151212;
 
   /* Default width constraints */
-<<<<<<< HEAD
   --container-content-width: 1400px;
   --text-content-width: 1100px;
-=======
-  --text-content-width: 1400px;
->>>>>>> main
+  --container-content-width: 1400px;
+  --text-content-width: 1100px;
 }
 
 * {
@@ -140,12 +138,7 @@ strong {
 .chart {
   flex: 1;
   width: 100%;
-<<<<<<< HEAD
   min-height: 300px;
-=======
-  max-width: var(--text-content-width);
-  min-height: 0;
->>>>>>> main
   margin: 0 auto;
   font-size: 1.2rem;
 }
@@ -291,11 +284,11 @@ tbody td:last-child {
 }
 
 .pyramid-legend-header-primary {
-  fill: #8B4513;
+  fill: #8b4513;
 }
 
 .pyramid-legend-header-tertiary {
-  fill: #9370DB;
+  fill: #9370db;
 }
 
 .pyramid-category-label {
@@ -303,11 +296,11 @@ tbody td:last-child {
 }
 
 .pyramid-category-label-primary {
-  fill: #8B4513;
+  fill: #8b4513;
 }
 
 .pyramid-category-label-tertiary {
-  fill: #9370DB;
+  fill: #9370db;
 }
 
 /* Ridge Chart Styles */
@@ -316,11 +309,11 @@ tbody td:last-child {
 }
 
 .ridge-legend-rect-primary {
-  fill: #8B4513;
+  fill: #8b4513;
 }
 
 .ridge-legend-rect-tertiary {
-  fill: #9370DB;
+  fill: #9370db;
 }
 
 .ridge-legend-text {
@@ -328,11 +321,11 @@ tbody td:last-child {
 }
 
 .ridge-legend-text-primary {
-  fill: #8B4513;
+  fill: #8b4513;
 }
 
 .ridge-legend-text-tertiary {
-  fill: #9370DB;
+  fill: #9370db;
 }
 
 /* Violin Plot Styles */
@@ -341,11 +334,11 @@ tbody td:last-child {
 }
 
 .violin-legend-text-primary {
-  fill: #8B4513;
+  fill: #8b4513;
 }
 
 .violin-legend-text-tertiary {
-  fill: #9370DB;
+  fill: #9370db;
 }
 
 @media (max-width: 768px) {
