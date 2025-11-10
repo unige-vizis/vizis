@@ -89,7 +89,7 @@ function createChart() {
         .tickSizeOuter(0)
         .tickPadding(12)
       )
-      .style('font-size', '1rem')
+      .attr('class', 'axis-text')
       .call(g => g.selectAll('text')
         .attr('transform', null)
         .style('text-anchor', 'middle')
@@ -99,11 +99,19 @@ function createChart() {
   svg.append("g")
     .attr("transform", `translate(${margin.left},0)`)
     .call(d3.axisLeft(y).tickFormat(d => d + '%'))
-    .style('font-size', '1rem')
+    .attr('class', 'axis-text')
 
 
   // numeric formatter for labels
   const fmt = d3.format('.2f');
+
+  // Color scale matching stacked bar chart colors
+  const sectorColors = {
+    'Primary_%': '#8B4513',    // Brown
+    'Secondary_%': '#4682B4',  // Steel Blue
+    'Tertiary_%': '#9370DB',   // Medium Purple (matching section 3)
+    'Tourism_%': '#FFB366'     // Light Orange
+  };
 
   subgroups.forEach((sector, i) => {
     // Coerce to numbers and filter out non-numeric values before computing quantiles
@@ -129,7 +137,7 @@ function createChart() {
       .attr('y', y(q3))
       .attr('height', Math.abs(y(q1) - y(q3)))
       .attr('width', x.bandwidth())
-      .attr('fill', '#8d6aff')
+      .attr('fill', sectorColors[sector])
 
     // Median line
     svg.append('line')
@@ -160,7 +168,7 @@ function createChart() {
         .attr('x', center + x.bandwidth() * 0.55)
         .attr('y', y(max))
         .attr('dy', '0.35em')
-        .style('font-size', '1rem')
+        .attr('class', 'axis-text')
         .style('fill', '#333');
     }
 
@@ -185,7 +193,7 @@ function createChart() {
         .attr('x', center + x.bandwidth() * 0.55)
         .attr('y', y(min))
         .attr('dy', (min === 0) ? '-.2em' : '0.35em')
-        .style('font-size', '1rem')
+        .attr('class', 'axis-text')
         .style('fill', '#333');
     }
   });

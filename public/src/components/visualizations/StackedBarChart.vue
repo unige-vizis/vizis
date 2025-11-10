@@ -95,7 +95,7 @@ function createChart() {
   // Color scale for economic sectors (4 colors)
   const color = d3.scaleOrdinal()
     .domain(subgroups)
-    .range(['#8B4513', '#4682B4', '#5b5e9f', '#FFB366']) // Brown, Steel Blue, Medium Purple, Light Orange
+    .range(['#8B4513', '#4682B4', '#9370DB', '#FFB366']) // Brown, Steel Blue, Medium Purple (matching section 3), Light Orange
 
   // Add Y axis
   svg.append('g')
