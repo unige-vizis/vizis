@@ -7,8 +7,8 @@ const containerWidth = ref(0)
 const containerHeight = ref(0)
 const normalizeByPopulation = ref(false)
 
-// Load the data from data-processing/viz-datasets/viz1_bar_chart_sectors_conflicts.json and extract the array
-import data from '../../../../data-processing/viz-datasets/viz1_bar_chart_sectors_conflicts.json'
+// Load the data from /viz1_bar_chart_sectors_conflicts.json and extract the array
+import data from '@/assets/data/viz1_bar_chart_sectors_conflicts.json'
 const dataset = Array.isArray(data && data.data) ? data.data : []
 
 // Distinct countries to highlight (analysis subset)
