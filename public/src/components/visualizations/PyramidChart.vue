@@ -194,6 +194,7 @@ function createChart() {
       .attr('text-anchor', 'end')
       .attr('class', 'axis-text')
       .text(d.count)
+      .style('font-size', '1rem')
   })
 
   // Create bars for Tertiary (right side)
