@@ -27,6 +27,7 @@ This boxplot will display the distrubution of conflict fatalities for countries 
 
 ##### Boxplot
 - Distribution of Sector Percentages for all countries.
+![alt text](box-and-kindof-violin-plot.png)
 
 ##### Violin PLOT
 - Fatalities for some Partition of countries that is BIG 
