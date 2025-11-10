@@ -105,6 +105,14 @@ function createChart() {
   // numeric formatter for labels
   const fmt = d3.format('.2f');
 
+  // Color scale matching stacked bar chart colors
+  const sectorColors = {
+    'Primary_%': '#8B4513',    // Brown
+    'Secondary_%': '#4682B4',  // Steel Blue
+    'Tertiary_%': '#9370DB',   // Medium Purple (matching section 3)
+    'Tourism_%': '#FFB366'     // Light Orange
+  };
+
   subgroups.forEach((sector, i) => {
     // Coerce to numbers and filter out non-numeric values before computing quantiles
     const values = dataset
@@ -129,7 +137,7 @@ function createChart() {
       .attr('y', y(q3))
       .attr('height', Math.abs(y(q1) - y(q3)))
       .attr('width', x.bandwidth())
-      .attr('fill', '#8d6aff')
+      .attr('fill', sectorColors[sector])
 
     // Median line
     svg.append('line')

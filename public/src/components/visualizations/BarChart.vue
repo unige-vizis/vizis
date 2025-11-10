@@ -92,7 +92,7 @@ function createChart() {
     .attr('y', d => y(d.country))
     .attr('width', d => x(getValue(d)))
     .attr('height', y.bandwidth())
-    .attr('fill', d => highlightedCountries.has(d.country) ? '#CC9966' : '#9966cc')
+    .attr('fill', d => highlightedCountries.has(d.country) ? '#5F9EA0' : '#999999')
     .attr('opacity', 0.9)
     .on('mouseover', function() {
       d3.select(this).attr('opacity', 1)
@@ -170,7 +170,7 @@ function updateChart() {
     .duration(600)
     .ease(d3.easeCubicInOut)
     .attr('width', d => x(getValue(d)))
-    .attr('fill', d => highlightedCountries.has(d.country) ? '#CC9966' : '#9966cc')
+    .attr('fill', d => highlightedCountries.has(d.country) ? '#5F9EA0' : '#999999')
 
   // Update tooltips
   svg.selectAll('.bar')
