@@ -42,7 +42,7 @@ onUnmounted(() => {
 function createChart() {
   if (!containerWidth.value || !containerHeight.value || !dataset.value.length) return
 
-  const margin = { top: 40, right: 20, bottom: 60, left: 100 }
+  const margin = { top: 50, right: 20, bottom: 60, left: 100 }
   const width = containerWidth.value - margin.left - margin.right
   const height = 300
 
@@ -192,7 +192,7 @@ function createChart() {
       .attr('y', y(bracket) + y.bandwidth() / 2)
       .attr('dy', '0.35em')
       .attr('text-anchor', 'end')
-      .style('font-size', '1rem')
+      .attr('class', 'axis-text')
       .text(d.count)
   })
 
@@ -233,36 +233,47 @@ function createChart() {
       .attr('y', y(bracket) + y.bandwidth() / 2)
       .attr('dy', '0.35em')
       .attr('text-anchor', 'start')
-      .style('font-size', '1rem')
+      .attr('class', 'axis-text')
       .text(d.count)
   })
 
   // Y-axis (GDP brackets) on the left - two separate axes
   svg.append('g')
     .call(d3.axisLeft(yLow))
-    .style('font-size', '0.95rem')
+    .attr('class', 'axis-text')
 
   svg.append('g')
     .call(d3.axisLeft(yHigh))
-    .style('font-size', '0.95rem')
+    .attr('class', 'axis-text')
+
+  // Add "Number of Countries" headers (one for each side)
+  svg.append('text')
+    .attr('class', 'pyramid-legend-header pyramid-legend-header-primary')
+    .attr('x', width / 4)
+    .attr('y', -30)
+    .attr('text-anchor', 'middle')
+    .text('Number of Countries')
+
+  svg.append('text')
+    .attr('class', 'pyramid-legend-header pyramid-legend-header-tertiary')
+    .attr('x', width * 3 / 4)
+    .attr('y', -30)
+    .attr('text-anchor', 'middle')
+    .text('Number of Countries')
 
   // Add category labels
   svg.append('text')
+    .attr('class', 'pyramid-category-label pyramid-category-label-primary')
     .attr('x', width / 4)
     .attr('y', -15)
     .attr('text-anchor', 'middle')
-    .style('font-size', '1rem')
-    .style('font-weight', 'bold')
-    .style('fill', '#8B4513')
     .text('Primary+Secondary Dominated')
 
   svg.append('text')
+    .attr('class', 'pyramid-category-label pyramid-category-label-tertiary')
     .attr('x', width * 3 / 4)
     .attr('y', -15)
     .attr('text-anchor', 'middle')
-    .style('font-size', '1rem')
-    .style('font-weight', 'bold')
-    .style('fill', '#9370DB')
     .text('Tertiary Dominated')
 
   // Add Y-axis label
@@ -271,7 +282,7 @@ function createChart() {
     .attr('x', -height / 2)
     .attr('y', -margin.left + 20)
     .attr('text-anchor', 'middle')
-    .style('font-size', '1rem')
+    .attr('class', 'axis-label')
     .text('GDP per Capita (USD)')
 }
 </script>

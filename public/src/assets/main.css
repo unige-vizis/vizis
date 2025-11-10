@@ -261,6 +261,84 @@ tbody td:last-child {
   cursor: pointer;
 }
 
+/* Chart Text Styles */
+.axis-text {
+  font-size: 1rem;
+}
+
+.axis-label {
+  font-size: 1rem;
+}
+
+.chart-note {
+  font-size: 1rem;
+  font-style: italic;
+}
+
+/* Pyramid Chart Styles */
+.pyramid-legend-header {
+  font-size: 1rem;
+  fill: #333;
+}
+
+.pyramid-legend-header-primary {
+  fill: #8B4513;
+}
+
+.pyramid-legend-header-tertiary {
+  fill: #9370DB;
+}
+
+.pyramid-category-label {
+  font-size: 1rem;
+}
+
+.pyramid-category-label-primary {
+  fill: #8B4513;
+}
+
+.pyramid-category-label-tertiary {
+  fill: #9370DB;
+}
+
+/* Ridge Chart Styles */
+.ridge-legend-rect {
+  opacity: 1;
+}
+
+.ridge-legend-rect-primary {
+  fill: #8B4513;
+}
+
+.ridge-legend-rect-tertiary {
+  fill: #9370DB;
+}
+
+.ridge-legend-text {
+  font-size: 1rem;
+}
+
+.ridge-legend-text-primary {
+  fill: #8B4513;
+}
+
+.ridge-legend-text-tertiary {
+  fill: #9370DB;
+}
+
+/* Violin Plot Styles */
+.violin-legend-text {
+  font-size: 1rem;
+}
+
+.violin-legend-text-primary {
+  fill: #8B4513;
+}
+
+.violin-legend-text-tertiary {
+  fill: #9370DB;
+}
+
 @media (max-width: 768px) {
   #app {
     padding: 1.5rem;

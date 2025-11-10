@@ -89,7 +89,7 @@ function createChart() {
         .tickSizeOuter(0)
         .tickPadding(12)
       )
-      .style('font-size', '1rem')
+      .attr('class', 'axis-text')
       .call(g => g.selectAll('text')
         .attr('transform', null)
         .style('text-anchor', 'middle')
@@ -99,7 +99,7 @@ function createChart() {
   svg.append("g")
     .attr("transform", `translate(${margin.left},0)`)
     .call(d3.axisLeft(y).tickFormat(d => d + '%'))
-    .style('font-size', '1rem')
+    .attr('class', 'axis-text')
 
 
   // numeric formatter for labels
@@ -160,7 +160,7 @@ function createChart() {
         .attr('x', center + x.bandwidth() * 0.55)
         .attr('y', y(max))
         .attr('dy', '0.35em')
-        .style('font-size', '1rem')
+        .attr('class', 'axis-text')
         .style('fill', '#333');
     }
 
@@ -185,7 +185,7 @@ function createChart() {
         .attr('x', center + x.bandwidth() * 0.55)
         .attr('y', y(min))
         .attr('dy', (min === 0) ? '-.2em' : '0.35em')
-        .style('font-size', '1rem')
+        .attr('class', 'axis-text')
         .style('fill', '#333');
     }
   });

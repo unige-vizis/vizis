@@ -147,28 +147,28 @@ function createChart() {
       .ticks(10)
       .tickFormat(d => `${d}%`)
     )
-    .style('font-size', '1rem')
+    .attr('class', 'axis-text')
 
   // Add Y-axis with years
   svg.append('g')
     .call(d3.axisLeft(y))
-    .style('font-size', '1rem')
+    .attr('class', 'axis-text')
 
   // Add X-axis label
   svg.append('text')
     .attr('x', width / 2)
-    .attr('y', height + margin.bottom - 10)
+    .attr('y', height + margin.bottom - 35)
     .attr('text-anchor', 'middle')
-    .style('font-size', '1rem')
-    .text('Annual Inflation Rate (%)')
+    .attr('class', 'axis-label')
+    .text('Annual Inflation Rate')
 
   // Add Y-axis label
   svg.append('text')
     .attr('transform', 'rotate(-90)')
     .attr('x', -height / 2)
-    .attr('y', -margin.left + 20)
+    .attr('y', -margin.left + 10)
     .attr('text-anchor', 'middle')
-    .style('font-size', '1rem')
+    .attr('class', 'axis-label')
     .text('Year')
 
   // Add legend (horizontal at top, outside plot area)
@@ -177,36 +177,32 @@ function createChart() {
 
   // Primary+Secondary legend item
   legend.append('rect')
-    .attr('x', -180)
+    .attr('class', 'ridge-legend-rect ridge-legend-rect-primary')
+    .attr('x', -250)
     .attr('y', 0)
     .attr('width', 20)
     .attr('height', 20)
-    .attr('fill', colorScale['Primary+Secondary Dominated'])
-    .attr('opacity', 0.6)
 
   legend.append('text')
-    .attr('x', -155)
+    .attr('class', 'ridge-legend-text ridge-legend-text-primary')
+    .attr('x', -222)
     .attr('y', 10)
     .attr('dy', '0.35em')
-    .style('font-size', '1rem')
-    .style('fill', colorScale['Primary+Secondary Dominated'])
-    .text('Primary+Secondary')
+    .text('Primary+Secondary Dominated')
 
   // Tertiary legend item
   legend.append('rect')
-    .attr('x', 20)
+    .attr('class', 'ridge-legend-rect ridge-legend-rect-tertiary')
+    .attr('x', 60)
     .attr('y', 0)
     .attr('width', 20)
     .attr('height', 20)
-    .attr('fill', colorScale['Tertiary Dominated'])
-    .attr('opacity', 0.7)
 
   legend.append('text')
-    .attr('x', 45)
+    .attr('class', 'ridge-legend-text ridge-legend-text-tertiary')
+    .attr('x', 88)
     .attr('y', 10)
     .attr('dy', '0.35em')
-    .style('font-size', '1rem')
-    .style('fill', colorScale['Tertiary Dominated'])
     .text('Tertiary Dominated')
 }
 </script>

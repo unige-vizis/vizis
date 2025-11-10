@@ -48,7 +48,7 @@ function createChart() {
   console.log('Creating chart with data:', dataset.value)
   console.log('Tooltip ref:', tooltipRef.value)
 
-  const margin = { top: 60, right: 40, bottom: 40, left: 100 }
+  const margin = { top: 60, right: 40, bottom: 80, left: 100 }
   const width = containerWidth.value - margin.left - margin.right
   const height = 210
 
@@ -82,9 +82,15 @@ function createChart() {
   svg.append('g')
     .attr('transform', `translate(0,${height})`)
     .call(d3.axisBottom(x))
-    .style('font-size', '1rem')
+    .attr('class', 'axis-text')
     .selectAll('text')
     .style('text-anchor', 'middle')
+    .style('font-size', '1rem')
+    .attr('class', d => {
+      if (d === 'Primary+Secondary Dominated') return 'axis-text violin-legend-text-primary'
+      if (d === 'Tertiary Dominated') return 'axis-text violin-legend-text-tertiary'
+      return 'axis-text'
+    })
 
   // Add horizontal grid lines
   svg.append('g')
@@ -104,7 +110,7 @@ function createChart() {
       .ticks(8)
       .tickFormat(d => `$${d3.format(',.0f')(d)}`)
     )
-    .style('font-size', '1rem')
+    .attr('class', 'axis-text')
 
   // Add Y-axis label
   svg.append('text')
@@ -112,7 +118,7 @@ function createChart() {
     .attr('x', -height / 2)
     .attr('y', -margin.left + 20)
     .attr('text-anchor', 'middle')
-    .style('font-size', '1rem')
+    .attr('class', 'axis-label')
     .text('Debt per Capita (USD)')
 
   // Create tooltip
@@ -185,10 +191,9 @@ function createChart() {
       .attr('class', 'bubble')
       .attr('r', d => d.radius)
       .attr('fill', colorScale[categoryData.category])
-      .attr('opacity', 0.6)
+      .attr('opacity', 1)
       .attr('stroke', '#000')
       .attr('stroke-width', 0.5)
-      .style('cursor', 'pointer')
       .on('mouseover', function(event, d) {
         console.log('Mouseover:', d.country, d.value)
         d3.select(this)
@@ -218,7 +223,7 @@ function createChart() {
           .transition()
           .duration(200)
           .attr('r', 4)
-          .attr('opacity', 0.6)
+          .attr('opacity', 1)
           .attr('stroke-width', 0.5)
 
         tooltip.style('opacity', 0)
@@ -261,15 +266,13 @@ function createChart() {
     .attr('x', width / 2)
     .attr('y', -35)
     .attr('text-anchor', 'middle')
-    .style('font-size', '1rem')
-    .style('font-style', 'italic')
+    .attr('class', 'chart-note')
     .text('Displaying last reported value per country within 10-year timeframe')
   svg.append('text')
     .attr('x', width / 2)
     .attr('y', -15)
     .attr('text-anchor', 'middle')
-    .style('font-size', '1rem')
-    .style('font-style', 'italic')
+    .attr('class', 'chart-note')
     .text('(sparse data coverage in World Bank Data).')
 }
 </script>
