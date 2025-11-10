@@ -15,4 +15,21 @@ In order to compare human suffering accorss countries fairly, we used the indica
 
 Unlike raw death counts, this normalized rate elminates the bias toward large-population countries and allows meaningful cross-national comparisons.
 
-This boxplot will display the distrubution of conflict fatalities for countries grouped by their dominant economic sector: primary (agriculture), secondary (industry), tertiary (services) of tourism. It helps to reveal whether countries with differen economic compositions face different levels of human sufferin in conflict.
+This boxplot will display the distrubution of conflict fatalities for countries grouped by their dominant economic sector: primary (agriculture), secondary (industry), tertiary (services) of tourism. It helps to reveal whether countries with differen economic compositions face different levels of human suffering in conflict.
+
+
+
+
+### PLOTS
+
+##### Histogram
+![alt text](histogram-GDP-Per-Capita.png)- 
+
+##### Boxplot
+- Distribution of Sector Percentages for all countries.
+
+##### Violin PLOT
+- Fatalities for some Partition of countries that is BIG 
+
+- fatalites of events distribution on country basis.
+
