@@ -169,7 +169,8 @@ function createChart() {
         .attr('y', y(max))
         .attr('dy', '0.35em')
         .attr('class', 'axis-text')
-        .style('fill', '#333');
+        .style('fill', '#333')
+        .style('font-size', '1rem');
     }
 
     // Whisker to min: vertical line and cap + label
@@ -189,12 +190,13 @@ function createChart() {
         .attr('stroke', 'black');
 
       svg.append('text')
-        .text(fmt(min))
+        .text(fmt(min)+ "%")
         .attr('x', center + x.bandwidth() * 0.55)
         .attr('y', y(min))
         .attr('dy', (min === 0) ? '-.2em' : '0.35em')
         .attr('class', 'axis-text')
-        .style('fill', '#333');
+        .style('fill', '#333')
+        .style('font-size', '1rem');
     }
   });
 }

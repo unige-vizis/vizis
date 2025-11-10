@@ -161,6 +161,7 @@ function createChart() {
     .attr('text-anchor', 'middle')
     .attr('class', 'axis-label')
     .text('Annual Inflation Rate')
+    .style('font-size', '1rem')
 
   // Add Y-axis label
   svg.append('text')
@@ -170,6 +171,7 @@ function createChart() {
     .attr('text-anchor', 'middle')
     .attr('class', 'axis-label')
     .text('Year')
+    .style('font-size', '1rem')
 
   // Add legend (horizontal at top, outside plot area)
   const legend = svgRoot.append('g')
@@ -189,6 +191,7 @@ function createChart() {
     .attr('y', 10)
     .attr('dy', '0.35em')
     .text('Primary+Secondary Dominated')
+    .style('font-size', '1rem')
 
   // Tertiary legend item
   legend.append('rect')
@@ -204,6 +207,7 @@ function createChart() {
     .attr('y', 10)
     .attr('dy', '0.35em')
     .text('Tertiary Dominated')
+    .style('font-size', '1rem')
 }
 </script>
 

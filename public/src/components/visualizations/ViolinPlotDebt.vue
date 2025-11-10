@@ -85,7 +85,6 @@ function createChart() {
     .selectAll('text')
     .style('font-size', '1rem')
     .style('text-anchor', 'middle')
-    .style('font-size', '1rem')
     .attr('class', d => {
       if (d === 'Primary+Secondary Dominated') return 'axis-text violin-legend-text-primary'
       if (d === 'Tertiary Dominated') return 'axis-text violin-legend-text-tertiary'
@@ -120,6 +119,7 @@ function createChart() {
     .attr('text-anchor', 'middle')
     .attr('class', 'axis-label')
     .text('Debt per Capita (USD)')
+    .style('font-size', '1rem')
 
   // Create tooltip
   const tooltip = d3.select(tooltipRef.value)
@@ -266,14 +266,14 @@ function createChart() {
     .attr('x', width / 2)
     .attr('y', -35)
     .attr('text-anchor', 'middle')
-    .attr('class', 'chart-note')
     .text('Displaying last reported value per country within 10-year timeframe')
+    .style('font-size', '1rem')
   svg.append('text')
     .attr('x', width / 2)
     .attr('y', -15)
     .attr('text-anchor', 'middle')
-    .attr('class', 'chart-note')
     .text('(sparse data coverage in World Bank Data).')
+    .style('font-size', '1rem')
 }
 </script>
 

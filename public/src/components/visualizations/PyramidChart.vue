@@ -253,6 +253,7 @@ function createChart() {
     .attr('y', -30)
     .attr('text-anchor', 'middle')
     .text('Number of Countries')
+    .style('font-size', '1rem')
 
 
   svg.append('text')
@@ -261,6 +262,7 @@ function createChart() {
     .attr('y', -30)
     .attr('text-anchor', 'middle')
     .text('Number of Countries')
+    .style('font-size', '1rem')
 
   svg.append('g')
     .call(d3.axisLeft(yHigh))
@@ -273,6 +275,7 @@ function createChart() {
     .attr('y', -15)
     .attr('text-anchor', 'middle')
     .text('Primary+Secondary Dominated')
+    .style('font-size', '1rem')
 
   svg.append('text')
     .attr('class', 'pyramid-category-label pyramid-category-label-tertiary')
@@ -280,6 +283,7 @@ function createChart() {
     .attr('y', -15)
     .attr('text-anchor', 'middle')
     .text('Tertiary Dominated')
+    .style('font-size', '1rem')
 
   // Add Y-axis label
   svg.append('text')
@@ -289,6 +293,7 @@ function createChart() {
     .attr('text-anchor', 'middle')
     .attr('class', 'axis-label')
     .text('GDP per Capita (USD)')
+    .style('font-size', '1rem')
 }
 </script>
 
