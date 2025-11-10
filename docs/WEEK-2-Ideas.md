@@ -26,8 +26,9 @@ This boxplot will display the distrubution of conflict fatalities for countries 
 ![alt text](histogram-GDP-Per-Capita.png)- 
 
 ##### Boxplot
-- Distribution of Sector Percentages for all countries.
 ![alt text](box-and-kindof-violin-plot.png)
+- Distribution of Sector Percentages for all countries.
+
 
 ##### Violin PLOT
 - Fatalities for some Partition of countries that is BIG 
