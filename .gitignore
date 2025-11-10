@@ -56,6 +56,9 @@ data-processing/output/**/*.pdf
 # Ignore temp folder (for one-off analysis scripts)
 data-processing/temp/
 
+# Allow processed-data folder CSV files (final processed datasets)
+!data-processing/processed-data/**/*.csv
+
 # Allow viz-datasets folder JSON files (reduced datasets for website)
 !data-processing/viz-datasets/**/*.json
 !data-processing/viz-datasets/**/*.geojson
