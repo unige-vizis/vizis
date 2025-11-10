@@ -11,8 +11,12 @@
   --color-text: #151212;
 
   /* Default width constraints */
+<<<<<<< HEAD
   --container-content-width: 1400px;
   --text-content-width: 1100px;
+=======
+  --text-content-width: 1400px;
+>>>>>>> main
 }
 
 * {
@@ -136,7 +140,12 @@ strong {
 .chart {
   flex: 1;
   width: 100%;
+<<<<<<< HEAD
   min-height: 300px;
+=======
+  max-width: var(--text-content-width);
+  min-height: 0;
+>>>>>>> main
   margin: 0 auto;
   font-size: 1.2rem;
 }
