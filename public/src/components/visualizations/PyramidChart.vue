@@ -36,7 +36,7 @@ onUnmounted(() => {
     resizeObserver.disconnect()
   }
   // Remove any tooltips
-  d3.selectAll('.pyramid-tooltip').remove()
+  d3.selectAll('.tooltip').remove()
 })
 
 function createChart() {
@@ -48,7 +48,7 @@ function createChart() {
 
   // Clear any existing chart and tooltips
   d3.select(chartRef.value).selectAll('*').remove()
-  d3.selectAll('.pyramid-tooltip').remove()
+  d3.selectAll('.tooltip').remove()
 
   const svg = d3.select(chartRef.value)
     .append('svg')

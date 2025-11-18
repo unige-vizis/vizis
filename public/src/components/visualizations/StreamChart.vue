@@ -1,20 +1,41 @@
 <script setup>
-import { onMounted, onBeforeUnmount, ref } from 'vue'
+import { onMounted, onUnmounted, onBeforeUnmount, ref } from 'vue'
 import * as d3 from 'd3'
 
 const chartRef = ref(null)
+const containerWidth = ref(0)
 
 // Load the data directly via import
 import jsonData from '@/assets/data/viz6_stream_mexico_india_timeline.json'
 const data = ref(jsonData)
 
-onMounted(() => {
+// Update dimensions and redraw chart when container size changes
+function updateDimensions() {
+  if (!chartRef.value) return
+  const container = chartRef.value
+  containerWidth.value = container.clientWidth
   createChart()
+}
+
+// Set up resize observer
+let resizeObserver
+onMounted(() => {
+  updateDimensions()
+  resizeObserver = new ResizeObserver(updateDimensions)
+  if (chartRef.value) {
+    resizeObserver.observe(chartRef.value)
+  }
+})
+
+onUnmounted(() => {
+  if (resizeObserver) {
+    resizeObserver.disconnect()
+  }
 })
 
 onBeforeUnmount(() => {
   // Clean up tooltip when component is destroyed
-  d3.selectAll('.stream-tooltip').remove()
+  d3.selectAll('.tooltip').remove()
 })
 
 function createChart() {
@@ -51,39 +72,31 @@ function createChart() {
     return quarterly
   }
 
-  const marginMexico = { top: 65, right: 15, bottom: 50, left: 50 }
-  const marginIndia = { top: 65, right: 120, bottom: 50, left: 15 }
-  const chartWidth = 380
+  if (!containerWidth.value) return
+
+  const margin = { top: 65, right: 200, bottom: 50, left: 60 }
+  const marginMexico = { top: 65, right: 15, bottom: 50, left: 60 }
+  const marginIndia = { top: 65, right: 200, bottom: 50, left: containerWidth.value > 600 ? 15 : 60 }
+  let chartWidth = 0
+  if( containerWidth.value > 600 ) {
+    chartWidth = (containerWidth.value - margin.left - margin.right) / 2
+  } else {
+    chartWidth = containerWidth.value - margin.left - margin.right
+  }
   const chartHeight = 250
-  const gapBetweenCharts = 15
 
   d3.select(chartRef.value).selectAll('*').remove()
-  d3.selectAll('.stream-tooltip').remove()
+  d3.selectAll('.tooltip').remove()
 
   const container = d3.select(chartRef.value)
     .append('div')
-    .style('display', 'flex')
-    .style('justify-content', 'center')
-    .style('align-items', 'flex-start')
-    .style('gap', `${gapBetweenCharts}px`)
-    .style('flex-wrap', 'nowrap')
+    .attr('class', 'double-chart')
 
   // Tooltip
   const tooltip = d3.select('body')
     .append('div')
-    .attr('class', 'stream-tooltip')
+    .attr('class', 'tooltip')
     .style('position', 'fixed')
-    .style('background', 'rgba(0, 0, 0, 0.95)')
-    .style('color', '#fff')
-    .style('padding', '6px 10px')
-    .style('border-radius', '4px')
-    .style('font-size', '0.85rem')
-    .style('pointer-events', 'none')
-    .style('opacity', 0)
-    .style('z-index', 10000)
-    .style('box-shadow', '0 4px 6px rgba(0,0,0,0.3)')
-    .style('max-width', '280px')
-    .style('line-height', '1.3')
 
   const eventColors = {
     'Battles': '#2563EB',
@@ -139,7 +152,6 @@ function createChart() {
 
     const stackData = country.data
     const parseDate = d3.timeParse('%Y-%m')
-    const formatDate = d3.timeFormat('%Y-%m')
 
     const xScale = d3.scaleTime()
       .domain(d3.extent(stackData, d => parseDate(d.date)))
@@ -247,21 +259,15 @@ function createChart() {
           .on('mouseover', function(event) {
             d3.select(this)
               .style('opacity', 1)
-              .style('stroke', '#000')
-              .style('stroke-width', 1.5)
 
             tooltip
               .html(`
-                <strong style="font-size: 0.95rem; color: ${color}">${eventType}</strong>
-                <div style="margin-top: 2px; font-size: 0.8rem;">
-                  <div><strong>Year:</strong> ${year}</div>
-                  <div><strong>Events:</strong> ${totalCount.toLocaleString()} (${percentage}%)</div>
-                  <div><strong>Fatalities:</strong> ${totalFatalities.toLocaleString()}</div>
-                  <div><strong>Avg per event:</strong> ${avgFatalityRate}</div>
-                </div>
+                <strong style="font-size: 1rem; color: ${color}">${eventType}</strong>
+                  <div>Year: ${year}</div>
+                  <div>Events: ${totalCount.toLocaleString()} (${percentage}%)</div>
+                  <div>Fatalities: ${totalFatalities.toLocaleString()}</div>
+                  <div>Avg per event: ${avgFatalityRate}</div>
               `)
-              .style('left', (event.clientX + 10) + 'px')
-              .style('top', (event.clientY - 10) + 'px')
               .style('opacity', 1)
           })
           .on('mousemove', function(event) {
@@ -272,8 +278,6 @@ function createChart() {
           .on('mouseout', function() {
             d3.select(this)
               .style('opacity', 0.8)
-              .style('stroke', 'none')
-
             tooltip.style('opacity', 0)
           })
       })
@@ -294,11 +298,11 @@ function createChart() {
       .call(xAxis)
       .style('font-size', '12px')
 
-    if (index === 0) {
+    if (index === 0 || containerWidth.value <= 600) {
       g.append('text')
         .attr('transform', 'rotate(-90)')
         .attr('x', -chartHeight / 2)
-        .attr('y', -45)
+        .attr('y', -15)
         .attr('text-anchor', 'middle')
         .style('font-size', '14px')
         .text('Number of Events')
@@ -377,8 +381,7 @@ function createChart() {
 </script>
 
 <template>
-  <div ref="chartRef" style="position: relative; width: 100%; margin: 0.5rem 0;"></div>
+  <div class="chart-wrapper">
+    <div ref="chartRef" class="chart chart-min-width"></div>
+  </div>
 </template>
-
-<style scoped>
-</style>
