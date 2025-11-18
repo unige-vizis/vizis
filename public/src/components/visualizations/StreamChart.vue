@@ -20,15 +20,43 @@ onBeforeUnmount(() => {
 function createChart() {
   if (!data.value) return
 
-  // Chart dimensions - made thinner vertically and narrower to fit in container
-  // Different margins for each chart to minimize gap between them
-  const marginMexico = { top: 65, right: 15, bottom: 50, left: 50 }  // Increased top margin for spacing
-  const marginIndia = { top: 65, right: 120, bottom: 50, left: 15 }  // Increased top margin for spacing
-  const chartWidth = 380  // Reduced to fit both charts side-by-side
-  const chartHeight = 250
-  const gapBetweenCharts = 15  // Small gap between charts
+  // ============================================================
+  // TOGGLE: Set to false to use monthly data (original behavior)
+  // ============================================================
+  const USE_QUARTERLY_DATA = false
 
-  // Clear any existing chart and tooltips
+  // Helper function to aggregate monthly data into 3-month buckets
+  function aggregateToQuarterly(monthlyData) {
+    const quarterly = []
+
+    for (let i = 0; i < monthlyData.length; i += 3) {
+      const chunk = monthlyData.slice(i, i + 3)
+      if (chunk.length === 0) continue
+
+      // Use the date of the first month in the quarter
+      const aggregated = { date: chunk[0].date }
+
+      // Sum all numeric fields across the 3 months
+      const allKeys = new Set()
+      chunk.forEach(month => Object.keys(month).forEach(key => allKeys.add(key)))
+
+      allKeys.forEach(key => {
+        if (key === 'date') return
+        aggregated[key] = chunk.reduce((sum, month) => sum + (month[key] || 0), 0)
+      })
+
+      quarterly.push(aggregated)
+    }
+
+    return quarterly
+  }
+
+  const marginMexico = { top: 65, right: 15, bottom: 50, left: 50 }
+  const marginIndia = { top: 65, right: 120, bottom: 50, left: 15 }
+  const chartWidth = 380
+  const chartHeight = 250
+  const gapBetweenCharts = 15
+
   d3.select(chartRef.value).selectAll('*').remove()
   d3.selectAll('.stream-tooltip').remove()
 
@@ -38,9 +66,9 @@ function createChart() {
     .style('justify-content', 'center')
     .style('align-items', 'flex-start')
     .style('gap', `${gapBetweenCharts}px`)
-    .style('flex-wrap', 'nowrap')  // Changed from 'wrap' to 'nowrap' to keep side-by-side
+    .style('flex-wrap', 'nowrap')
 
-  // Create single tooltip for both charts - append to body for proper positioning
+  // Tooltip
   const tooltip = d3.select('body')
     .append('div')
     .attr('class', 'stream-tooltip')
@@ -57,34 +85,32 @@ function createChart() {
     .style('max-width', '280px')
     .style('line-height', '1.3')
 
-  // Color scale for event types
   const eventColors = {
-    'Battles': '#2563EB',                        // Blue
-    'Protests & Riots': '#059669',               // Green
-    'Violence against civilians': '#DC2626',     // Red
-    'Other': '#9CA3AF'                           // Grey (combined Explosions/Remote violence and Strategic developments)
+    'Battles': '#2563EB',
+    'Protests & Riots': '#059669',
+    'Violence against civilians': '#DC2626',
+    'Other': '#9CA3AF'
   }
 
-  // Get event categories from metadata and reorder to put "Other" first (bottom of stream)
   const eventCategories = ['Other', ...data.value.metadata.event_categories.filter(c => c !== 'Other')]
 
-  // Create charts for both countries
+  // Apply quarterly aggregation if enabled
+  const indiaData = USE_QUARTERLY_DATA ? aggregateToQuarterly(data.value.india) : data.value.india
+  const mexicoData = USE_QUARTERLY_DATA ? aggregateToQuarterly(data.value.mexico) : data.value.mexico
+
   const countries = [
-    { name: 'India', data: data.value.india },
-    { name: 'Mexico', data: data.value.mexico }
+    { name: 'India', data: indiaData },
+    { name: 'Mexico', data: mexicoData }
   ]
 
-  // Calculate global min/max across BOTH countries for consistent scaling
   const stack = d3.stack()
     .keys(eventCategories)
     .value((d, key) => d[key] || 0)
     .order(d3.stackOrderNone)
     .offset(d3.stackOffsetWiggle)
 
-  // Get stacked data for both countries
   const allSeries = countries.map(country => stack(country.data))
 
-  // Find global min and max across both countries
   const globalYMin = d3.min(allSeries, series =>
     d3.min(series, s => d3.min(s, d => d[0]))
   )
@@ -93,10 +119,8 @@ function createChart() {
   )
 
   countries.forEach((country, index) => {
-    // Use appropriate margin - first chart (India) gets left-side margins, second (Mexico) gets right-side margins
     const margin = index === 0 ? marginMexico : marginIndia
 
-    // Create SVG for each country
     const svg = container.append('svg')
       .attr('width', chartWidth + margin.left + margin.right)
       .attr('height', chartHeight + margin.top + margin.bottom)
@@ -105,7 +129,6 @@ function createChart() {
     const g = svg.append('g')
       .attr('transform', `translate(${margin.left},${margin.top})`)
 
-    // Title - centered over the plot area only (not including legend)
     svg.append('text')
       .attr('x', margin.left + chartWidth / 2)
       .attr('y', 25)
@@ -114,49 +137,36 @@ function createChart() {
       .style('font-weight', 'bold')
       .text(country.name)
 
-    // Prepare data for stack
     const stackData = country.data
-
-    // Parse dates from "YYYY-MM" format
     const parseDate = d3.timeParse('%Y-%m')
     const formatDate = d3.timeFormat('%Y-%m')
 
-    // Create scales
     const xScale = d3.scaleTime()
       .domain(d3.extent(stackData, d => parseDate(d.date)))
       .range([0, chartWidth])
 
-    // Use pre-calculated stacked data for this country
     const series = allSeries[index]
 
-    // Y scale - using GLOBAL min/max so both charts have proportional scaling
     const yScale = d3.scaleLinear()
       .domain([globalYMin, globalYMax])
       .range([chartHeight, 0])
 
-    // Group data by year for hoverable segments
     const yearGroups = d3.group(stackData, d => d.date.split('-')[0])
     const years = Array.from(yearGroups.keys()).sort()
 
-    // Create a clip path for the stream bounds - encompass entire stream
     const clipId = `stream-clip-${country.name}-${Math.random().toString(36).substr(2, 9)}`
 
-    // Find the envelope of the entire stream (min y0 and max y1 at each point)
     const envelopeData = stackData.map((d, i) => {
       const minY = d3.min(series, s => s[i][0])
       const maxY = d3.max(series, s => s[i][1])
-      return {
-        date: d.date,
-        minY: minY,
-        maxY: maxY
-      }
+      return { date: d.date, minY, maxY }
     })
 
     const area = d3.area()
       .x(d => xScale(parseDate(d.date)))
       .y0(d => yScale(d.minY))
       .y1(d => yScale(d.maxY))
-      .curve(d3.curveMonotoneX)
+      .curve(d3.curveBasis)
 
     g.append('defs')
       .append('clipPath')
@@ -164,32 +174,27 @@ function createChart() {
       .append('path')
       .attr('d', area(envelopeData))
 
-    // Draw individual year segments for each category
-    // Each year is independently hoverable
-    series.forEach((categoryData) => {
+    //
+    // ---------------------------------------------------------
+    //  STREAM SEGMENTS (unchanged)
+    // ---------------------------------------------------------
+    //
+
+    series.forEach(categoryData => {
       const eventType = categoryData.key
       const color = eventColors[eventType] || '#999'
 
-      // Create a segment for each year
-      years.forEach((year, yearIndex) => {
-        // Get all monthly data points for this year
+      years.forEach(year => {
         const yearMonths = yearGroups.get(year)
-
-        // Find indices in the series data
         const startIndex = categoryData.findIndex(d => d.data.date.startsWith(year))
         if (startIndex === -1) return
 
         const endIndex = categoryData.findIndex((d, i) => i > startIndex && !d.data.date.startsWith(year))
         const lastIndex = endIndex === -1 ? categoryData.length - 1 : endIndex - 1
 
-        // Get start and end points for this year
-        const startData = categoryData[startIndex]
-        const endData = categoryData[lastIndex]
-
-        // For the last point, we need to extend to the next data point if it exists
         const nextData = categoryData[lastIndex + 1]
 
-        // Calculate aggregate values for the entire year
+        // totals
         let totalCount = 0
         let totalFatalities = 0
         let totalAllEvents = 0
@@ -205,14 +210,8 @@ function createChart() {
         const avgFatalityRate = totalCount > 0 ? (totalFatalities / totalCount).toFixed(2) : '0.00'
         const percentage = totalAllEvents > 0 ? ((totalCount / totalAllEvents) * 100).toFixed(1) : '0.0'
 
-        // Create path points for the year segment
-        const x0 = xScale(parseDate(startData.data.date))
-        const x1 = nextData ? xScale(parseDate(nextData.data.date)) : xScale(parseDate(endData.data.date))
-
-        // Build path going through all months in the year
         let pathPoints = []
 
-        // Top edge (y1 values) - forward through the year
         for (let i = startIndex; i <= lastIndex; i++) {
           const d = categoryData[i]
           pathPoints.push([xScale(parseDate(d.data.date)), yScale(d[1])])
@@ -221,19 +220,18 @@ function createChart() {
           pathPoints.push([xScale(parseDate(nextData.data.date)), yScale(nextData[1])])
         }
 
-        // Bottom edge (y0 values) - backward through the year
-        const bottomPoints = []
+        const bottom = []
         for (let i = startIndex; i <= lastIndex; i++) {
           const d = categoryData[i]
-          bottomPoints.push([xScale(parseDate(d.data.date)), yScale(d[0])])
+          bottom.push([xScale(parseDate(d.data.date)), yScale(d[0])])
         }
         if (nextData) {
-          bottomPoints.push([xScale(parseDate(nextData.data.date)), yScale(nextData[0])])
+          bottom.push([xScale(parseDate(nextData.data.date)), yScale(nextData[0])])
         }
-        bottomPoints.reverse()
-        pathPoints = pathPoints.concat(bottomPoints)
+        bottom.reverse()
 
-        // Build the path string
+        pathPoints = pathPoints.concat(bottom)
+
         let pathString = `M ${pathPoints[0][0]},${pathPoints[0][1]}`
         for (let i = 1; i < pathPoints.length; i++) {
           pathString += ` L ${pathPoints[i][0]},${pathPoints[i][1]}`
@@ -281,27 +279,12 @@ function createChart() {
       })
     })
 
-    // Add vertical grid lines for years (clipped to stream bounds)
-    const xGrid = d3.axisBottom(xScale)
-      .tickFormat('')
-      .tickSize(-chartHeight)
-      .ticks(d3.timeYear.every(1))
+    //
+    // ---------------------------------------------------------
+    //  AXIS + COVID LINE
+    // ---------------------------------------------------------
+    //
 
-    g.append('g')
-      .attr('class', 'x-grid')
-      .attr('transform', `translate(0,${chartHeight})`)
-      .attr('clip-path', `url(#${clipId})`)
-      .call(xGrid)
-      .selectAll('line')
-      .style('stroke', '#fff')
-      .style('stroke-width', 1.5)
-      .style('opacity', 0.7)
-      .style('pointer-events', 'none')
-
-    // Remove the domain line from the grid
-    g.select('.x-grid .domain').remove()
-
-    // X-axis
     const xAxis = d3.axisBottom(xScale)
       .tickFormat(d3.timeFormat('%Y'))
       .ticks(d3.timeYear.every(1))
@@ -311,7 +294,6 @@ function createChart() {
       .call(xAxis)
       .style('font-size', '12px')
 
-    // Y-axis label (only for left chart - India)
     if (index === 0) {
       g.append('text')
         .attr('transform', 'rotate(-90)')
@@ -322,7 +304,6 @@ function createChart() {
         .text('Number of Events')
     }
 
-    // COVID-19 pandemic declaration reference line (March 11, 2020)
     const covidDate = parseDate('2020-03')
     const covidX = xScale(covidDate)
 
@@ -353,13 +334,32 @@ function createChart() {
       .style('fill', '#666')
       .text('Mar 11, 2020')
 
-    // Add inline labels on the right side for Mexico chart only (second chart)
+    //
+    // ---------------------------------------------------------
+    //  GRIDLINES — ON TOP OF COLORS (Manual lines)
+    // ---------------------------------------------------------
+    //
+
+    years.forEach(year => {
+      const yearDate = parseDate(`${year}-01`)
+      const xPos = xScale(yearDate)
+
+      g.append('line')
+        .attr('x1', xPos)
+        .attr('x2', xPos)
+        .attr('y1', 0)
+        .attr('y2', chartHeight)
+        .style('stroke', '#666')
+        .style('stroke-width', 1.2)
+        .style('opacity', 2.0)
+        .style('pointer-events', 'none')
+        .attr('clip-path', `url(#${clipId})`)
+    })
+
     if (index === 1) {
-      series.forEach((s, i) => {
+      series.forEach(s => {
         const category = s.key
         const lastPoint = s[s.length - 1]
-
-        // Calculate the middle y-position of this stream segment at the end
         const yMid = (yScale(lastPoint[0]) + yScale(lastPoint[1])) / 2
 
         g.append('text')
@@ -369,7 +369,6 @@ function createChart() {
           .attr('dominant-baseline', 'middle')
           .style('font-size', '13px')
           .style('fill', eventColors[category])
-          .style('font-weight', 'normal')
           .text(category)
       })
     }
@@ -382,5 +381,4 @@ function createChart() {
 </template>
 
 <style scoped>
-/* Add any specific styles if needed */
 </style>
