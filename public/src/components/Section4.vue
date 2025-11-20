@@ -10,7 +10,7 @@ import StreamChart from './visualizations/StreamChart.vue'
 
       <StreamChart />
 
-      <div>
+      <div class="two-columns">
         <p>
           When comparing India and Mexico using ACLED raw event-level data, we can see that India’s conflict activity is
           more volatile and protest-driven, while Mexico’s is characterized by persistent violence against civilians and

@@ -12,9 +12,8 @@
 
   /* Default width constraints */
   --container-content-width: 1400px;
-  --text-content-width: 1100px;
-  --container-content-width: 1400px;
-  --text-content-width: 1100px;
+  --content-width: 1100px;
+  --text-content-width: 700px;
 }
 
 * {
@@ -103,14 +102,37 @@ section {
   box-sizing: border-box;
   background: linear-gradient(90deg, #cfcfcf56, #ceb1ce89);
   border-radius: 1rem;
+  gap: 1rem;
 }
 
 .section__inner {
-  max-width: var(--text-content-width);
+  max-width: var(--content-width);
   column-gap: 1rem;
   margin: 0 auto;
   text-align: left;
-  padding: 1rem 2rem;
+  padding: 2rem;
+}
+
+.max-text-width {
+  max-width: var(--text-content-width);
+}
+
+.flex {
+  display: flex;
+  gap: 2rem;
+}
+
+.mx-auto {
+  margin: 0 auto;
+}
+
+.mt-2 {
+  margin-top: 2rem;
+}
+
+.two-columns {
+  column-count: 2;
+  column-gap: 2rem;
 }
 
 div {
@@ -347,6 +369,10 @@ tbody td:last-child {
   padding: 1.5rem;
   margin-top: 1.5rem;
   border-radius: 1rem;
+  height: fit-content;
+  max-width: var(--text-content-width);
+  margin: auto;
+  justify-content: center;
 }
 
 .double-chart {
@@ -405,5 +431,9 @@ tbody td:last-child {
 
   .chart svg {
     margin: 0;
+  }
+
+  .two-columns {
+    column-count: 1;
   }
 }
