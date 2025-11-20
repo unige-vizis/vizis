@@ -45,9 +45,6 @@ onUnmounted(() => {
 function createChart() {
   if (!containerWidth.value || !containerHeight.value || !dataset.value.length) return
 
-  console.log('Creating chart with data:', dataset.value)
-  console.log('Tooltip ref:', tooltipRef.value)
-
   const margin = { top: 60, right: 40, bottom: 80, left: 100 }
   const width = containerWidth.value - margin.left - margin.right
   const height = 210
@@ -137,7 +134,6 @@ function createChart() {
 
   // Draw bubbles for each category
   dataset.value.forEach(categoryData => {
-    console.log('Processing category:', categoryData.category, 'with', categoryData.data_points?.length, 'data points')
 
     if (!categoryData.data_points || categoryData.data_points.length === 0) {
       console.warn('No data_points for category:', categoryData.category)
@@ -195,7 +191,6 @@ function createChart() {
       .attr('stroke', '#000')
       .attr('stroke-width', 0.5)
       .on('mouseover', function(event, d) {
-        console.log('Mouseover:', d.country, d.value)
         d3.select(this)
           .transition()
           .duration(200)
