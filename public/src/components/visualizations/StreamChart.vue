@@ -79,7 +79,8 @@ function createChart() {
   const marginIndia = { top: 65, right: 200, bottom: 50, left: containerWidth.value > 600 ? 15 : 60 }
   let chartWidth = 0
   if( containerWidth.value > 600 ) {
-    chartWidth = (containerWidth.value - margin.left - margin.right) / 2
+    // Account for both charts' margins: Mexico (60+15) + India (15+200) = 290, plus 16px gap
+    chartWidth = (containerWidth.value - marginMexico.left - marginMexico.right - marginIndia.left - marginIndia.right - 16) / 2
   } else {
     chartWidth = containerWidth.value - margin.left - margin.right
   }

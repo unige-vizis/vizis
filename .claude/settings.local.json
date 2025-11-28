@@ -26,7 +26,11 @@
       "Bash(NUL)",
       "Bash(findstr:*)",
       "Bash(copy:*)",
-      "Bash(cp:*)"
+      "Bash(cp:*)",
+      "mcp__ide__getDiagnostics",
+      "Bash(git fetch:*)",
+      "Bash(git stash:*)",
+      "Bash(git stash drop:*)"
     ],
     "deny": [],
     "ask": []
