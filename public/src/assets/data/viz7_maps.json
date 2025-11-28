@@ -10,1423 +10,1097 @@
     {
       "country": "Afghanistan",
       "year": 2023,
-      "primary": 41.89,
-      "gdp_usd": 14266499429.8746,
-      "gdp_per_capita": 346.8739542417788
+      "primary": 41.89
     },
     {
       "country": "Albania",
       "year": 2023,
-      "primary": 26.58,
-      "gdp_usd": 18916378860.5488,
-      "gdp_per_capita": 6810.11404104232
+      "primary": 26.58
     },
     {
       "country": "Algeria",
       "year": 2023,
-      "primary": 29.78,
-      "gdp_usd": 194998449769.085,
-      "gdp_per_capita": 4342.637967965218
+      "primary": 29.78
     },
     {
       "country": "Andorra",
       "year": 2023,
-      "primary": 1.9,
-      "gdp_usd": 3352031094.22914,
-      "gdp_per_capita": 41992.77277797579
+      "primary": 1.9
     },
     {
       "country": "Angola",
       "year": 2023,
-      "primary": 46.78,
-      "gdp_usd": 106782770714.619,
-      "gdp_per_capita": 3000.4442305317375
+      "primary": 46.78
+    },
+    {
+      "country": "Anguilla",
+      "year": 2023,
+      "primary": 5.2
     },
     {
       "country": "Antigua and Barbuda",
       "year": 2023,
-      "primary": 5.49,
-      "gdp_usd": 1867733333.33333,
-      "gdp_per_capita": 19919.726686788283
+      "primary": 5.49
     },
     {
       "country": "Argentina",
       "year": 2023,
-      "primary": 12.8,
-      "gdp_usd": 631133384439.944,
-      "gdp_per_capita": 13650.604629452384
+      "primary": 12.8
     },
     {
       "country": "Armenia",
       "year": 2023,
-      "primary": 15.66,
-      "gdp_usd": 19513474648.2429,
-      "gdp_per_capita": 7018.051504347972
+      "primary": 15.66
     },
     {
       "country": "Aruba",
       "year": 2023,
-      "primary": 4.11,
-      "gdp_usd": 3544707788.05664,
-      "gdp_per_capita": 33300.838818701115
+      "primary": 4.11
     },
     {
       "country": "Australia",
       "year": 2023,
-      "primary": 16.71,
-      "gdp_usd": 1692956646855.7,
-      "gdp_per_capita": 65099.845911898
+      "primary": 16.71
     },
     {
       "country": "Austria",
       "year": 2023,
-      "primary": 5.21,
-      "gdp_usd": 470941926750.741,
-      "gdp_per_capita": 52084.681195337216
+      "primary": 5.21
     },
     {
       "country": "Azerbaijan",
       "year": 2023,
-      "primary": 44.24,
-      "gdp_usd": 78721058823.5294,
-      "gdp_per_capita": 7762.073828588403
+      "primary": 44.24
     },
     {
       "country": "Bahamas",
       "year": 2023,
-      "primary": 4.69,
-      "gdp_usd": 12897400000.0,
-      "gdp_per_capita": 31458.300811738995
+      "primary": 4.69
     },
     {
       "country": "Bahrain",
       "year": 2023,
-      "primary": 17.43,
-      "gdp_usd": 44383297872.3404,
-      "gdp_per_capita": 30146.925026364985
+      "primary": 17.43
     },
     {
       "country": "Bangladesh",
       "year": 2023,
-      "primary": 14.37,
-      "gdp_usd": 460201265527.977,
-      "gdp_per_capita": 2688.3055009073796
+      "primary": 14.37
     },
     {
       "country": "Barbados",
       "year": 2023,
-      "primary": 5.34,
-      "gdp_usd": 5699950000.0,
-      "gdp_per_capita": 20238.784242015376
+      "primary": 5.34
     },
     {
       "country": "Belarus",
       "year": 2023,
-      "primary": 13.33,
-      "gdp_usd": 72793457588.4367,
-      "gdp_per_capita": 7888.263710632125
+      "primary": 13.33
     },
     {
       "country": "Belgium",
       "year": 2023,
-      "primary": 3.51,
-      "gdp_usd": 583435595579.963,
-      "gdp_per_capita": 49926.82542953046
+      "primary": 3.51
     },
     {
       "country": "Belize",
       "year": 2023,
-      "primary": 14.5,
-      "gdp_usd": 2830507575.6841,
-      "gdp_per_capita": 6984.216959681647
+      "primary": 14.5
     },
     {
       "country": "Benin",
       "year": 2023,
-      "primary": 29.49,
-      "gdp_usd": 17396792699.5489,
-      "gdp_per_capita": 1302.8510362682418
+      "primary": 29.49
     },
     {
       "country": "Bermuda",
       "year": 2023,
-      "primary": 1.91,
-      "gdp_usd": 7546000000.0,
-      "gdp_per_capita": 118774.79065667695
+      "primary": 1.91
     },
     {
       "country": "Bhutan",
       "year": 2023,
-      "primary": 29.64,
-      "gdp_usd": 2768003872.54065,
-      "gdp_per_capita": 3537.5885802258913
+      "primary": 29.64
     },
     {
-      "country": "Bolivia (Plurinational State of)",
+      "country": "Bolivia",
       "year": 2023,
-      "primary": 27.91,
-      "gdp_usd": 44008282877.9606,
-      "gdp_per_capita": 3600.1216348642643
+      "primary": 27.91
     },
     {
-      "country": "Bosnia and Herzegovina",
+      "country": "Bosnia and Herz.",
       "year": 2023,
-      "primary": 13.03,
-      "gdp_usd": 24473906673.7086,
-      "gdp_per_capita": 7568.798479959214
+      "primary": 13.03
     },
     {
       "country": "Botswana",
       "year": 2023,
-      "primary": 20.19,
-      "gdp_usd": 20355541962.8512,
-      "gdp_per_capita": 7738.87880407802
+      "primary": 20.19
     },
     {
       "country": "Brazil",
       "year": 2023,
-      "primary": 13.64,
-      "gdp_usd": 1920095779022.73,
-      "gdp_per_capita": 8917.674910574951
+      "primary": 13.64
     },
     {
-      "country": "Brunei Darussalam",
+      "country": "British Virgin Islands",
       "year": 2023,
-      "primary": 41.32,
-      "gdp_usd": 16681536466.7183,
-      "gdp_per_capita": 37152.47697497628
+      "primary": 1.46
+    },
+    {
+      "country": "Brunei",
+      "year": 2023,
+      "primary": 41.32
     },
     {
       "country": "Bulgaria",
       "year": 2023,
-      "primary": 8.99,
-      "gdp_usd": 90346169914.9349,
-      "gdp_per_capita": 13974.449248779238
+      "primary": 8.99
     },
     {
       "country": "Burkina Faso",
       "year": 2023,
-      "primary": 35.59,
-      "gdp_usd": 18820064797.8379,
-      "gdp_per_capita": 830.0371503342894
+      "primary": 35.59
     },
     {
       "country": "Burundi",
       "year": 2023,
-      "primary": 34.44,
-      "gdp_usd": 3338722827.66241,
-      "gdp_per_capita": 259.025031363515
+      "primary": 34.44
     },
     {
       "country": "Cabo Verde",
       "year": 2023,
-      "primary": 7.55,
-      "gdp_usd": 2226862134.08787,
-      "gdp_per_capita": 3754.304793716031
+      "primary": 7.55
     },
     {
       "country": "Cambodia",
       "year": 2023,
-      "primary": 21.36,
-      "gdp_usd": 29504829319.3169,
-      "gdp_per_capita": 1759.608023460437
+      "primary": 21.36
     },
     {
       "country": "Cameroon",
       "year": 2023,
-      "primary": 24.46,
-      "gdp_usd": 43644068310.851,
-      "gdp_per_capita": 1563.4889403445932
+      "primary": 24.46
     },
     {
       "country": "Canada",
       "year": 2023,
-      "primary": 9.31,
-      "gdp_usd": 2161483369422.01,
-      "gdp_per_capita": 55522.44568768783
+      "primary": 9.31
     },
     {
       "country": "Cayman Islands",
       "year": 2023,
-      "primary": 3.18,
-      "gdp_usd": 6844827379.30952,
-      "gdp_per_capita": 99624.88544391349
+      "primary": 3.18
     },
     {
-      "country": "Central African Republic",
+      "country": "Central African Rep.",
       "year": 2023,
-      "primary": 32.83,
-      "gdp_usd": 2382618615.01694,
-      "gdp_per_capita": 427.0580961912688
+      "primary": 32.83
     },
     {
       "country": "Chad",
       "year": 2023,
-      "primary": 59.64,
-      "gdp_usd": 12704149840.2283,
-      "gdp_per_capita": 716.8043811345846
+      "primary": 59.64
     },
     {
       "country": "Chile",
       "year": 2023,
-      "primary": 20.25,
-      "gdp_usd": 301024724911.923,
-      "gdp_per_capita": 15355.479740104753
+      "primary": 20.25
     },
     {
       "country": "China",
       "year": 2023,
-      "primary": 12.29,
-      "gdp_usd": 17963171479205.3,
-      "gdp_per_capita": 12720.216318236267
+      "primary": 12.29
     },
     {
       "country": "China, Hong Kong SAR",
       "year": 2023,
-      "primary": 1.22,
-      "gdp_usd": 359838583490.063,
-      "gdp_per_capita": 48983.621716293404
+      "primary": 1.22
     },
     {
       "country": "Colombia",
       "year": 2023,
-      "primary": 20.48,
-      "gdp_usd": 343622114560.409,
-      "gdp_per_capita": 6624.165392690742
+      "primary": 20.48
     },
     {
       "country": "Comoros",
       "year": 2023,
-      "primary": 38.13,
-      "gdp_usd": 1242519407.27815,
-      "gdp_per_capita": 1484.8924647254219
+      "primary": 38.13
     },
     {
       "country": "Congo",
       "year": 2023,
-      "primary": 40.48,
-      "gdp_usd": 15816996654.5788,
-      "gdp_per_capita": 2649.2250223064225
+      "primary": 40.48
+    },
+    {
+      "country": "Cook Islands",
+      "year": 2023,
+      "primary": 2.64
     },
     {
       "country": "Costa Rica",
       "year": 2023,
-      "primary": 7.19,
-      "gdp_usd": 69243626028.6696,
-      "gdp_per_capita": 13365.356399269229
+      "primary": 7.19
     },
     {
       "country": "Croatia",
       "year": 2023,
-      "primary": 7.78,
-      "gdp_usd": 71600049650.195,
-      "gdp_per_capita": 18570.403996834477
+      "primary": 7.78
     },
     {
       "country": "Cuba",
       "year": 2023,
-      "primary": 4.03,
-      "gdp_usd": 107351800000.0,
-      "gdp_per_capita": 9574.560404830778
+      "primary": 4.03
     },
     {
       "country": "Curaçao",
       "year": 2023,
-      "primary": 5.93,
-      "gdp_usd": 3075180834.72417,
-      "gdp_per_capita": 20501.752278221888
+      "primary": 5.93
     },
     {
       "country": "Cyprus",
       "year": 2023,
-      "primary": 3.26,
-      "gdp_usd": 29250524418.0855,
-      "gdp_per_capita": 23372.596795243342
+      "primary": 3.26
     },
     {
       "country": "Czechia",
       "year": 2023,
-      "primary": 7.83,
-      "gdp_usd": 290565654835.809,
-      "gdp_per_capita": 27226.615638602292
+      "primary": 7.83
+    },
+    {
+      "country": "Czechoslovakia (Former)",
+      "year": 1990,
+      "primary": 7.59
     },
     {
       "country": "Côte d'Ivoire",
       "year": 2023,
-      "primary": 20.56,
-      "gdp_usd": 70018715016.8293,
-      "gdp_per_capita": 2486.412193942478
+      "primary": 20.56
     },
     {
-      "country": "D.R. of the Congo",
+      "country": "North Korea",
       "year": 2023,
-      "primary": 46.13,
-      "gdp_usd": 64718641221.216,
-      "gdp_per_capita": 653.6562230693537
+      "primary": 36.47
+    },
+    {
+      "country": "Dem. Rep. Congo",
+      "year": 2023,
+      "primary": 46.13
     },
     {
       "country": "Denmark",
       "year": 2023,
-      "primary": 4.25,
-      "gdp_usd": 400167196948.707,
-      "gdp_per_capita": 67790.0539923275
+      "primary": 4.25
     },
     {
       "country": "Djibouti",
       "year": 2023,
-      "primary": 6.58,
-      "gdp_usd": 3515108859.95465,
-      "gdp_per_capita": 3136.112768048729
+      "primary": 6.58
     },
     {
       "country": "Dominica",
       "year": 2023,
-      "primary": 23.56,
-      "gdp_usd": 607440740.740741,
-      "gdp_per_capita": 8351.193213092938
+      "primary": 23.56
     },
     {
-      "country": "Dominican Republic",
+      "country": "Dominican Rep.",
       "year": 2023,
-      "primary": 9.64,
-      "gdp_usd": 113537368176.13,
-      "gdp_per_capita": 10111.245711026118
+      "primary": 9.64
     },
     {
       "country": "Ecuador",
       "year": 2023,
-      "primary": 19.24,
-      "gdp_usd": 115049476000.0,
-      "gdp_per_capita": 6391.282484306427
+      "primary": 19.24
     },
     {
       "country": "Egypt",
       "year": 2023,
-      "primary": 21.51,
-      "gdp_usd": 476747720364.742,
-      "gdp_per_capita": 4295.407495610145
+      "primary": 21.51
     },
     {
       "country": "El Salvador",
       "year": 2023,
-      "primary": 9.85,
-      "gdp_usd": 32488720000.0,
-      "gdp_per_capita": 5127.321668230122
+      "primary": 9.85
     },
     {
-      "country": "Equatorial Guinea",
+      "country": "Eq. Guinea",
       "year": 2023,
-      "primary": 27.32,
-      "gdp_usd": 12029633746.519,
-      "gdp_per_capita": 7182.265382050237
+      "primary": 27.32
     },
     {
       "country": "Eritrea",
       "year": 2023,
-      "primary": 26.83,
-      "gdp_usd": 2065001626.01626,
-      "gdp_per_capita": 560.5276029134003
+      "primary": 26.83
     },
     {
       "country": "Estonia",
       "year": 2023,
-      "primary": 7.08,
-      "gdp_usd": 38100812958.5196,
-      "gdp_per_capita": 28247.09599249696
+      "primary": 7.08
     },
     {
       "country": "Eswatini",
       "year": 2023,
-      "primary": 11.34,
-      "gdp_usd": 4790922065.6101,
-      "gdp_per_capita": 3986.886637437982
+      "primary": 11.34
     },
     {
       "country": "Ethiopia",
       "year": 2023,
-      "primary": 37.77,
-      "gdp_usd": 126783471597.671,
-      "gdp_per_capita": 1027.5859109596388
+      "primary": 37.77
+    },
+    {
+      "country": "Ethiopia (Former)",
+      "year": 1993,
+      "primary": 45.65
     },
     {
       "country": "Fiji",
       "year": 2023,
-      "primary": 17.01,
-      "gdp_usd": 4979979546.0123,
-      "gdp_per_capita": 5356.164396216144
+      "primary": 17.01
     },
     {
       "country": "Finland",
       "year": 2023,
-      "primary": 6.67,
-      "gdp_usd": 282649838009.729,
-      "gdp_per_capita": 50871.930450882144
+      "primary": 6.67
+    },
+    {
+      "country": "Former Netherlands Antilles",
+      "year": 2012,
+      "primary": 4.21
     },
     {
       "country": "France",
       "year": 2023,
-      "primary": 6.02,
-      "gdp_usd": 2779092236505.85,
-      "gdp_per_capita": 40886.2532680273
+      "primary": 6.02
     },
     {
       "country": "French Polynesia",
       "year": 2023,
-      "primary": 5.67,
-      "gdp_usd": 5814661208.90544,
-      "gdp_per_capita": 18984.851096240487
+      "primary": 5.67
     },
     {
       "country": "Gabon",
       "year": 2023,
-      "primary": 48.35,
-      "gdp_usd": 21071739224.8918,
-      "gdp_per_capita": 8820.347336823146
+      "primary": 48.35
     },
     {
       "country": "Gambia",
       "year": 2023,
-      "primary": 28.19,
-      "gdp_usd": 2187194563.48605,
-      "gdp_per_capita": 808.2782814901338
+      "primary": 28.19
     },
     {
       "country": "Georgia",
       "year": 2023,
-      "primary": 11.38,
-      "gdp_usd": 24780791063.7131,
-      "gdp_per_capita": 6674.956959945907
+      "primary": 11.38
     },
     {
       "country": "Germany",
       "year": 2023,
-      "primary": 4.65,
-      "gdp_usd": 4082469490797.68,
-      "gdp_per_capita": 48717.99114021274
+      "primary": 4.65
     },
     {
       "country": "Ghana",
       "year": 2023,
-      "primary": 36.96,
-      "gdp_usd": 73766052451.5256,
-      "gdp_per_capita": 2203.558935183032
+      "primary": 36.96
     },
     {
       "country": "Greece",
       "year": 2023,
-      "primary": 9.21,
-      "gdp_usd": 217581324512.059,
-      "gdp_per_capita": 20867.269086108656
+      "primary": 9.21
     },
     {
       "country": "Greenland",
       "year": 2023,
-      "primary": 21.43,
-      "gdp_usd": 3235809504.29871,
-      "gdp_per_capita": 57108.2314872436
+      "primary": 21.43
     },
     {
       "country": "Grenada",
       "year": 2023,
-      "primary": 7.93,
-      "gdp_usd": 1215379155.67282,
-      "gdp_per_capita": 9689.082699603152
+      "primary": 7.93
     },
     {
       "country": "Guatemala",
       "year": 2023,
-      "primary": 13.39,
-      "gdp_usd": 95003330315.8754,
-      "gdp_per_capita": 5473.208564445889
+      "primary": 13.39
     },
     {
       "country": "Guinea",
       "year": 2023,
-      "primary": 48.37,
-      "gdp_usd": 20999229260.4955,
-      "gdp_per_capita": 1515.1679477758357
+      "primary": 48.37
     },
     {
       "country": "Guinea-Bissau",
       "year": 2023,
-      "primary": 48.8,
-      "gdp_usd": 1633559092.08861,
-      "gdp_per_capita": 775.8289657453672
+      "primary": 48.8
     },
     {
       "country": "Guyana",
       "year": 2023,
-      "primary": 73.09,
-      "gdp_usd": 14718388489.2086,
-      "gdp_per_capita": 18199.474839696755
+      "primary": 73.09
     },
     {
       "country": "Haiti",
       "year": 2023,
-      "primary": 20.74,
-      "gdp_usd": 20253551884.6055,
-      "gdp_per_capita": 1748.257132294694
+      "primary": 20.74
     },
     {
       "country": "Honduras",
       "year": 2023,
-      "primary": 16.8,
-      "gdp_usd": 31717699764.3621,
-      "gdp_per_capita": 3040.173045968421
+      "primary": 16.8
     },
     {
       "country": "Hungary",
       "year": 2023,
-      "primary": 6.64,
-      "gdp_usd": 177337436677.365,
-      "gdp_per_capita": 18390.18499932438
+      "primary": 6.64
     },
     {
       "country": "Iceland",
       "year": 2023,
-      "primary": 9.26,
-      "gdp_usd": 28064529851.3098,
-      "gdp_per_capita": 73466.77866747067
+      "primary": 9.26
     },
     {
       "country": "India",
       "year": 2023,
-      "primary": 22.1,
-      "gdp_usd": 3416645826052.87,
-      "gdp_per_capita": 2410.888020706888
+      "primary": 22.1
     },
     {
       "country": "Indonesia",
       "year": 2023,
-      "primary": 25.26,
-      "gdp_usd": 1319100220407.72,
-      "gdp_per_capita": 4787.999307719227
+      "primary": 25.26
     },
     {
-      "country": "Iran (Islamic Republic of)",
+      "country": "Iran",
       "year": 2023,
-      "primary": 25.15,
-      "gdp_usd": 413493207349.265,
-      "gdp_per_capita": 4669.571379938774
+      "primary": 25.15
     },
     {
       "country": "Iraq",
       "year": 2023,
-      "primary": 48.81,
-      "gdp_usd": 264182173793.103,
-      "gdp_per_capita": 5937.1954660027
+      "primary": 48.81
     },
     {
       "country": "Ireland",
       "year": 2023,
-      "primary": 2.26,
-      "gdp_usd": 533140011838.276,
-      "gdp_per_capita": 103983.29133581996
+      "primary": 2.26
     },
     {
       "country": "Israel",
       "year": 2023,
-      "primary": 2.99,
-      "gdp_usd": 525002447652.773,
-      "gdp_per_capita": 54930.9388075096
+      "primary": 2.99
     },
     {
       "country": "Italy",
       "year": 2023,
-      "primary": 4.73,
-      "gdp_usd": 2049737165407.98,
-      "gdp_per_capita": 34776.42323427393
+      "primary": 4.73
     },
     {
       "country": "Jamaica",
       "year": 2023,
-      "primary": 14.92,
-      "gdp_usd": 17097760723.9201,
-      "gdp_per_capita": 6047.216456779587
+      "primary": 14.92
     },
     {
       "country": "Japan",
       "year": 2023,
-      "primary": 3.92,
-      "gdp_usd": 4256410760723.75,
-      "gdp_per_capita": 34017.27180750242
+      "primary": 3.92
     },
     {
       "country": "Jordan",
       "year": 2023,
-      "primary": 9.94,
-      "gdp_usd": 48653381780.6397,
-      "gdp_per_capita": 4311.000046220605
+      "primary": 9.94
     },
     {
       "country": "Kazakhstan",
       "year": 2023,
-      "primary": 20.25,
-      "gdp_usd": 225496328925.494,
-      "gdp_per_capita": 11492.031938762017
+      "primary": 20.25
     },
     {
       "country": "Kenya",
       "year": 2023,
-      "primary": 25.95,
-      "gdp_usd": 113420008178.793,
-      "gdp_per_capita": 2099.3019382669604
+      "primary": 25.95
     },
     {
       "country": "Kiribati",
       "year": 2023,
-      "primary": 27.16,
-      "gdp_usd": 223353014.294593,
-      "gdp_per_capita": 1701.9706648880838
+      "primary": 27.16
     },
     {
       "country": "Kosovo",
       "year": 2023,
-      "primary": 15.68,
-      "gdp_usd": 9409473517.95304,
-      "gdp_per_capita": 5340.268797948359
+      "primary": 15.68
     },
     {
       "country": "Kuwait",
       "year": 2023,
-      "primary": 44.65,
-      "gdp_usd": 175363265306.122,
-      "gdp_per_capita": 41079.522699813744
+      "primary": 44.65
     },
     {
       "country": "Kyrgyzstan",
       "year": 2023,
-      "primary": 15.69,
-      "gdp_usd": 11543966558.842,
-      "gdp_per_capita": 1655.072697650432
+      "primary": 15.69
     },
     {
-      "country": "Lao People's DR",
+      "country": "Laos",
       "year": 2023,
-      "primary": 38.61,
-      "gdp_usd": 15468785203.7532,
-      "gdp_per_capita": 2054.430780864961
+      "primary": 38.61
     },
     {
       "country": "Latvia",
       "year": 2023,
-      "primary": 9.87,
-      "gdp_usd": 40932030049.5644,
-      "gdp_per_capita": 21779.504257282522
+      "primary": 9.87
     },
     {
       "country": "Lebanon",
       "year": 2023,
-      "primary": 7.5,
-      "gdp_usd": 23131941556.7843,
-      "gdp_per_capita": 4213.668729384822
+      "primary": 7.5
     },
     {
       "country": "Lesotho",
       "year": 2023,
-      "primary": 21.97,
-      "gdp_usd": 2236502124.16956,
-      "gdp_per_capita": 969.9357601594049
+      "primary": 21.97
     },
     {
       "country": "Liberia",
       "year": 2023,
-      "primary": 36.43,
-      "gdp_usd": 4001046970.0,
-      "gdp_per_capita": 754.5328429147445
+      "primary": 36.43
     },
     {
       "country": "Libya",
       "year": 2023,
-      "primary": 41.35,
-      "gdp_usd": 45752336035.9846,
-      "gdp_per_capita": 6716.095984623288
+      "primary": 41.35
     },
     {
       "country": "Liechtenstein",
       "year": 2023,
-      "primary": 1.51,
-      "gdp_usd": 7710380085.92257,
-      "gdp_per_capita": 196058.18104413178
+      "primary": 1.51
     },
     {
       "country": "Lithuania",
       "year": 2023,
-      "primary": 6.4,
-      "gdp_usd": 70974490450.4944,
-      "gdp_per_capita": 25064.80891472903
+      "primary": 6.4
     },
     {
       "country": "Luxembourg",
       "year": 2023,
-      "primary": 2.15,
-      "gdp_usd": 81641807865.7591,
-      "gdp_per_capita": 125006.0218154856
+      "primary": 2.15
     },
     {
       "country": "Madagascar",
       "year": 2023,
-      "primary": 28.8,
-      "gdp_usd": 15297192798.9771,
-      "gdp_per_capita": 516.5926159822124
+      "primary": 28.8
     },
     {
       "country": "Malawi",
       "year": 2023,
-      "primary": 31.46,
-      "gdp_usd": 13164667626.9363,
-      "gdp_per_capita": 645.1586920671853
+      "primary": 31.46
     },
     {
       "country": "Malaysia",
       "year": 2023,
-      "primary": 18.97,
-      "gdp_usd": 407027451714.616,
-      "gdp_per_capita": 11993.187613299355
+      "primary": 18.97
     },
     {
       "country": "Maldives",
       "year": 2023,
-      "primary": 8.15,
-      "gdp_usd": 6170638746.965,
-      "gdp_per_capita": 11780.816910242142
+      "primary": 8.15
     },
     {
       "country": "Mali",
       "year": 2023,
-      "primary": 38.8,
-      "gdp_usd": 18827176529.6983,
-      "gdp_per_capita": 833.2972550930729
+      "primary": 38.8
     },
     {
       "country": "Malta",
       "year": 2023,
-      "primary": 1.37,
-      "gdp_usd": 18125564514.2664,
-      "gdp_per_capita": 34127.51055663559
+      "primary": 1.37
     },
     {
       "country": "Marshall Islands",
       "year": 2023,
-      "primary": 23.55,
-      "gdp_usd": 258774475.097656,
-      "gdp_per_capita": 6225.1792224411465
+      "primary": 23.55
     },
     {
       "country": "Mauritania",
       "year": 2023,
-      "primary": 42.48,
-      "gdp_usd": 9780863578.97688,
-      "gdp_per_capita": 2065.1555157010553
+      "primary": 42.48
     },
     {
       "country": "Mauritius",
       "year": 2023,
-      "primary": 6.48,
-      "gdp_usd": 12948726653.811,
-      "gdp_per_capita": 10256.230305357605
+      "primary": 6.48
     },
     {
       "country": "Mexico",
       "year": 2023,
-      "primary": 9.99,
-      "gdp_usd": 1465854089286.47,
-      "gdp_per_capita": 11496.522871604899
+      "primary": 9.99
     },
     {
       "country": "Micronesia (FS of)",
       "year": 2023,
-      "primary": 26.07,
-      "gdp_usd": 424000000.0,
-      "gdp_per_capita": 3713.955362461021
+      "primary": 26.07
     },
     {
       "country": "Mongolia",
       "year": 2023,
-      "primary": 44.57,
-      "gdp_usd": 17146471626.3963,
-      "gdp_per_capita": 5045.504700316652
+      "primary": 44.57
     },
     {
       "country": "Montenegro",
       "year": 2023,
-      "primary": 14.42,
-      "gdp_usd": 6229801580.79157,
-      "gdp_per_capita": 10093.438700726605
+      "primary": 14.42
+    },
+    {
+      "country": "Montserrat",
+      "year": 2023,
+      "primary": 5.74
     },
     {
       "country": "Morocco",
       "year": 2023,
-      "primary": 17.3,
-      "gdp_usd": 130912558829.84,
-      "gdp_per_capita": 3494.9185803427526
+      "primary": 17.3
     },
     {
       "country": "Mozambique",
       "year": 2023,
-      "primary": 44.25,
-      "gdp_usd": 18406835954.6695,
-      "gdp_per_capita": 558.2986064482197
+      "primary": 44.25
     },
     {
       "country": "Myanmar",
       "year": 2023,
-      "primary": 26.55,
-      "gdp_usd": 62263466263.7375,
-      "gdp_per_capita": 1149.2112184629589
+      "primary": 26.55
     },
     {
       "country": "Namibia",
       "year": 2023,
-      "primary": 27.59,
-      "gdp_usd": 12914932655.685,
-      "gdp_per_capita": 5031.115030114779
+      "primary": 27.59
     },
     {
       "country": "Nauru",
       "year": 2023,
-      "primary": 16.35,
-      "gdp_usd": 151647846.128953,
-      "gdp_per_capita": 11970.938279835254
+      "primary": 16.35
     },
     {
       "country": "Nepal",
       "year": 2023,
-      "primary": 26.51,
-      "gdp_usd": 40828247303.5337,
-      "gdp_per_capita": 1336.5460472984669
+      "primary": 26.51
     },
     {
       "country": "Netherlands",
       "year": 2023,
-      "primary": 5.64,
-      "gdp_usd": 1009398719033.08,
-      "gdp_per_capita": 57025.012455980126
+      "primary": 5.64
     },
     {
       "country": "New Caledonia",
       "year": 2023,
-      "primary": 4.21,
-      "gdp_usd": 9623318718.31459,
-      "gdp_per_capita": 35745.185046856066
+      "primary": 4.21
     },
     {
       "country": "New Zealand",
       "year": 2023,
-      "primary": 9.42,
-      "gdp_usd": 248101705541.399,
-      "gdp_per_capita": 48418.59166319919
+      "primary": 9.42
     },
     {
       "country": "Nicaragua",
       "year": 2023,
-      "primary": 26.92,
-      "gdp_usd": 15671583939.9889,
-      "gdp_per_capita": 2255.425994962417
+      "primary": 26.92
     },
     {
       "country": "Niger",
       "year": 2023,
-      "primary": 59.39,
-      "gdp_usd": 15342278919.4009,
-      "gdp_per_capita": 585.4049291710268
+      "primary": 59.39
     },
     {
       "country": "Nigeria",
       "year": 2023,
-      "primary": 31.1,
-      "gdp_usd": 472624597402.898,
-      "gdp_per_capita": 2162.6337342857696
+      "primary": 31.1
     },
     {
-      "country": "North Macedonia",
+      "country": "Macedonia",
       "year": 2023,
-      "primary": 12.08,
-      "gdp_usd": 13563132102.1663,
-      "gdp_per_capita": 6591.471314119598
+      "primary": 12.08
     },
     {
       "country": "Norway",
       "year": 2023,
-      "primary": 33.62,
-      "gdp_usd": 593348981537.661,
-      "gdp_per_capita": 108729.18690322967
+      "primary": 33.62
     },
     {
       "country": "Oman",
       "year": 2023,
-      "primary": 39.75,
-      "gdp_usd": 114667360208.062,
-      "gdp_per_capita": 25056.794860837734
+      "primary": 39.75
     },
     {
       "country": "Pakistan",
       "year": 2023,
-      "primary": 29.49,
-      "gdp_usd": 374697366359.244,
-      "gdp_per_capita": 1588.8798287910968
+      "primary": 29.49
     },
     {
       "country": "Palau",
       "year": 2023,
-      "primary": 7.39,
-      "gdp_usd": 232903015.625,
-      "gdp_per_capita": 12899.64085433398
+      "primary": 7.39
     },
     {
       "country": "Panama",
       "year": 2023,
-      "primary": 8.5,
-      "gdp_usd": 76522511800.0,
-      "gdp_per_capita": 17357.628633793956
+      "primary": 8.5
     },
     {
       "country": "Papua New Guinea",
       "year": 2023,
-      "primary": 47.2,
-      "gdp_usd": 31603619041.7903,
-      "gdp_per_capita": 3115.9229230428846
+      "primary": 47.2
     },
     {
       "country": "Paraguay",
       "year": 2023,
-      "primary": 19.07,
-      "gdp_usd": 41722295229.2279,
-      "gdp_per_capita": 6153.055657200433
+      "primary": 19.07
     },
     {
       "country": "Peru",
       "year": 2023,
-      "primary": 23.31,
-      "gdp_usd": 242631573320.79,
-      "gdp_per_capita": 7125.829931357466
+      "primary": 23.31
     },
     {
       "country": "Philippines",
       "year": 2023,
-      "primary": 13.82,
-      "gdp_usd": 404284326110.463,
-      "gdp_per_capita": 3498.5098055874037
+      "primary": 13.82
     },
     {
       "country": "Poland",
       "year": 2023,
-      "primary": 10.7,
-      "gdp_usd": 688125010520.52,
-      "gdp_per_capita": 18688.004486710288
+      "primary": 10.7
     },
     {
       "country": "Portugal",
       "year": 2023,
-      "primary": 4.87,
-      "gdp_usd": 255196660987.427,
-      "gdp_per_capita": 24515.265850731874
+      "primary": 4.87
     },
     {
       "country": "Puerto Rico",
       "year": 2023,
-      "primary": 2.89,
-      "gdp_usd": 113434800000.0,
-      "gdp_per_capita": 35208.637188841356
+      "primary": 2.89
     },
     {
       "country": "Qatar",
       "year": 2023,
-      "primary": 38.24,
-      "gdp_usd": 236258302839.653,
-      "gdp_per_capita": 87661.45014572736
+      "primary": 38.24
     },
     {
-      "country": "Republic of Korea",
+      "country": "South Korea",
       "year": 2023,
-      "primary": 3.55,
-      "gdp_usd": 1673916469026.56,
-      "gdp_per_capita": 32422.57448642878
+      "primary": 3.55
     },
     {
-      "country": "Republic of Moldova",
+      "country": "Moldova",
       "year": 2023,
-      "primary": 14.05,
-      "gdp_usd": 14508333280.4233,
-      "gdp_per_capita": 5714.4304884029425
+      "primary": 14.05
     },
     {
       "country": "Romania",
       "year": 2023,
-      "primary": 11.34,
-      "gdp_usd": 300691354864.855,
-      "gdp_per_capita": 15786.801742197686
+      "primary": 11.34
     },
     {
-      "country": "Russian Federation",
+      "country": "Russia",
       "year": 2023,
-      "primary": 17.44,
-      "gdp_usd": 2240422427458.58,
-      "gdp_per_capita": 15532.931689961682
+      "primary": 17.44
     },
     {
       "country": "Rwanda",
       "year": 2023,
-      "primary": 32.41,
-      "gdp_usd": 13311487445.0686,
-      "gdp_per_capita": 966.2320713619911
+      "primary": 32.41
     },
     {
       "country": "Saint Kitts and Nevis",
       "year": 2023,
-      "primary": 2.92,
-      "gdp_usd": 965638864.921867,
-      "gdp_per_capita": 20262.267136451457
+      "primary": 2.92
     },
     {
       "country": "Saint Lucia",
       "year": 2023,
-      "primary": 3.82,
-      "gdp_usd": 2343703703.7037,
-      "gdp_per_capita": 13030.928480424449
+      "primary": 3.82
     },
     {
       "country": "Samoa",
       "year": 2023,
-      "primary": 14.17,
-      "gdp_usd": 832945205.637185,
-      "gdp_per_capita": 3745.5603674631266
+      "primary": 14.17
     },
     {
       "country": "San Marino",
       "year": 2023,
-      "primary": 0.01,
-      "gdp_usd": 1855382833.1165,
-      "gdp_per_capita": 55121.29628985442
+      "primary": 0.01
     },
     {
       "country": "Sao Tome and Principe",
       "year": 2023,
-      "primary": 15.7,
-      "gdp_usd": 542686976.457587,
-      "gdp_per_capita": 2386.6961758183966
+      "primary": 15.7
     },
     {
       "country": "Saudi Arabia",
       "year": 2023,
-      "primary": 31.36,
-      "gdp_usd": 1108571517285.38,
-      "gdp_per_capita": 30447.883707447258
+      "primary": 31.36
     },
     {
       "country": "Senegal",
       "year": 2023,
-      "primary": 27.1,
-      "gdp_usd": 27684264748.2324,
-      "gdp_per_capita": 1598.726433360119
+      "primary": 27.1
     },
     {
       "country": "Serbia",
       "year": 2023,
-      "primary": 14.28,
-      "gdp_usd": 63563401043.5044,
-      "gdp_per_capita": 9537.682866731278
+      "primary": 14.28
     },
     {
       "country": "Seychelles",
       "year": 2023,
-      "primary": 6.15,
-      "gdp_usd": 1588438144.37685,
-      "gdp_per_capita": 13250.45583323754
+      "primary": 6.15
     },
     {
       "country": "Sierra Leone",
       "year": 2023,
-      "primary": 40.9,
-      "gdp_usd": 4094563859.43556,
-      "gdp_per_capita": 475.79572784462147
+      "primary": 40.9
     },
     {
       "country": "Singapore",
       "year": 2023,
-      "primary": 1.54,
-      "gdp_usd": 466788426791.966,
-      "gdp_per_capita": 82807.62906228963
+      "primary": 1.54
     },
     {
       "country": "Slovakia",
       "year": 2023,
-      "primary": 7.09,
-      "gdp_usd": 115461711688.965,
-      "gdp_per_capita": 21256.80842736653
+      "primary": 7.09
     },
     {
       "country": "Slovenia",
       "year": 2023,
-      "primary": 6.11,
-      "gdp_usd": 60063475466.3446,
-      "gdp_per_capita": 28439.334098968742
+      "primary": 6.11
     },
     {
-      "country": "Solomon Islands",
+      "country": "Solomon Is.",
       "year": 2023,
-      "primary": 37.46,
-      "gdp_usd": 1597204340.62902,
-      "gdp_per_capita": 2205.2518050914778
+      "primary": 37.46
     },
     {
       "country": "Somalia",
       "year": 2023,
-      "primary": 60.86,
-      "gdp_usd": 10419541202.0382,
-      "gdp_per_capita": 592.1031219720903
+      "primary": 60.86
     },
     {
       "country": "South Africa",
       "year": 2023,
-      "primary": 13.27,
-      "gdp_usd": 405270850099.387,
-      "gdp_per_capita": 6766.481254294776
+      "primary": 13.27
     },
     {
-      "country": "South Sudan",
+      "country": "S. Sudan",
       "year": 2023,
-      "primary": 48.81,
-      "gdp_usd": 11997800760.2242,
-      "gdp_per_capita": 1099.3879282144205
+      "primary": 48.81
     },
     {
       "country": "Spain",
       "year": 2023,
-      "primary": 6.94,
-      "gdp_usd": 1417800466262.65,
-      "gdp_per_capita": 29674.5442864413
+      "primary": 6.94
     },
     {
       "country": "Sri Lanka",
       "year": 2023,
-      "primary": 11.53,
-      "gdp_usd": 74403578363.4355,
-      "gdp_per_capita": 3354.3834075756504
+      "primary": 11.53
     },
     {
       "country": "St. Vincent and the Grenadines",
       "year": 2023,
-      "primary": 8.66,
-      "gdp_usd": 948559259.259259,
-      "gdp_per_capita": 9125.324770647429
+      "primary": 8.66
     },
     {
-      "country": "State of Palestine",
+      "country": "Palestine",
       "year": 2023,
-      "primary": 9.54,
-      "gdp_usd": 19111900000.0,
-      "gdp_per_capita": 3789.327965751529
+      "primary": 9.54
     },
     {
       "country": "Sudan",
       "year": 2023,
-      "primary": 15.03,
-      "gdp_usd": 51662241775.0629,
-      "gdp_per_capita": 1102.1465404524608
+      "primary": 15.03
+    },
+    {
+      "country": "Sudan (Former)",
+      "year": 2010,
+      "primary": 44.6
     },
     {
       "country": "Suriname",
       "year": 2023,
-      "primary": 15.86,
-      "gdp_usd": 3620987993.32637,
-      "gdp_per_capita": 5858.82466074424
+      "primary": 15.86
     },
     {
       "country": "Sweden",
       "year": 2023,
-      "primary": 4.56,
-      "gdp_usd": 591718144602.141,
-      "gdp_per_capita": 56424.284698668656
+      "primary": 4.56
     },
     {
       "country": "Switzerland",
       "year": 2023,
-      "primary": 2.69,
-      "gdp_usd": 818426550206.45,
-      "gdp_per_capita": 93259.90571830246
+      "primary": 2.69
     },
     {
-      "country": "Syrian Arab Republic",
+      "country": "Syria",
       "year": 2023,
-      "primary": 52.79,
-      "gdp_usd": 8969512933.38826,
-      "gdp_per_capita": 405.39715206767886
+      "primary": 52.79
     },
     {
       "country": "Tajikistan",
       "year": 2023,
-      "primary": 35.41,
-      "gdp_usd": 10492123387.7931,
-      "gdp_per_capita": 1054.1894835881749
+      "primary": 35.41
     },
     {
       "country": "Thailand",
       "year": 2023,
-      "primary": 14.09,
-      "gdp_usd": 495423343049.622,
-      "gdp_per_capita": 6909.95628479481
+      "primary": 14.09
     },
     {
       "country": "Timor-Leste",
       "year": 2023,
-      "primary": 29.66,
-      "gdp_usd": 3204753000.0,
-      "gdp_per_capita": 2389.295875034295
+      "primary": 29.66
     },
     {
       "country": "Togo",
       "year": 2023,
-      "primary": 24.86,
-      "gdp_usd": 8341225241.45693,
-      "gdp_per_capita": 942.649901579535
+      "primary": 24.86
     },
     {
       "country": "Tonga",
       "year": 2023,
-      "primary": 24.4,
-      "gdp_usd": 469228219.665791,
-      "gdp_per_capita": 4391.137955658827
+      "primary": 24.4
     },
     {
       "country": "Trinidad and Tobago",
       "year": 2023,
-      "primary": 17.27,
-      "gdp_usd": 30053575132.142,
-      "gdp_per_capita": 19629.465340082974
+      "primary": 17.27
     },
     {
       "country": "Tunisia",
       "year": 2023,
-      "primary": 14.5,
-      "gdp_usd": 46303552449.3542,
-      "gdp_per_capita": 3747.419391492829
+      "primary": 14.5
     },
     {
       "country": "Turkmenistan",
       "year": 2023,
-      "primary": 13.74,
-      "gdp_usd": 56542857142.8571,
-      "gdp_per_capita": 8792.548503967193
+      "primary": 13.74
     },
     {
       "country": "Turks and Caicos Islands",
       "year": 2023,
-      "primary": 5.47,
-      "gdp_usd": 1138808881.1,
-      "gdp_per_capita": 24917.595805526988
+      "primary": 5.47
     },
     {
       "country": "Tuvalu",
       "year": 2023,
-      "primary": 10.47,
-      "gdp_usd": 59065979.0227679,
-      "gdp_per_capita": 5221.532799042424
+      "primary": 10.47
     },
     {
-      "country": "Türkiye",
+      "country": "Turkey",
       "year": 2023,
-      "primary": 10.71,
-      "gdp_usd": 907118435952.688,
-      "gdp_per_capita": 10674.504173153107
+      "primary": 10.71
     },
     {
-      "country": "U.R. of Tanzania: Mainland",
+      "country": "Tanzania",
       "year": 2023,
-      "primary": 38.65,
-      "gdp_usd": 75732311666.039,
-      "gdp_per_capita": 1156.2582528186924
+      "primary": 38.65
+    },
+    {
+      "country": "USSR (Former)",
+      "year": 1990,
+      "primary": 18.05
     },
     {
       "country": "Uganda",
       "year": 2023,
-      "primary": 31.75,
-      "gdp_usd": 45567304608.4764,
-      "gdp_per_capita": 964.3958694764494
+      "primary": 31.75
     },
     {
       "country": "Ukraine",
       "year": 2023,
-      "primary": 18.74,
-      "gdp_usd": 160502737251.047,
-      "gdp_per_capita": 4223.756243448605
+      "primary": 18.74
     },
     {
       "country": "United Arab Emirates",
       "year": 2023,
-      "primary": 29.54,
-      "gdp_usd": 507063968273.313,
-      "gdp_per_capita": 53707.98008091119
+      "primary": 29.54
     },
     {
       "country": "United Kingdom",
       "year": 2023,
-      "primary": 4.57,
-      "gdp_usd": 3089072722400.14,
-      "gdp_per_capita": 46125.25575135683
+      "primary": 4.57
     },
     {
-      "country": "United States",
+      "country": "United States of America",
       "year": 2023,
-      "primary": 4.38,
-      "gdp_usd": 25439700000000.0,
-      "gdp_per_capita": 76329.5822652029
+      "primary": 4.38
     },
     {
       "country": "Uruguay",
       "year": 2023,
-      "primary": 11.52,
-      "gdp_usd": 71177146197.4951,
-      "gdp_per_capita": 20795.042353555342
+      "primary": 11.52
     },
     {
       "country": "Uzbekistan",
       "year": 2023,
-      "primary": 29.77,
-      "gdp_usd": 80391853887.4049,
-      "gdp_per_capita": 2255.1511549677234
+      "primary": 29.77
     },
     {
       "country": "Vanuatu",
       "year": 2023,
-      "primary": 26.53,
-      "gdp_usd": 1055811723.74753,
-      "gdp_per_capita": 3231.351299955714
+      "primary": 26.53
     },
     {
-      "country": "Venezuela (Bolivarian Republic of)",
+      "country": "Venezuela",
       "year": 2023,
-      "primary": 38.55,
-      "gdp_usd": 482359318767.703,
-      "gdp_per_capita": 17043.477492221773
+      "primary": 38.55
     },
     {
-      "country": "Viet Nam",
+      "country": "Vietnam",
       "year": 2023,
-      "primary": 20.66,
-      "gdp_usd": 408802378904.838,
-      "gdp_per_capita": 4163.514298745221
+      "primary": 20.66
     },
     {
       "country": "Yemen",
       "year": 2023,
-      "primary": 25.29,
-      "gdp_usd": 21606160783.9845,
-      "gdp_per_capita": 641.1967915822196
+      "primary": 25.29
+    },
+    {
+      "country": "Yemen Arab Republic (Former)",
+      "year": 1990,
+      "primary": 30.61
+    },
+    {
+      "country": "Yemen Democratic (Former)",
+      "year": 1990,
+      "primary": 15.69
+    },
+    {
+      "country": "Yugoslavia (Former)",
+      "year": 1990,
+      "primary": 17.12
     },
     {
       "country": "Zambia",
       "year": 2023,
-      "primary": 19.68,
-      "gdp_usd": 29163782138.3415,
-      "gdp_per_capita": 1456.901570154451
+      "primary": 19.68
+    },
+    {
+      "country": "Zanzibar",
+      "year": 2023,
+      "primary": 28.95
     },
     {
       "country": "Zimbabwe",
       "year": 2023,
-      "primary": 14.05,
-      "gdp_usd": 27366627153.0852,
-      "gdp_per_capita": 1676.8214889672565
+      "primary": 14.05
+    },
+    {
+      "country": "Somaliland",
+      "year": 2023,
+      "primary": 60.86
+    },
+    {
+      "country": "N. Cyprus",
+      "year": 2023,
+      "primary": 3.26
     }
   ]
 }

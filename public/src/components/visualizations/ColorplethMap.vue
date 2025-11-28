@@ -59,7 +59,7 @@ async function createChart() {
   const dataByCountry = new Map()
   dataset.forEach(d => {
     if (!d.country) return
-    const value = d.primary; //VERY SMALL!!
+    const value = d.primary;
     dataByCountry.set(d.country.toLowerCase(), value)
   })
 
@@ -93,6 +93,7 @@ async function createChart() {
     .attr("fill", d => {
       const name = d.properties.name?.toLowerCase()
       const v = dataByCountry.get(name)
+      if(!v) console.log(name)
       return v ? color(v) : "#eee"
     })
     .attr("stroke", "#555")
