@@ -11,55 +11,6 @@ const chartRef = ref(null)
 const containerWidth = ref(0)
 const containerHeight = ref(0)
 
-// Country name mapping: GeoJSON name -> World Bank data name
-const geoToDataName = {
-  'united states of america': 'united states',
-  'democratic republic of the congo': 'd.r. of the congo',
-  'republic of the congo': 'congo',
-  'tanzania': 'u.r. of tanzania: mainland',
-  'the bahamas': 'bahamas',
-  'ivory coast': "côte d'ivoire",
-  'republic of serbia': 'serbia',
-  'guinea bissau': 'guinea-bissau',
-  'equatorial guinea': 'equatorial guinea',
-  'republic of korea': 'republic of korea',
-  'south korea': 'republic of korea',
-  'north korea': "dem. people's republic of korea",
-  'czechia': 'czechia',
-  'czech republic': 'czechia',
-  'bosnia and herz.': 'bosnia and herzegovina',
-  'n. cyprus': 'cyprus',
-  'somaliland': 'somalia',
-  'w. sahara': 'morocco',
-  's. sudan': 'south sudan',
-  'central african rep.': 'central african republic',
-  'eq. guinea': 'equatorial guinea',
-  'dom. rep.': 'dominican republic',
-  'falkland is.': 'falkland islands',
-  'fr. s. antarctic lands': 'france',
-  'solomon is.': 'solomon islands',
-  'timor-leste': 'timor-leste',
-  'east timor': 'timor-leste',
-  'burma': 'myanmar',
-  'cape verde': 'cabo verde',
-  'swaziland': 'eswatini',
-  'turkey': 'türkiye',
-  'vietnam': 'viet nam',
-  'laos': "lao people's dr",
-  'iran': 'iran (islamic republic of)',
-  'syria': 'syrian arab republic',
-  'venezuela': 'venezuela (bolivarian republic of)',
-  'bolivia': 'bolivia (plurinational state of)',
-  'russia': 'russian federation',
-  'moldova': 'republic of moldova',
-  'palestine': 'state of palestine',
-  'hong kong': 'china, hong kong sar',
-  'macau': 'china, macao sar',
-  'taiwan': 'china',
-  'brunei': 'brunei darussalam',
-  'micronesia': 'micronesia (fs of)'
-}
-
 // Resize handling
 function updateDimensions() {
   if (!chartRef.value) return
@@ -84,7 +35,7 @@ onUnmounted(() => resizeObserver?.disconnect())
 function getDataForCountry(geoName) {
   if (!geoName) return null
   const lowerName = geoName.toLowerCase()
-  const mappedName = geoToDataName[lowerName] || lowerName
+  const mappedName = lowerName
   return dataset.find(d => d.country?.toLowerCase() === mappedName)
 }
 
