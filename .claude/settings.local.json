@@ -26,7 +26,12 @@
       "Bash(NUL)",
       "Bash(findstr:*)",
       "Bash(copy:*)",
-      "Bash(cp:*)"
+      "Bash(cp:*)",
+      "mcp__ide__getDiagnostics",
+      "Bash(git fetch:*)",
+      "Bash(git stash:*)",
+      "Bash(git stash drop:*)",
+      "Bash(git commit -m \"$(cat <<''EOF''\nMerge branch ''week-4-colorplethmap'' into main\n\nAdd Section5 with colorpleth map and new visualizations:\n- Colorpleth map with GDP per capita and country name matching\n- Bubble map for conflict fatalities\n- Intervention flow map\n- StreamChart margin fix\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")"
     ],
     "deny": [],
     "ask": []
