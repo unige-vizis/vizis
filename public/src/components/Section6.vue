@@ -6,7 +6,7 @@ import SankeyChart from './visualizations/SankeyChart.vue'
   <section>
     <div class="container section__inner">
       <div class="visualization-section">
-        <h3>The Actors most involved in Conflict</h3>
+        <h3>What does the activity of the most engaged actors look like?</h3>
 
         <SankeyChart />
 
