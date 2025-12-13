@@ -383,6 +383,26 @@ tbody td:last-child {
   flex-wrap: nowrap;
 }
 
+.chart-hint {
+  color: #64748b;
+  margin: 0.25rem 0 0.5rem 0;
+}
+
+.bipartite-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.network-svg {
+  width: 100%;
+  height: 700px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background: #fafafa;
+}
+
 @media (max-width: 768px) {
   #app {
     padding: 1.5rem;
