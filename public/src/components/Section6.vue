@@ -61,6 +61,14 @@ import ActorCountryNetwork from './visualizations/ActorCountryNetwork.vue'
           provides insights into the geographic spread and intensity of rebel activities, highlighting key areas of
           concern in global conflict dynamics.
         </p>
+        <p>
+          Notably, Afghanistan and the Taliban dominate the chart, reflecting both a high number of events and
+          significant fatalities. Other major conflict zones include Iraq and Syria, linked to multiple rebel groups,
+          and Somalia with many deadly conflicts caused the rebel group Al Shabaab. Smaller nodes, such as Cameroon and
+          Thailand, represent localized insurgencies with fewer events and fatalities. Overall, the visualization
+          underscores the concentration of deadly conflicts in the Middle East and parts of Africa, while also showing
+          the global spread of insurgent activity.
+        </p>
       </div>
     </div>
   </section>

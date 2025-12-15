@@ -233,7 +233,7 @@ function updateChart() {
   const flows = actorFlows.value
   if (flows.length === 0) return
 
-  const width = containerWidth.value - margin.left - margin.right
+  const width = containerWidth.value - margin.left - margin.right - 20
   const svgHeight = height - margin.top - margin.bottom
 
   // Declare histogram-related variables early to avoid temporal dead zone issues
@@ -455,7 +455,7 @@ function updateChart() {
     .attr('fill', d => {
       if (d.category === 'event_type') return eventTypeColors[d.name] || '#64748b'
       if (d.category === 'actor') return '#c4b5fd'  // light purple for actor
-      return '#ddd6fe'  // lighter lavender for country
+      return '#8e8e8e'
     })
     .attr('stroke', '#333')
     .attr('stroke-width', 1)
@@ -486,7 +486,7 @@ function updateChart() {
       if (d.category === 'country') {
         // Country block: show all events in this country
         const dates = countryDates[d.name] || []
-        drawDensity(dates, '#ddd6fe', `All events in ${d.name}`)
+        drawDensity(dates, '#8e8e8e', `All events in ${d.name}`)
       } else if (d.category === 'event_type') {
         // Event type block: show all events of this type across all countries
         const dates = eventTypeDates[d.name] || []
@@ -882,14 +882,12 @@ watch(containerWidth, () => {
   <div class="sankey-wrapper">
     <!-- Sankey Chart -->
     <div class="sankey-container">
-      <div v-if="!selectedActor" class="placeholder-message">
-        Click the button to select an actor
-      </div>
+      <div v-if="!selectedActor" class="placeholder-message">Click the button to select an actor</div>
       <div class="chart-area">
         <div class="chart-container" ref="chartRef"></div>
         <!-- Actor Selector Button - centered above actor column -->
         <div class="actor-selector-btn" @click="openActorMenu">
-          <span class="btn-label">Select<br>Actor</span>
+          <span class="btn-label">Select<br />Actor</span>
           <span class="btn-dropdown">▼</span>
         </div>
 
@@ -897,9 +895,15 @@ watch(containerWidth, () => {
         <div v-if="selectedActor && actorStats[selectedActor]" class="actor-summary-banner">
           <div class="banner-row banner-name">{{ selectedActor }}</div>
           <div class="banner-row banner-stats">
-            <span class="banner-stat"><strong>{{ actorStats[selectedActor].events.toLocaleString() }}</strong> events</span>
-            <span class="banner-stat"><strong>{{ actorStats[selectedActor].fatalities.toLocaleString() }}</strong> fatalities</span>
-            <span class="banner-stat"><strong>{{ actorStats[selectedActor].countries }}</strong> countries</span>
+            <span class="banner-stat"
+              ><strong>{{ actorStats[selectedActor].events.toLocaleString() }}</strong> events</span
+            >
+            <span class="banner-stat"
+              ><strong>{{ actorStats[selectedActor].fatalities.toLocaleString() }}</strong> fatalities</span
+            >
+            <span class="banner-stat"
+              ><strong>{{ actorStats[selectedActor].countries }}</strong> countries</span
+            >
           </div>
         </div>
       </div>
@@ -914,11 +918,7 @@ watch(containerWidth, () => {
         </div>
 
         <div class="actor-grid">
-          <div
-            v-for="(actors, actorType) in sortedActorTypes"
-            :key="actorType"
-            class="actor-type-cell"
-          >
+          <div v-for="(actors, actorType) in sortedActorTypes" :key="actorType" class="actor-type-cell">
             <div class="actor-type-header">{{ actorType }}</div>
             <div class="actor-list">
               <div
