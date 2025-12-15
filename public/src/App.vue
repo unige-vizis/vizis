@@ -12,7 +12,7 @@ import Section6 from './components/Section6.vue'
     <h1>Data Visualization</h1>
     <div class="subtitle">
       <h2>Vizis</h2>
-      <h4>Maleah Leonie Koegler, Kim Benecken, Matteo Glaeser, Victoria Cruz, Petula Arnold</h4>
+      <h4>Maleah Leonie Koegler, Kim Benecken, Matteo Glaeser, Petula Arnold</h4>
     </div>
   </header>
 

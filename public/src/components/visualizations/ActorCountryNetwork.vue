@@ -25,29 +25,29 @@ const buildNetwork = () => {
     }
   })
 
-  const top10rebels = Array.from(rebelCounts.entries())
+  const topActors = Array.from(rebelCounts.entries())
     .sort((a, b) => b[1] - a[1])
-    .slice(0, 10)
     .map(d => d[0])
 
-  const top10set = new Set(top10rebels)
+  const topActorsSet = new Set(topActors)
 
   // Step 2: Build network data
   // Nodes: rebel groups + countries
   // Edges: rebel group -> country with fatality data
-  const rebelNodes = top10rebels.map(rebel => ({
+  const rebelNodes = topActors.map(rebel => ({
     id: rebel,
     type: 'rebel',
     totalEvents: rebelCounts.get(rebel),
-    label: rebel.split(':')[0]
+    label: rebel.split(':')[0],
+    subtitle: rebel.split(':')[1] ? `(${rebel.split(':')[1].trim()})` : ''
   }))
 
   const countrySet = new Set()
-  const links = []
   const linkMap = new Map()
+  const countryEventCounts = new Map()
 
   sankeyData.flows.forEach(entry => {
-    if (!entry.actor || !top10set.has(entry.actor)) return
+    if (!entry.actor || !topActorsSet.has(entry.actor)) return
 
     const rebel = entry.actor
     const country = entry.country
@@ -55,6 +55,10 @@ const buildNetwork = () => {
     const events = entry.events || 0
 
     countrySet.add(country)
+
+    // Track total events per country
+    const prevEvents = countryEventCounts.get(country) || 0
+    countryEventCounts.set(country, prevEvents + events)
 
     const linkKey = `${rebel}|${country}`
     if (!linkMap.has(linkKey)) {
@@ -74,7 +78,8 @@ const buildNetwork = () => {
   const countryNodes = Array.from(countrySet).map(country => ({
     id: country,
     type: 'country',
-    label: country
+    label: country,
+    totalEvents: countryEventCounts.get(country) || 0
   }))
 
   const allNodes = [...rebelNodes, ...countryNodes]
@@ -162,7 +167,7 @@ const renderNetwork = (rebelNodes, countryNodes, allNodes, edges) => {
         .forceLink(edges)
         .id(d => d.id)
         .distance(d => {
-          return d.source.type === 'rebel' && d.target.type === 'country' ? 180 : 100
+          return d.source.type === 'rebel' && d.target.type === 'country' ? 80 : 10
         })
     )
     .force('charge', d3.forceManyBody().strength(-300))
@@ -182,7 +187,11 @@ const renderNetwork = (rebelNodes, countryNodes, allNodes, edges) => {
       }
     }).strength(0.2))
     .force('collide', d3.forceCollide(d => {
-      return d.type === 'rebel' ? Math.sqrt(d.totalEvents) + 20 : (countryDegree.get(d.id) * 8 + 15)
+      if (d.type === 'rebel') {
+        return Math.sqrt(d.totalEvents / Math.PI) + 5 + 100
+      } else {
+        return Math.sqrt((d.totalEvents || 0) / Math.PI) + 30
+      }
     }))
 
   // Draw edges (links)
@@ -193,7 +202,7 @@ const renderNetwork = (rebelNodes, countryNodes, allNodes, edges) => {
     .append('line')
     .attr('class', 'link')
     .attr('stroke', d => getFatalityColor(d.fatalities))
-    .attr('stroke-width', 4)
+    .attr('stroke-width', 6)
     .attr('opacity', 0.6)
 
   // Draw nodes
@@ -220,27 +229,36 @@ const renderNetwork = (rebelNodes, countryNodes, allNodes, edges) => {
 
       g.append('text')
         .attr('text-anchor', 'middle')
-        .attr('dy', '0.3em')
-        .attr('font-size', '15px')
+        .attr('dy', d.subtitle ? '0' : '0.3em')
+        .attr('font-size', '20px')
         .attr('font-weight', '600')
         .attr('fill', '#000')
         .text(d.label)
         .style('pointer-events', 'none')
+
+      if(d.subtitle){
+        g.append('text')
+          .attr('text-anchor', 'middle')
+          .attr('dy', '1em')
+          .attr('font-size', '15px')
+          .attr('font-weight', '600')
+          .attr('fill', '#000')
+          .text(d.subtitle)
+          .style('pointer-events', 'none')}
     } else {
-      // Countries: size by degree (number of connected rebels)
-      const degree = countryDegree.get(d.id)
-      const countryRadius = Math.max(16, degree * 10)
+      // Countries: size by total events
+      const countryRadius = Math.sqrt((d.totalEvents || 0) / Math.PI) + 5
       d.baseRadius = countryRadius
       g.append('circle')
         .attr('class', 'node-circle')
         .attr('r', countryRadius)
-        .attr('fill', '#4ecdc4')
+        .attr('fill', '#8e8e8e')
         .attr('opacity', 0.8)
 
       g.append('text')
         .attr('text-anchor', 'middle')
         .attr('dy', '0.3em')
-        .attr('font-size', '12px')
+        .attr('font-size', '20px')
         .attr('fill', '#333')
         .text(d.label)
         .style('pointer-events', 'none')
@@ -328,9 +346,9 @@ const renderNetwork = (rebelNodes, countryNodes, allNodes, edges) => {
 
   svg.call(zoom)
   // Set initial zoom transform to show whole layout (zoomed out)
-  const initialScale = 0.7
+  const initialScale = 0.55
   const translateX = (width - width * initialScale) / 3
-  const translateY = (height - height * initialScale) / 2
+  const translateY = (height - height * initialScale) / 3
   const initialTransform = d3.zoomIdentity.translate(translateX, translateY).scale(initialScale)
   svg.call(zoom.transform, initialTransform)
 
@@ -468,7 +486,7 @@ const renderNetwork = (rebelNodes, countryNodes, allNodes, edges) => {
       .text(`${events} events`)
   })
 
-  // LEGEND 3: Country Node Size (by connected rebel groups)
+  // LEGEND 3: Country Node Size (by total events)
   currentY += legend1Height - 220 + legendPadding
   svg.append('text')
     .attr('x', rightX + 5)
@@ -483,28 +501,26 @@ const renderNetwork = (rebelNodes, countryNodes, allNodes, edges) => {
     .attr('y', currentY + 15)
     .attr('font-size', '9px')
     .attr('fill', '#666')
-    .text('(Connected Groups)')
+    .text('(Total Events)')
 
-  const countrySizeExamples = [1, 3]
-  countrySizeExamples.forEach((groups, i) => {
-    const radius = Math.max(16, groups * 10)
-    const y = currentY + 35 + i * (radius + 20)
+  const countrySizeExamples = [100, 500, 1000]
+  countrySizeExamples.forEach((events, i) => {
+    const radius = Math.sqrt(events / Math.PI) + 5
+    const y = currentY + 35 + i * (radius + 15)
 
     svg.append('circle')
       .attr('cx', rightX + 25)
       .attr('cy', y)
       .attr('r', radius)
-      .attr('fill', '#4ecdc4')
+      .attr('fill', '#8e8e8e')
       .attr('opacity', 0.8)
-      .attr('stroke', '#2dd4d4')
-      .attr('stroke-width', 1)
 
     svg.append('text')
       .attr('x', rightX + 60)
       .attr('y', y + 2)
       .attr('font-size', '9px')
       .attr('fill', '#333')
-      .text(`${groups} group${groups > 1 ? 's' : ''}`)
+      .text(`${events} events`)
   })
 }
 
