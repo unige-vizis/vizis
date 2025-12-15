@@ -1,0 +1,1326 @@
+<script setup>
+import { onMounted, onUnmounted, ref, computed, watch, nextTick } from 'vue'
+import * as d3 from 'd3'
+import { sankey, sankeyLinkHorizontal, sankeyLeft } from 'd3-sankey'
+
+// Load data
+import sankeyData from '@/assets/data/viz10_actor_sankey.json'
+
+const chartRef = ref(null)
+const containerWidth = ref(0)
+const selectedActor = ref(null)
+const searchQuery = ref('')
+const showActorMenu = ref(false)
+
+// Extract actor types and actors from data
+const actorTypes = computed(() => sankeyData.actor_types)
+
+// Filter actors based on search
+const filteredActorTypes = computed(() => {
+  if (!searchQuery.value) return actorTypes.value
+
+  const query = searchQuery.value.toLowerCase()
+  const filtered = {}
+
+  for (const [type, actors] of Object.entries(actorTypes.value)) {
+    const matchingActors = actors.filter(actor =>
+      actor.toLowerCase().includes(query)
+    )
+    if (matchingActors.length > 0) {
+      filtered[type] = matchingActors
+    }
+  }
+
+  return filtered
+})
+
+// Get flows for selected actor
+const actorFlows = computed(() => {
+  if (!selectedActor.value) return []
+  return sankeyData.flows.filter(f => f.actor === selectedActor.value)
+})
+
+// Get actor stats for display in dropdown
+const actorStats = computed(() => {
+  const stats = {}
+  for (const flow of sankeyData.flows) {
+    if (!stats[flow.actor]) {
+      stats[flow.actor] = { events: 0, fatalities: 0, countries: new Set() }
+    }
+    stats[flow.actor].events += flow.events
+    stats[flow.actor].fatalities += flow.fatalities
+    stats[flow.actor].countries.add(flow.country)
+  }
+  // Convert Sets to counts
+  for (const actor in stats) {
+    stats[actor].countries = stats[actor].countries.size
+  }
+  return stats
+})
+
+// Sort actors within each type by event count (descending)
+const sortedActorTypes = computed(() => {
+  const sorted = {}
+  for (const [type, actors] of Object.entries(actorTypes.value)) {
+    sorted[type] = [...actors].sort((a, b) => {
+      const eventsA = actorStats.value[a]?.events || 0
+      const eventsB = actorStats.value[b]?.events || 0
+      return eventsB - eventsA
+    })
+  }
+  return sorted
+})
+
+// Chart dimensions
+const margin = { top: 85, right: 350, bottom: 40, left: 20 }
+const height = 750
+
+// Fatality color scale (Yellow to Orange to Red) - keeps most values yellow, only highest go red
+const maxLogFatalities = Math.log10(sankeyData.metadata.fatality_stats.max + 1)
+const fatalityColorScale = d3.scaleSequential()
+  .domain([0, maxLogFatalities])
+  .interpolator(t => d3.interpolateYlOrRd(Math.pow(t, 2.5) * 0.75 + 0.1))
+
+function getFlowColor(fatalities) {
+  if (fatalities === 0) return '#fee8c8'
+  return fatalityColorScale(Math.log10(fatalities + 1))
+}
+
+// Transform data for D3 sankey
+function transformToSankeyData(flows) {
+  if (!flows || flows.length === 0) return { nodes: [], links: [], eventTypeDates: {}, countryDates: {}, flowsByCountryEvent: {} }
+
+  const nodesMap = new Map()
+  const links = []
+  const eventTypeDates = {} // Track dates for each event type
+  const countryDates = {} // Track dates for each country
+  const flowsByCountryEvent = {} // Track flows by country+eventType combo
+
+  // Add actor node (Level 1)
+  const actorId = `actor_${selectedActor.value}`
+  nodesMap.set(actorId, {
+    id: actorId,
+    name: selectedActor.value,
+    category: 'actor',
+    depth: 0
+  })
+
+  // Process flows to create country and event type nodes
+  for (const flow of flows) {
+    const countryId = `country_${flow.country}`
+    const eventTypeId = `event_${flow.event_type}`
+
+    // Add country node (Level 2)
+    if (!nodesMap.has(countryId)) {
+      nodesMap.set(countryId, {
+        id: countryId,
+        name: flow.country,
+        category: 'country',
+        depth: 1
+      })
+    }
+
+    // Add event type node (Level 3)
+    if (!nodesMap.has(eventTypeId)) {
+      nodesMap.set(eventTypeId, {
+        id: eventTypeId,
+        name: flow.event_type,
+        category: 'event_type',
+        depth: 2
+      })
+    }
+
+    // Collect dates for this event type (across all countries) - use array to count all occurrences
+    if (!eventTypeDates[flow.event_type]) {
+      eventTypeDates[flow.event_type] = []
+    }
+    if (flow.dates) {
+      // Use concat instead of push(...) to avoid stack overflow with large arrays
+      eventTypeDates[flow.event_type] = eventTypeDates[flow.event_type].concat(flow.dates)
+    }
+
+    // Collect dates for this country (across all event types) - use array to count all occurrences
+    if (!countryDates[flow.country]) {
+      countryDates[flow.country] = []
+    }
+    if (flow.dates) {
+      countryDates[flow.country] = countryDates[flow.country].concat(flow.dates)
+    }
+
+    // Track flows by country+eventType for Country→EventType link hover
+    const countryEventKey = `${flow.country}|${flow.event_type}`
+    if (!flowsByCountryEvent[countryEventKey]) {
+      flowsByCountryEvent[countryEventKey] = []
+    }
+    if (flow.dates) {
+      flowsByCountryEvent[countryEventKey] = flowsByCountryEvent[countryEventKey].concat(flow.dates)
+    }
+
+    // Create link: Actor -> Country
+    const actorCountryKey = `${actorId}->${countryId}`
+    let actorCountryLink = links.find(l => l.key === actorCountryKey)
+    if (!actorCountryLink) {
+      actorCountryLink = {
+        key: actorCountryKey,
+        source: actorId,
+        target: countryId,
+        value: 0,
+        fatalities: 0,
+        flows: [],
+        dates: [] // All dates for this actor-country combination
+      }
+      links.push(actorCountryLink)
+    }
+    actorCountryLink.value += flow.events
+    actorCountryLink.fatalities += flow.fatalities
+    actorCountryLink.flows.push(flow)
+    if (flow.dates) {
+      actorCountryLink.dates = actorCountryLink.dates.concat(flow.dates)
+    }
+
+    // Create link: Country -> Event Type
+    const countryEventLinkKey = `${countryId}->${eventTypeId}`
+    let countryEventLink = links.find(l => l.key === countryEventLinkKey)
+    if (!countryEventLink) {
+      countryEventLink = {
+        key: countryEventLinkKey,
+        source: countryId,
+        target: eventTypeId,
+        value: 0,
+        fatalities: 0,
+        flows: [],
+        dates: [] // Dates for this country+eventType combo
+      }
+      links.push(countryEventLink)
+    }
+    countryEventLink.value += flow.events
+    countryEventLink.fatalities += flow.fatalities
+    countryEventLink.flows.push(flow)
+    if (flow.dates) {
+      countryEventLink.dates = countryEventLink.dates.concat(flow.dates)
+    }
+  }
+
+  // Convert nodes map to array
+  const nodes = Array.from(nodesMap.values())
+
+  // Convert source/target from IDs to indices
+  const nodeIndex = new Map(nodes.map((n, i) => [n.id, i]))
+  const indexedLinks = links.map(l => ({
+    ...l,
+    source: nodeIndex.get(l.source),
+    target: nodeIndex.get(l.target)
+  }))
+
+  // Sort date arrays (no longer need to convert from Sets)
+  for (const eventType in eventTypeDates) {
+    eventTypeDates[eventType].sort()
+  }
+  for (const country in countryDates) {
+    countryDates[country].sort()
+  }
+
+  return { nodes, links: indexedLinks, eventTypeDates, countryDates, flowsByCountryEvent }
+}
+
+function updateChart() {
+  const container = chartRef.value
+  if (!container || !selectedActor.value) return
+
+  // Clear previous chart
+  d3.select(container).selectAll('*').remove()
+
+  const flows = actorFlows.value
+  if (flows.length === 0) return
+
+  const width = containerWidth.value - margin.left - margin.right
+  const svgHeight = height - margin.top - margin.bottom
+
+  // Declare histogram-related variables early to avoid temporal dead zone issues
+  let hoverDensityGroup = null
+  let histogramLabelGroup = null
+  let histogramScale = null
+
+  // Helper functions declared early (they reference the variables above)
+  function updateHistogramLabel(text) {
+    if (!histogramLabelGroup) return
+    histogramLabelGroup.selectAll('*').remove()
+
+    const words = text.split(' ')
+    const lines = []
+    let currentLine = ''
+
+    words.forEach(word => {
+      const testLine = currentLine ? currentLine + ' ' + word : word
+      if (testLine.length > 18 && currentLine) {
+        lines.push(currentLine)
+        currentLine = word
+      } else {
+        currentLine = testLine
+      }
+    })
+    if (currentLine) lines.push(currentLine)
+
+    if (lines.length > 2) {
+      lines.length = 2
+      lines[1] = lines[1].slice(0, 15) + '...'
+    }
+
+    const timelineX = width + 300
+    lines.forEach((line, i) => {
+      histogramLabelGroup.append('text')
+        .attr('x', timelineX - 70)
+        .attr('y', -50 + (i * 14))
+        .attr('text-anchor', 'middle')
+        .attr('font-size', '11px')
+        .attr('font-weight', '600')
+        .attr('fill', '#475569')
+        .text(line)
+    })
+  }
+
+  function clearHoverDensity() {
+    if (!hoverDensityGroup) return
+    hoverDensityGroup.selectAll('*')
+      .transition()
+      .duration(100)
+      .attr('opacity', 0)
+      .remove()
+    updateHistogramLabel('All Events')
+  }
+
+  // Transform data
+  const { nodes, links, eventTypeDates, countryDates, flowsByCountryEvent } = transformToSankeyData(flows)
+
+  if (nodes.length === 0) return
+
+  // Calculate all dates for timeline
+  const allDates = new Set()
+  for (const dates of Object.values(eventTypeDates)) {
+    dates.forEach(d => allDates.add(d))
+  }
+  const sortedDates = Array.from(allDates).sort()
+  const minDate = new Date(sortedDates[0])
+  const maxDate = new Date(sortedDates[sortedDates.length - 1])
+
+  // Create SVG
+  const svg = d3.select(container)
+    .append('svg')
+    .attr('width', containerWidth.value)
+    .attr('height', height)
+    .append('g')
+    .attr('transform', `translate(${margin.left},${margin.top})`)
+
+  // Create sankey generator
+  const sankeyGenerator = sankey()
+    .nodeWidth(20)
+    .nodePadding(15)
+    .nodeAlign(sankeyLeft)
+    .extent([[0, 0], [width, svgHeight]])
+
+  // Generate layout
+  const { nodes: layoutNodes, links: layoutLinks } = sankeyGenerator({
+    nodes: nodes.map(d => ({ ...d })),
+    links: links.map(d => ({ ...d }))
+  })
+
+  // Sort links by value (descending) so larger flows are drawn first (underneath)
+  // and smaller flows are drawn on top, making them easier to hover
+  layoutLinks.sort((a, b) => b.value - a.value)
+
+  // Create tooltip
+  const tooltip = d3.select('body')
+    .append('div')
+    .attr('class', 'sankey-tooltip')
+    .style('opacity', 0)
+    .style('position', 'absolute')
+    .style('background', 'rgba(0, 0, 0, 0.85)')
+    .style('color', 'white')
+    .style('padding', '12px')
+    .style('border-radius', '6px')
+    .style('pointer-events', 'none')
+    .style('font-size', '13px')
+    .style('max-width', '300px')
+    .style('z-index', '1000')
+    .style('box-shadow', '0 4px 12px rgba(0,0,0,0.3)')
+
+  // Draw link outlines first (underneath)
+  const linkOutline = svg.append('g')
+    .attr('class', 'link-outlines')
+    .attr('fill', 'none')
+    .selectAll('path')
+    .data(layoutLinks)
+    .enter()
+    .append('path')
+    .attr('d', sankeyLinkHorizontal())
+    .attr('stroke', '#00000030')
+    .attr('stroke-width', d => Math.max(1, d.width) + 2)
+    .attr('opacity', 0.7)
+
+  // Draw links on top
+  const link = svg.append('g')
+    .attr('class', 'link-fills')
+    .attr('fill', 'none')
+    .selectAll('path')
+    .data(layoutLinks)
+    .enter()
+    .append('path')
+    .attr('d', sankeyLinkHorizontal())
+    .attr('stroke', d => getFlowColor(d.fatalities))
+    .attr('stroke-width', d => Math.max(1, d.width))
+    .attr('opacity', 0.7)
+    .style('mix-blend-mode', 'multiply')
+    .on('mouseover', function(event, d) {
+      d3.select(this)
+        .attr('opacity', 1)
+        .attr('stroke-width', d => Math.max(2, d.width * 1.1))
+
+      // Also highlight the outline
+      linkOutline.filter(l => l === d)
+        .attr('stroke-width', d => Math.max(2, d.width * 1.1) + 2)
+
+      // Highlight connected nodes
+      svg.selectAll('.node')
+        .attr('opacity', n =>
+          n.id === d.source.id || n.id === d.target.id ? 1 : 0.3
+        )
+
+      // Dim other links
+      link.attr('opacity', l => l === d ? 1 : 0.2)
+      linkOutline.attr('opacity', l => l === d ? 0.7 : 0.2)
+
+      tooltip
+        .style('opacity', 1)
+        .html(`
+          <strong>${d.source.name} → ${d.target.name}</strong><br/>
+          <span style="color: #93c5fd;">Events:</span> ${d.value.toLocaleString()}<br/>
+          <span style="color: #fca5a5;">Fatalities:</span> ${d.fatalities.toLocaleString()}
+        `)
+        .style('left', (event.pageX + 15) + 'px')
+        .style('top', (event.pageY - 10) + 'px')
+
+      // Update density based on link type
+      if (d.source.category === 'actor' && d.target.category === 'country') {
+        // Actor → Country link: show all events for this actor in this country
+        const label = `${selectedActor.value} in ${d.target.name}`
+        drawDensity(d.dates, '#8b5cf6', label) // Purple for actor-country
+      } else if (d.source.category === 'country' && d.target.category === 'event_type') {
+        // Country → Event Type link: show events of this type in this country
+        const label = `${d.target.name} in ${d.source.name}`
+        const color = eventTypeColors[d.target.name] || '#64748b'
+        drawDensity(d.dates, color, label)
+      }
+    })
+    .on('mouseout', function() {
+      d3.select(this)
+        .attr('opacity', 0.7)
+        .attr('stroke-width', d => Math.max(1, d.width))
+
+      // Reset outline
+      linkOutline
+        .attr('opacity', 0.7)
+        .attr('stroke-width', d => Math.max(1, d.width) + 2)
+
+      svg.selectAll('.node').attr('opacity', 1)
+      link.attr('opacity', 0.7)
+      tooltip.style('opacity', 0)
+
+      // Clear hover density
+      clearHoverDensity()
+    })
+
+  // Draw nodes
+  const node = svg.append('g')
+    .selectAll('g')
+    .data(layoutNodes)
+    .enter()
+    .append('g')
+    .attr('class', 'node')
+
+  // Event type colors
+  const eventTypeColors = {
+    'Battles': '#2563EB',                      // blue
+    'Explosions/Remote violence': '#D97706',   // orange
+    'Violence against civilians': '#DC2626',   // red
+    'Strategic developments': '#0891b2',       // cyan
+    'Protests': '#059669',                     // emerald green
+    'Riots': '#7c3aed'                         // violet
+  }
+
+  node.append('rect')
+    .attr('x', d => d.x0)
+    .attr('y', d => d.y0)
+    .attr('height', d => Math.max(1, d.y1 - d.y0))
+    .attr('width', d => d.x1 - d.x0)
+    .attr('fill', d => {
+      if (d.category === 'event_type') return eventTypeColors[d.name] || '#64748b'
+      if (d.category === 'actor') return '#c4b5fd'  // light purple for actor
+      return '#ddd6fe'  // lighter lavender for country
+    })
+    .attr('stroke', '#333')
+    .attr('stroke-width', 1)
+    .on('mouseover', function(event, d) {
+      d3.select(this).attr('stroke-width', 2)
+
+      // Calculate node totals
+      const incomingEvents = d.targetLinks?.reduce((sum, l) => sum + l.value, 0) || 0
+      const outgoingEvents = d.sourceLinks?.reduce((sum, l) => sum + l.value, 0) || 0
+      const totalEvents = Math.max(incomingEvents, outgoingEvents)
+
+      const incomingFatalities = d.targetLinks?.reduce((sum, l) => sum + l.fatalities, 0) || 0
+      const outgoingFatalities = d.sourceLinks?.reduce((sum, l) => sum + l.fatalities, 0) || 0
+      const totalFatalities = Math.max(incomingFatalities, outgoingFatalities)
+
+      tooltip
+        .style('opacity', 1)
+        .html(`
+          <strong>${d.name}</strong><br/>
+          <span style="color: #a5b4fc;">${d.category.replace('_', ' ')}</span><br/>
+          <span style="color: #93c5fd;">Events:</span> ${totalEvents.toLocaleString()}<br/>
+          <span style="color: #fca5a5;">Fatalities:</span> ${totalFatalities.toLocaleString()}
+        `)
+        .style('left', (event.pageX + 15) + 'px')
+        .style('top', (event.pageY - 10) + 'px')
+
+      // Update density based on node type
+      if (d.category === 'country') {
+        // Country block: show all events in this country
+        const dates = countryDates[d.name] || []
+        drawDensity(dates, '#ddd6fe', `All events in ${d.name}`)
+      } else if (d.category === 'event_type') {
+        // Event type block: show all events of this type across all countries
+        const dates = eventTypeDates[d.name] || []
+        const color = eventTypeColors[d.name] || '#64748b'
+        drawDensity(dates, color, `${d.name} (all countries)`)
+      } else if (d.category === 'actor') {
+        // Actor block: background already shows all events
+        clearHoverDensity()
+      }
+    })
+    .on('mouseout', function() {
+      d3.select(this).attr('stroke-width', 1)
+      tooltip.style('opacity', 0)
+
+      // Clear hover density
+      clearHoverDensity()
+    })
+
+  // Node labels for country nodes only (on the left)
+  node.filter(d => d.category === 'country')
+    .append('text')
+    .attr('x', d => d.x0 - 6)
+    .attr('y', d => (d.y0 + d.y1) / 2)
+    .attr('dy', '0.35em')
+    .attr('text-anchor', 'end')
+    .attr('font-size', '12px')
+    .attr('fill', '#333')
+    .text(d => {
+      // Truncate long names
+      const maxLen = 25
+      return d.name.length > maxLen ? d.name.slice(0, maxLen) + '...' : d.name
+    })
+
+  // Timeline dimensions
+  const timelineX = width + 300  // Position timeline near right edge (histogram extends left)
+  const timelineTop = 0
+  const timelineBottom = svgHeight
+
+  // Create time scale for timeline (using dates)
+  const timeScale = d3.scaleTime()
+    .domain([minDate, maxDate])
+    .range([timelineTop, timelineBottom])
+
+  // Draw timeline axis line
+  svg.append('line')
+    .attr('x1', timelineX)
+    .attr('x2', timelineX)
+    .attr('y1', timelineTop)
+    .attr('y2', timelineBottom)
+    .attr('stroke', '#64748b')
+    .attr('stroke-width', 1.5)
+
+  // Add start date marker (actual first event)
+  svg.append('line')
+    .attr('x1', timelineX - 8)
+    .attr('x2', timelineX + 8)
+    .attr('y1', timelineTop)
+    .attr('y2', timelineTop)
+    .attr('stroke', '#475569')
+    .attr('stroke-width', 2)
+
+  svg.append('text')
+    .attr('x', timelineX + 12)
+    .attr('y', timelineTop)
+    .attr('dy', '0.35em')
+    .attr('font-size', '10px')
+    .attr('fill', '#475569')
+    .attr('font-weight', '600')
+    .text(d3.timeFormat('%b %Y')(minDate))
+
+  // Add end date marker (actual last event)
+  svg.append('line')
+    .attr('x1', timelineX - 8)
+    .attr('x2', timelineX + 8)
+    .attr('y1', timelineBottom)
+    .attr('y2', timelineBottom)
+    .attr('stroke', '#475569')
+    .attr('stroke-width', 2)
+
+  svg.append('text')
+    .attr('x', timelineX + 12)
+    .attr('y', timelineBottom)
+    .attr('dy', '0.35em')
+    .attr('font-size', '10px')
+    .attr('fill', '#475569')
+    .attr('font-weight', '600')
+    .text(d3.timeFormat('%b %Y')(maxDate))
+
+  // Generate year ticks - only show years that fall WITHIN the data range
+  const years = d3.timeYear.range(d3.timeYear.ceil(minDate), maxDate)
+  years.forEach(yearDate => {
+    const y = timeScale(yearDate)
+
+    // Only draw if within the visible timeline area (with small margin)
+    if (y < timelineTop + 15 || y > timelineBottom - 15) return
+
+    // Tick mark
+    svg.append('line')
+      .attr('x1', timelineX - 4)
+      .attr('x2', timelineX + 4)
+      .attr('y1', y)
+      .attr('y2', y)
+      .attr('stroke', '#94a3b8')
+      .attr('stroke-width', 1)
+
+    // Year label
+    svg.append('text')
+      .attr('x', timelineX + 10)
+      .attr('y', y)
+      .attr('dy', '0.35em')
+      .attr('font-size', '11px')
+      .attr('fill', '#64748b')
+      .attr('font-weight', '400')
+      .text(yearDate.getFullYear())
+  })
+
+
+  // Calculate histogram width (horizontal space for histogram bars)
+  const histogramWidth = 140
+
+  // Collect all dates for background histogram
+  let allEventDates = []
+  for (const dates of Object.values(eventTypeDates)) {
+    allEventDates = allEventDates.concat(dates)
+  }
+
+  // Create time bins for histogram (fixed number of bins regardless of time range)
+  const numBins = 120
+
+  // Generate evenly spaced thresholds
+  const timeRange = maxDate.getTime() - minDate.getTime()
+  const binWidth = timeRange / numBins
+  const thresholds = d3.range(numBins).map(i => new Date(minDate.getTime() + i * binWidth))
+
+  const timeBins = d3.bin()
+    .domain([minDate, maxDate])
+    .thresholds(thresholds)
+
+  // Helper to compute histogram data
+  function computeHistogram(dates) {
+    if (!dates || dates.length === 0) return []
+
+    const dateObjects = dates.map(d => new Date(d))
+    const bins = timeBins(dateObjects)
+    return bins.map(bin => ({
+      x0: bin.x0,
+      x1: bin.x1,
+      count: bin.length
+    }))
+  }
+
+  // Compute background histogram once
+  const backgroundHistogram = computeHistogram(allEventDates)
+  const maxBackgroundCount = d3.max(backgroundHistogram, d => d.count) || 1
+
+  // Scale for histogram bars (fixed based on background max) - assign to let variable declared earlier
+  histogramScale = d3.scaleLinear()
+    .domain([0, maxBackgroundCount])
+    .range([0, histogramWidth])
+
+  // Draw background histogram bars (always visible)
+  const backgroundBars = svg.append('g')
+    .attr('class', 'histogram-background')
+
+  backgroundBars.selectAll('rect')
+    .data(backgroundHistogram)
+    .enter()
+    .append('rect')
+    .attr('x', d => timelineX - histogramScale(d.count))
+    .attr('y', d => timeScale(d.x0))
+    .attr('width', d => histogramScale(d.count))
+    .attr('height', d => Math.max(1, timeScale(d.x1) - timeScale(d.x0) - 0.5))
+    .attr('fill', '#e2e8f0')
+    .attr('opacity', 0.7)
+    .attr('stroke', '#cbd5e1')
+    .attr('stroke-width', 0.5)
+
+  // Assign to let variables declared earlier
+  hoverDensityGroup = svg.append('g')
+    .attr('class', 'hover-density-group')
+
+  histogramLabelGroup = svg.append('g')
+    .attr('class', 'histogram-label')
+
+  updateHistogramLabel('All Events')
+
+  // Function to draw hover histogram on top
+  function drawDensity(dates, color, label) {
+    // Clear previous hover histogram - interrupt any transitions first
+    hoverDensityGroup.selectAll('*').interrupt().remove()
+
+    // Update label
+    updateHistogramLabel(label || 'All Events')
+
+    if (!dates || dates.length === 0) return
+
+    // Compute histogram for the hover data
+    const histogram = computeHistogram(dates)
+    if (!histogram || histogram.length === 0) return
+
+    // Draw hover histogram bars with quick animation - using join pattern for reliability
+    hoverDensityGroup.selectAll('rect.hover-bar')
+      .data(histogram, d => d.x0.getTime())
+      .join(
+        enter => enter.append('rect')
+          .attr('class', 'hover-bar')
+          .attr('x', d => timelineX - histogramScale(d.count))
+          .attr('y', d => timeScale(d.x0))
+          .attr('width', d => histogramScale(d.count))
+          .attr('height', d => Math.max(1, timeScale(d.x1) - timeScale(d.x0) - 0.5))
+          .attr('fill', color)
+          .attr('opacity', 0)
+          .attr('stroke', d3.color(color).darker(0.5))
+          .attr('stroke-width', 0.5)
+          .call(enter => enter.transition().duration(150).attr('opacity', 0.8)),
+        update => update
+          .attr('x', d => timelineX - histogramScale(d.count))
+          .attr('width', d => histogramScale(d.count))
+          .attr('fill', color),
+        exit => exit.remove()
+      )
+
+    // Add event count
+    hoverDensityGroup.append('text')
+      .attr('x', timelineX - 40)
+      .attr('y', svgHeight + 20)
+      .attr('text-anchor', 'middle')
+      .attr('font-size', '10px')
+      .attr('fill', color)
+      .attr('font-weight', '500')
+      .text(`${dates.length} events`)
+  }
+
+  // Event type labels (right next to the blocks)
+  node.filter(d => d.category === 'event_type')
+    .append('text')
+    .attr('x', d => d.x1 + 6)
+    .attr('y', d => (d.y0 + d.y1) / 2)
+    .attr('dy', '0.35em')
+    .attr('text-anchor', 'start')
+    .attr('font-size', '11px')
+    .attr('font-weight', '500')
+    .attr('fill', d => eventTypeColors[d.name] || '#333')
+    .text(d => d.name)
+
+  // Color legend - positioned to the right of the banner
+  const legendWidth = 280
+  const legendHeight = 18
+  const legendX = 420  // Fixed position to clear the actor banner
+  const legendY = -55
+
+  // Create gradient for legend
+  const defs = svg.append('defs')
+  const gradient = defs.append('linearGradient')
+    .attr('id', 'fatality-gradient')
+    .attr('x1', '0%')
+    .attr('x2', '100%')
+
+  const stops = [0, 0.25, 0.5, 0.75, 1]
+  stops.forEach(stop => {
+    gradient.append('stop')
+      .attr('offset', `${stop * 100}%`)
+      .attr('stop-color', fatalityColorScale(stop * maxLogFatalities))
+  })
+
+  // Legend title
+  svg.append('text')
+    .attr('x', legendX + legendWidth / 2)
+    .attr('y', legendY - 8)
+    .attr('font-size', '11px')
+    .attr('font-weight', '600')
+    .attr('fill', '#475569')
+    .attr('text-anchor', 'middle')
+    .text('Fatalities (log scale)')
+
+  // Legend gradient rectangle
+  svg.append('rect')
+    .attr('x', legendX)
+    .attr('y', legendY)
+    .attr('width', legendWidth)
+    .attr('height', legendHeight)
+    .attr('fill', 'url(#fatality-gradient)')
+    .attr('stroke', '#94a3b8')
+    .attr('stroke-width', 1)
+
+  // Add reference tick marks and labels - using log scale positions
+  const maxFatalities = sankeyData.metadata.fatality_stats.max
+  // Create log-spaced tick values: 0, 10, 100, 1000, 10000, etc.
+  const logTickValues = [0]
+  let power = 1
+  while (Math.pow(10, power) <= maxFatalities) {
+    logTickValues.push(Math.pow(10, power))
+    power++
+  }
+  if (logTickValues[logTickValues.length - 1] < maxFatalities) {
+    logTickValues.push(maxFatalities)
+  }
+
+  logTickValues.forEach((value) => {
+    // Position based on log scale (matching the color scale domain)
+    const logValue = value === 0 ? 0 : Math.log10(value + 1)
+    const xPos = legendX + (legendWidth * logValue / maxLogFatalities)
+
+    // Tick mark
+    svg.append('line')
+      .attr('x1', xPos)
+      .attr('x2', xPos)
+      .attr('y1', legendY + legendHeight)
+      .attr('y2', legendY + legendHeight + 4)
+      .attr('stroke', '#64748b')
+      .attr('stroke-width', 1)
+
+    // Label - format large numbers compactly
+    let label
+    if (value === 0) label = '0'
+    else if (value >= 1000) label = (value / 1000).toFixed(0) + 'k'
+    else label = value.toString()
+
+    svg.append('text')
+      .attr('x', xPos)
+      .attr('y', legendY + legendHeight + 14)
+      .attr('font-size', '9px')
+      .attr('fill', '#64748b')
+      .attr('text-anchor', 'middle')
+      .text(label)
+  })
+}
+
+function selectActor(actor) {
+  selectedActor.value = actor
+  searchQuery.value = ''
+  showActorMenu.value = false
+  // Stop the pulsing animation after first interaction
+  document.querySelector('.actor-selector-btn')?.classList.add('clicked')
+}
+
+function openActorMenu() {
+  showActorMenu.value = true
+}
+
+function closeActorMenu() {
+  showActorMenu.value = false
+  searchQuery.value = ''
+}
+
+function handleResize() {
+  if (chartRef.value) {
+    containerWidth.value = chartRef.value.offsetWidth
+  }
+}
+
+// Set up resize observer
+let resizeObserver
+
+onMounted(async () => {
+  await nextTick()
+
+  handleResize()
+  resizeObserver = new ResizeObserver(handleResize)
+  if (chartRef.value) {
+    resizeObserver.observe(chartRef.value)
+  }
+
+  // Select JNIM as default actor
+  selectedActor.value = 'JNIM: Group for Support of Islam and Muslims'
+})
+
+onUnmounted(() => {
+  if (resizeObserver) {
+    resizeObserver.disconnect()
+  }
+  d3.selectAll('.sankey-tooltip').remove()
+})
+
+watch(selectedActor, async () => {
+  if (selectedActor.value) {
+    await nextTick()
+    handleResize()
+    if (containerWidth.value > 0) {
+      updateChart()
+    }
+  }
+})
+
+watch(containerWidth, () => {
+  if (selectedActor.value && containerWidth.value > 0) {
+    updateChart()
+  }
+})
+</script>
+
+<template>
+  <div class="sankey-wrapper">
+    <!-- Sankey Chart -->
+    <div class="sankey-container">
+      <div v-if="!selectedActor" class="placeholder-message">
+        Click the button to select an actor
+      </div>
+      <div class="chart-area">
+        <div class="chart-container" ref="chartRef"></div>
+        <!-- Actor Selector Button - centered above actor column -->
+        <div class="actor-selector-btn" @click="openActorMenu">
+          <span class="btn-label">Select<br>Actor</span>
+          <span class="btn-dropdown">▼</span>
+        </div>
+
+        <!-- Compact Actor Summary Banner - 2 rows -->
+        <div v-if="selectedActor && actorStats[selectedActor]" class="actor-summary-banner">
+          <div class="banner-row banner-name">{{ selectedActor }}</div>
+          <div class="banner-row banner-stats">
+            <span class="banner-stat"><strong>{{ actorStats[selectedActor].events.toLocaleString() }}</strong> events</span>
+            <span class="banner-stat"><strong>{{ actorStats[selectedActor].fatalities.toLocaleString() }}</strong> fatalities</span>
+            <span class="banner-stat"><strong>{{ actorStats[selectedActor].countries }}</strong> countries</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Actor Selection Modal Overlay -->
+    <div v-if="showActorMenu" class="modal-overlay" @click.self="closeActorMenu">
+      <div class="actor-modal">
+        <div class="modal-header">
+          <h3>Select an Actor</h3>
+          <button class="close-btn" @click="closeActorMenu">&times;</button>
+        </div>
+
+        <div class="actor-grid">
+          <div
+            v-for="(actors, actorType) in sortedActorTypes"
+            :key="actorType"
+            class="actor-type-cell"
+          >
+            <div class="actor-type-header">{{ actorType }}</div>
+            <div class="actor-list">
+              <div
+                v-for="actor in actors"
+                :key="actor"
+                class="actor-item"
+                :class="{ selected: selectedActor === actor }"
+                @click="selectActor(actor)"
+                :title="actor + ' (' + (actorStats[actor]?.events.toLocaleString() || 0) + ' events, ' + (actorStats[actor]?.countries || 0) + ' countries)'"
+              >
+                <span class="actor-events">{{ actorStats[actor]?.events || 0 }}</span>
+                <span class="actor-name">{{ actor }}</span>
+                <span class="actor-countries">{{ actorStats[actor]?.countries || 0 }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<style scoped>
+.sankey-wrapper {
+  position: relative;
+  width: 100%;
+  min-height: 800px;
+  margin-top: 0;
+}
+
+/* Chart Area - relative container for overlay positioning */
+.chart-area {
+  position: relative;
+  width: 100%;
+  overflow: visible;
+}
+
+/* Actor Selector Button - centered above actor column, ignores container */
+.actor-selector-btn {
+  position: absolute;
+  top: 25px;
+  left: 30px;
+  transform: translateX(-50%);
+  margin: 0 !important;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.75rem;
+  background: #f8fafc;
+  border: 2px solid #94a3b8;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.15s;
+  text-align: center;
+  width: 85px;
+  height: 85px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 20;
+}
+
+.actor-selector-btn {
+  animation: pulse-glow 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    border-color: #94a3b8;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transform: translateX(-50%) scale(1);
+  }
+  50% {
+    border-color: #3b82f6;
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.6), 0 0 40px rgba(59, 130, 246, 0.3);
+    transform: translateX(-50%) scale(1.05);
+  }
+}
+
+.actor-selector-btn.clicked {
+  animation: none;
+}
+
+.actor-selector-btn:hover {
+  animation: none;
+  border-color: #3b82f6;
+  background: #f1f5f9;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+  transform: translateX(-50%) scale(1);
+}
+
+.actor-selector-btn:hover .btn-dropdown {
+  background: #3b82f6;
+  border-color: #2563eb;
+}
+
+.btn-label {
+  font-weight: 700;
+  color: #334155;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  line-height: 1.2;
+}
+
+.btn-dropdown {
+  display: inline-block;
+  padding: 0.3rem 0.6rem;
+  background: #64748b;
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: 4px;
+  border: 1px solid #475569;
+  transition: all 0.15s;
+}
+
+/* Compact Actor Summary Banner - 2 rows */
+.actor-summary-banner {
+  position: absolute;
+  top: 67px;
+  left: 73px;
+  transform: translateY(-50%);
+  margin: 0 !important;
+  padding: 3px 8px !important;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 3px;
+  color: #475569;
+  z-index: 10;
+}
+
+.banner-row {
+  line-height: 1.25;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.banner-name {
+  font-weight: 600;
+  color: #1e293b;
+  max-width: 320px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 0.9rem;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.banner-stats {
+  display: flex;
+  gap: 0.6rem;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.banner-stat {
+  color: #64748b;
+  font-size: 0.8rem;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.banner-stat strong {
+  color: #334155;
+  font-weight: 600;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Modal Overlay */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 1rem;
+}
+
+.actor-modal {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  width: 100%;
+  max-width: 1100px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px 8px !important;
+  margin: 0 !important;
+  background: #f8fafc;
+}
+
+.modal-header h3 {
+  margin: 0 !important;
+  padding: 0 !important;
+  font-size: 1rem;
+  color: #1e293b;
+  font-weight: 600;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 1.25rem;
+  color: #64748b;
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+  transition: color 0.2s;
+}
+
+.close-btn:hover {
+  color: #1e293b;
+}
+
+.actor-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  align-items: start;
+  gap: 2px !important;
+  padding: 4px !important;
+  margin: 0 !important;
+}
+
+.actor-type-cell {
+  border: 1px solid #e2e8f0;
+  border-radius: 4px;
+  overflow: hidden;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.actor-type-header {
+  padding: 4px 8px !important;
+  margin: 0 !important;
+  background: #475569;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #fff;
+  letter-spacing: 0.02em;
+  line-height: 1.3;
+}
+
+.actor-list {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.actor-item {
+  margin: 0 !important;
+  padding: 2px 0 !important;
+  cursor: pointer;
+  font-size: 0.9rem;
+  color: #334155;
+  line-height: 1.3;
+  transition: background 0.1s;
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+
+.actor-events {
+  width: 38px;
+  min-width: 38px;
+  padding: 1px 4px;
+  font-size: 0.7rem;
+  color: #64748b;
+  text-align: right;
+  background: #f1f5f9;
+  border-right: 1px solid #e2e8f0;
+}
+
+.actor-name {
+  flex: 1;
+  padding: 1px 6px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.actor-countries {
+  width: 20px;
+  min-width: 20px;
+  padding: 1px 4px;
+  font-size: 0.7rem;
+  color: #64748b;
+  text-align: center;
+  background: #f1f5f9;
+  border-left: 1px solid #e2e8f0;
+}
+
+.actor-item:hover {
+  background: #dbeafe;
+}
+
+.actor-item:hover .actor-events,
+.actor-item:hover .actor-countries {
+  background: #bfdbfe;
+}
+
+.actor-item.selected {
+  background: #3b82f6;
+  color: #fff;
+}
+
+.actor-item.selected .actor-events,
+.actor-item.selected .actor-countries {
+  background: #2563eb;
+  color: #dbeafe;
+  border-color: #1d4ed8;
+}
+
+/* Sankey Container */
+.sankey-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-top: 0;
+}
+
+.placeholder-message {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 400px;
+  color: #64748b;
+  font-size: 1rem;
+  text-align: center;
+  background: #f8fafc;
+  border: 2px dashed #cbd5e1;
+  border-radius: 8px;
+}
+
+.chart-container {
+  width: 100%;
+  min-height: 750px;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+}
+
+
+/* Responsive adjustments */
+@media (max-width: 900px) {
+  .actor-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .banner-name {
+    max-width: 200px;
+  }
+}
+
+@media (max-width: 600px) {
+  .actor-selector-btn {
+    min-width: 70px;
+    padding: 0.5rem 0.8rem;
+  }
+
+  .btn-label {
+    font-size: 0.75rem;
+  }
+
+  .actor-summary-banner {
+    left: 85px;
+    font-size: 0.7rem;
+    padding: 0.35rem 0.5rem;
+  }
+
+  .banner-name {
+    max-width: 150px;
+    font-size: 0.7rem;
+  }
+
+  .banner-stat {
+    font-size: 0.65rem;
+  }
+
+  .actor-modal {
+    max-width: 95vw;
+  }
+
+  .actor-grid {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
